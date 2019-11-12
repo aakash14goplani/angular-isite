@@ -1,5 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -10,6 +11,8 @@ import { HomePageComponent } from './home-page/home-page.component';
 import { PrivacyPolicyComponent } from './privacy-policy/privacy-policy.component';
 import { LegalNoticeComponent } from './legal-notice/legal-notice.component';
 import { AccessibilityStatementComponent } from './accessibility-statement/accessibility-statement.component';
+import { UserNameValidatorDirective } from './home-page/user-name-validator.directive';
+import { PasswordValidatorDirective } from './home-page/password-validator.directive';
 
 @NgModule({
   declarations: [
@@ -20,11 +23,14 @@ import { AccessibilityStatementComponent } from './accessibility-statement/acces
     HomePageComponent,
     PrivacyPolicyComponent,
     LegalNoticeComponent,
-    AccessibilityStatementComponent
+    AccessibilityStatementComponent,
+    UserNameValidatorDirective,
+    PasswordValidatorDirective
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

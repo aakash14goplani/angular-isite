@@ -7,3 +7,11 @@
 .margin-b30 {
     margin-bottom: 30px;
 }
+
+/* forms */
+input.ng-invalid.ng-touched {
+    border: 1px solid red;
+}
+span.help-block {
+    color: red;
+}

@@ -17,18 +17,28 @@
             <div class="row">
                 <div class="col-xs-12 col-md-6 offset-md-3">
                     <h2>To know more Login/Register</h2>
-                    <form action="html/project-description.html">
+                    <form (ngSubmit)="onSubmit(form)" #form="ngForm">
+                        <div class="form-group" *ngIf="!isLoginMode">
+                            <label for="username">Name</label>
+                            <input type="text" id="username" class="form-control" name="username" required ngModel #userNameInput="ngModel" appUserNameValidator>
+                            <span class="help-block" *ngIf="!userNameInput.valid && userNameInput.touched">Please enter a valid user-name</span>
+                        </div>
+
                         <div class="form-group">
                             <label for="email">E-Mail</label>
-                            <input type="email" id="email" class="form-control" name="email" required>
+                            <input type="email" id="email" class="form-control" name="email" required ngModel email #emailInput="ngModel">
+                            <span class="help-block" *ngIf="!emailInput.valid && emailInput.touched">Please enter a valid email</span>
                         </div>
+
                         <div class="form-group">
                             <label for="password">Password</label>
-                            <input type="password" id="password" class="form-control" name="password" required>
+                            <input type="password" id="password" class="form-control" name="password" required ngModel #passwordInput="ngModel" appPasswordValidator>
+                            <span class="help-block" *ngIf="!passwordInput.valid && passwordInput.touched">{{ isLoginMode ? 'Please enter strong password' : 'Password should be between 8 - 16 character length and must include special character and number'}}</span>
                         </div>
+
                         <div class="form-group">
-                            <button class="btn btn-dark" type="submit">Login</button> |
-                            <button class="btn btn-dark" type="button">Register</button>
+                            <button class="btn btn-dark" type="submit" [disabled]="!form.valid">{{ isLoginMode ? 'Login' : 'Register' }}</button> |
+                            <button class="btn btn-dark" (click)="switchMode()" type="button">Switch to {{ isLoginMode ? 'Register' : 'Login' }}</button>
                         </div>
                     </form>
                 </div>
