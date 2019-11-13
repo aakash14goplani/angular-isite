@@ -1,0 +1,13 @@
+/* anchor link for cards */
+.anchor-card {
+    color: inherit;
+    text-decoration: none;
+}
+a:hover.anchor-card {
+    color: inherit;
+    text-decoration: none;
+}
+.btn-add-project {
+    float: right;
+    margin: 10px;
+}

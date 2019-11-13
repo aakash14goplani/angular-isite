@@ -1,0 +1,24 @@
+<app-project-details-header></app-project-details-header>
+<main>
+    <section class="project-details">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-xs-12 col-md-8 offset-md-2">
+                    <h2 class="text-center">Project Details</h2>
+                    <a class="anchor-card" href="plan.html">
+                        <div class="card" style="width: inherit;" *ngFor="let project of projectDetails">
+                            <div class="card-body">
+                                <h5 class="card-title">{{project.name}}</h5>
+                                <p class="card-text">Last Updated Date: {{project.date | date: 'dd MMMM, yyyy' }}</p>
+                            </div>
+                        </div>
+                    </a>
+                    <button class="btn btn-add-project">
+                        <i class="fa fa-plus-circle fa-3x" aria-hidden="true"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+<app-footer></app-footer>

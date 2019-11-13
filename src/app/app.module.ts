@@ -13,6 +13,14 @@ import { LegalNoticeComponent } from './legal-notice/legal-notice.component';
 import { AccessibilityStatementComponent } from './accessibility-statement/accessibility-statement.component';
 import { UserNameValidatorDirective } from './home-page/user-name-validator.directive';
 import { PasswordValidatorDirective } from './home-page/password-validator.directive';
+import { ProjectDetailsComponent } from './project-details/project-details.component';
+import { ProjectDetailsHeaderComponent } from './project-details/project-details-header/project-details-header.component';
+import { ProjectPlanComponent } from './project-plan/project-plan.component';
+import { FilterNSortComponent } from './shared/filter-n-sort/filter-n-sort.component';
+import { FormatProjectContentsPipe } from './project-plan/format-project-contents.pipe';
+import { LimitProjectContentsPipe } from './project-details/limit-project-contents.pipe';
+import { ProjectPhotosComponent } from './project-photos/project-photos.component';
+import { ProjectDprComponent } from './project-dpr/project-dpr.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +33,15 @@ import { PasswordValidatorDirective } from './home-page/password-validator.direc
     LegalNoticeComponent,
     AccessibilityStatementComponent,
     UserNameValidatorDirective,
-    PasswordValidatorDirective
+    PasswordValidatorDirective,
+    ProjectDetailsComponent,
+    ProjectDetailsHeaderComponent,
+    ProjectPlanComponent,
+    FilterNSortComponent,
+    FormatProjectContentsPipe,
+    LimitProjectContentsPipe,
+    ProjectPhotosComponent,
+    ProjectDprComponent
   ],
   imports: [
     BrowserModule,

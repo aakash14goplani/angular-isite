@@ -11,15 +11,15 @@ export class UserService {
   ) { }
 
   private userDataStore: Array<{name: string, email: string, password: string}> = [
-    { name: 'Aakash', email: 'test@test.test', password: 'test123' },
-    { name: 'Sumit', email: 'sumit@test.test', password: 'test123' },
-    { name: 'Ashish', email: 'ashish@test.test', password: 'test123' }
+    { name: 'Aakash', email: 'test@test.test', password: 'test@123' },
+    { name: 'Sumit', email: 'sumit@test.test', password: 'test@123' },
+    { name: 'Ashish', email: 'ashish@test.test', password: 'test@123' }
   ];
 
   public authenticateUser(email: string, password: string): void {
     for (const user of this.userDataStore) {
       if (user.email === email && user.password === password) {
-        this.router.navigate(['privacy-policy']);
+        this.router.navigate(['project-details']);
       }
     }
     console.log('login failed!');

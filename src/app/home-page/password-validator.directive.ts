@@ -20,7 +20,7 @@ export class PasswordValidatorDirective {
 
   validate(control: AbstractControl): ValidationErrors | null {
     const password = control.value;
-    if (password != null && !password.match(/^(?=.*[\d])(?=.*[!@#$%^&*])[\w!@#$%^&*]{8,16}$/)) {
+    if (password != null && !password.match(/^(?=.*[\d])(?=.*[!@#$_%^&*])[\w!@#_$%^&*]{8,16}$/)) {
       // must be between 8 - 16 letters and contains special char
       return { pwd_valid: true };
     } else {

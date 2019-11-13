@@ -1,0 +1,29 @@
+<header>
+    <!--navigation-->
+    <div id="wrapper" class="animate">
+        <nav class="navbar header-top fixed-top navbar-expand-lg navbar-dark bg-dark">
+            <a class="navbar-brand" [routerLink]="'/index'">iSITE</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText"
+            aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarText">
+                <ul class="navbar-nav ml-md-auto d-md-flex">
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">My Account <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-nav-link" href="profile.html">Profile</a></li>
+                            <li><a class="dropdown-nav-link" routerLink="/index">Logout</a></li>
+                        </ul>
+                    </li>
+                </ul>
+                <form class="navbar-form navbar-left">
+                    <input type="text" class="form-control" placeholder="Help me find...">
+                    <button type="submit" class="btn btn-search">
+                        <i class="fa fa-search" aria-hidden="true"></i>
+                    </button>
+                </form>
+            </div>
+        </nav>
+    </div>
+</header>

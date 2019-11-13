@@ -33,7 +33,7 @@
                         <div class="form-group">
                             <label for="password">Password</label>
                             <input type="password" id="password" class="form-control" name="password" required ngModel #passwordInput="ngModel" appPasswordValidator>
-                            <span class="help-block" *ngIf="!passwordInput.valid && passwordInput.touched">{{ isLoginMode ? 'Please enter strong password' : 'Password should be between 8 - 16 character length and must include special character and number'}}</span>
+                            <span class="help-block" *ngIf="!passwordInput.valid && passwordInput.touched">{{ isLoginMode ? 'Please enter a valid password' : 'Password should be between 8 - 16 character length and must include special character and number'}}</span>
                         </div>
 
                         <div class="form-group">
