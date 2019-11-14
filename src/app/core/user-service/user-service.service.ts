@@ -16,6 +16,10 @@ export class UserService {
     { name: 'Ashish', email: 'ashish@test.test', password: 'test@123' }
   ];
 
+  public getUserData(): Array<{name: string, email: string, password: string}> {
+    return this.userDataStore.slice();
+  }
+
   public authenticateUser(email: string, password: string): void {
     for (const user of this.userDataStore) {
       if (user.email === email && user.password === password) {
@@ -34,6 +38,7 @@ export class UserService {
       }
     }
     this.userDataStore.push({ name, email, password });
+    this.router.navigate(['project-details']);
     console.log('registeration successfull', this.userDataStore.length);
   }
 }

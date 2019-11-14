@@ -5,11 +5,11 @@
             <div class="row">
                 <div class="col-xs-12 col-md-8 offset-md-2">
                     <h2 class="text-center">Project Details</h2>
-                    <a class="anchor-card" href="plan.html">
+                    <a class="anchor-card" routerLink="/project-plan">
                         <div class="card" style="width: inherit;" *ngFor="let project of projectDetails">
                             <div class="card-body">
-                                <h5 class="card-title">{{project.name}}</h5>
-                                <p class="card-text">Last Updated Date: {{project.date | date: 'dd MMMM, yyyy' }}</p>
+                                <h5 class="card-title">{{ project.name }}</h5>
+                                <p class="card-text">Last Updated Date: {{ project.date | date: 'dd MMMM, yyyy' }}</p>
                             </div>
                         </div>
                     </a>

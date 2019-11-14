@@ -21,6 +21,11 @@ import { FormatProjectContentsPipe } from './project-plan/format-project-content
 import { LimitProjectContentsPipe } from './project-details/limit-project-contents.pipe';
 import { ProjectPhotosComponent } from './project-photos/project-photos.component';
 import { ProjectDprComponent } from './project-dpr/project-dpr.component';
+import { EmailValidatorDirective } from './home-page/email-validator.directive';
+import { ProjectMaterialInwardComponent } from './project-material-inward/project-material-inward.component';
+import { ProjectFilesComponent } from './project-files/project-files.component';
+import { ProjectTeamsComponent } from './project-teams/project-teams.component';
+import { ProjectBgDetailsComponent } from './project-bg-details/project-bg-details.component';
 
 @NgModule({
   declarations: [
@@ -41,7 +46,12 @@ import { ProjectDprComponent } from './project-dpr/project-dpr.component';
     FormatProjectContentsPipe,
     LimitProjectContentsPipe,
     ProjectPhotosComponent,
-    ProjectDprComponent
+    ProjectDprComponent,
+    EmailValidatorDirective,
+    ProjectMaterialInwardComponent,
+    ProjectFilesComponent,
+    ProjectTeamsComponent,
+    ProjectBgDetailsComponent
   ],
   imports: [
     BrowserModule,

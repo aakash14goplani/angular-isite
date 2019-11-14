@@ -22,7 +22,7 @@ export class PasswordValidatorDirective {
     const password = control.value;
     if (password != null && !password.match(/^(?=.*[\d])(?=.*[!@#$_%^&*])[\w!@#_$%^&*]{8,16}$/)) {
       // must be between 8 - 16 letters and contains special char
-      return { pwd_valid: true };
+      return { pwd_invalid: true };
     } else {
       return null;
     }

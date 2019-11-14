@@ -21,13 +21,20 @@
                         <div class="form-group" *ngIf="!isLoginMode">
                             <label for="username">Name</label>
                             <input type="text" id="username" class="form-control" name="username" required ngModel #userNameInput="ngModel" appUserNameValidator>
-                            <span class="help-block" *ngIf="!userNameInput.valid && userNameInput.touched">Please enter a valid user-name</span>
-                        </div>
+                            <span class="help-block" *ngIf="!userNameInput.valid && userNameInput.touched">
+                                <span class="help-block" *ngIf="userNameInput?.errors?.uname_already_exists">User Name already exists...</span>
+                                <span class="help-block" *ngIf="userNameInput?.errors?.uname_length_invalid">User Name length should be greater than 4!</span>
+                                <span class="help-block" *ngIf="userNameInput?.errors?.required">Please enter a valid user-name</span>
+                            </span>
+                        </div> 
 
                         <div class="form-group">
                             <label for="email">E-Mail</label>
-                            <input type="email" id="email" class="form-control" name="email" required ngModel email #emailInput="ngModel">
-                            <span class="help-block" *ngIf="!emailInput.valid && emailInput.touched">Please enter a valid email</span>
+                            <input type="email" id="email" class="form-control" name="email" required ngModel email #emailInput="ngModel" [appEmailValidator]="!isLoginMode ? true : false">
+                            <span class="help-block" *ngIf="!emailInput.valid && emailInput.touched">
+                                <span class="help-block" *ngIf="emailInput?.errors?.uemail_already_exists">Email already exists...</span>
+                                <span class="help-block" *ngIf="(!emailInput.valid && !emailInput?.errors?.uemail_already_exists) || emailInput?.errors?.required">Please enter a valid email</span>
+                            </span>
                         </div>
 
                         <div class="form-group">
