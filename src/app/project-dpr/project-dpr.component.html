@@ -16,9 +16,7 @@
                             <div class="card-body">
                                 <span class="card-text">
                                     <ul class="list-group list-group-flush">
-                                        <li class="list-group-item">Male: 1</li>
-                                        <li class="list-group-item">Female: 2</li>
-                                        <li class="list-group-item">NW: 3</li>
+                                        <li class="list-group-item" *ngFor="let labour of laboursArray">{{ labour.type }}: {{ labour.content }}</li>
                                     </ul>
                                 </span>
                             </div>
@@ -28,9 +26,7 @@
                             <div class="card-body">
                                 <span class="card-text">
                                     <ul class="list-group list-group-flush">
-                                        <li class="list-group-item">Poclain: 1</li>
-                                        <li class="list-group-item">Dumper: 2</li>
-                                        <li class="list-group-item">JCB: 3</li>
+                                        <li class="list-group-item" *ngFor="let machine of machineryArray">{{ machine.type }}: {{ machine.content }}</li>
                                     </ul>
                                 </span>
                             </div>
@@ -42,8 +38,7 @@
                             <div class="card-body">
                                 <span class="card-text">
                                     <ul class="list-group list-group-flush">
-                                        <li class="list-group-item">Murum: 1</li>
-                                        <li class="list-group-item">RMC M20: 2</li>
+                                        <li class="list-group-item" *ngFor="let material of materialArray">{{ material.type }}: {{ material.content }}</li>
                                     </ul>
                                 </span>
                             </div>
@@ -53,9 +48,7 @@
                             <div class="card-body">
                                 <span class="card-text">
                                     <ul class="list-group list-group-flush">
-                                        <li class="list-group-item">Earthwork filing</li>
-                                        <li class="list-group-item">Rock breaking</li>
-                                        <li class="list-group-item">SWD Wall</li>
+                                        <li class="list-group-item" *ngFor="let activity of activitiesArray">{{ activity.type }}</li>
                                     </ul>
                                 </span>
                             </div>

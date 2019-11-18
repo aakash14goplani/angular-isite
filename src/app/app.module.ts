@@ -27,6 +27,7 @@ import { ProjectFilesComponent } from './project-files/project-files.component';
 import { ProjectTeamsComponent } from './project-teams/project-teams.component';
 import { ProjectBgDetailsComponent } from './project-bg-details/project-bg-details.component';
 import { TooltipDirective } from './home-page/tooltip.directive';
+import { ProjectComponent } from './project/project.component';
 
 @NgModule({
   declarations: [
@@ -53,7 +54,8 @@ import { TooltipDirective } from './home-page/tooltip.directive';
     ProjectFilesComponent,
     ProjectTeamsComponent,
     ProjectBgDetailsComponent,
-    TooltipDirective
+    TooltipDirective,
+    ProjectComponent
   ],
   imports: [
     BrowserModule,

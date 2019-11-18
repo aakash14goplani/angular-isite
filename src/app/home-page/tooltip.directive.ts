@@ -6,13 +6,14 @@ import { Directive, Input, ElementRef, Renderer2, HostListener } from '@angular/
 })
 export class TooltipDirective {
 
+  // credits: https://stackblitz.com/edit/angular-tooltip-directive
+
   @Input('tooltip') tooltipTitle: string;
   @Input() placement: string;
   @Input() delay: string;
   tooltip: HTMLElement;
-  // Distance between host element and tooltip element
   // tslint:disable: no-inferrable-types
-  offset: number = 10;
+  offset: number = 10; // Distance between host element and tooltip element
   toggler: boolean = false;
 
   constructor(private el: ElementRef, private renderer: Renderer2) { }

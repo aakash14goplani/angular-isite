@@ -12,32 +12,32 @@
                 <!--toggle class 'open'-->
                 <ul [attr.class]="spanSideNavClass">
                     <li class="nav-item">
-                        <a class="nav-link" routerLink="/project-details">
+                        <a class="nav-link" routerLink="../details">
                             ( Current Project Name )
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" routerLink="/project-plan" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Plan
+                        <a class="nav-link" routerLink="../plan" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Plan
                             <span class="sr-only">(current)</span>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" routerLink="/project-photos" routerLinkActive="active">Photos</a>
+                        <a class="nav-link" routerLink="../photos" routerLinkActive="active">Photos</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" routerLink="/project-dpr" routerLinkActive="active">DPR</a>
+                        <a class="nav-link" routerLink="../dpr" routerLinkActive="active">DPR</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="material.html" routerLinkActive="active">Material Inward</a>
+                        <a class="nav-link" routerLink="../material-inward" routerLinkActive="active">Material Inward</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="files.html" routerLinkActive="active">Files</a>
+                        <a class="nav-link" routerLink="../files" routerLinkActive="active">Files</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="teams.html" routerLinkActive="active">Team</a>
+                        <a class="nav-link" routerLink="../teams" routerLinkActive="active">Team</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="bg_details.html" routerLinkActive="active">BG Details</a>
+                        <a class="nav-link" routerLink="../bg-details" routerLinkActive="active">BG Details</a>
                     </li>
                 </ul>
                 <ul class="navbar-nav ml-md-auto d-md-flex">
@@ -45,7 +45,7 @@
                         <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">My Account <span class="caret"></span></a>
                         <ul class="dropdown-menu">
                             <li><a class="dropdown-nav-link" href="profile.html">Profile</a></li>
-                            <li><a class="dropdown-nav-link" routerLink="/index.html">Logout</a></li>
+                            <li><a class="dropdown-nav-link" routerLink="/index">Logout</a></li>
                         </ul>
                     </li>
                 </ul>

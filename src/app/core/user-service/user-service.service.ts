@@ -23,7 +23,7 @@ export class UserService {
   public authenticateUser(email: string, password: string): void {
     for (const user of this.userDataStore) {
       if (user.email === email && user.password === password) {
-        this.router.navigate(['project-details']);
+        this.router.navigate(['project']);
       }
     }
     console.log('login failed!');
@@ -38,7 +38,7 @@ export class UserService {
       }
     }
     this.userDataStore.push({ name, email, password });
-    this.router.navigate(['project-details']);
+    this.router.navigate(['project/details']);
     console.log('registeration successfull', this.userDataStore.length);
   }
 }
