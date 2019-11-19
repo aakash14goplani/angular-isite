@@ -38,7 +38,7 @@ export class UserService {
       }
     }
     this.userDataStore.push({ name, email, password });
-    this.router.navigate(['project/details']);
+    this.router.navigate(['project']);
     console.log('registeration successfull', this.userDataStore.length);
   }
 }

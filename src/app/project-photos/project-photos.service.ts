@@ -5,7 +5,7 @@ export class ProjectPhotosService {
 
   constructor() { }
 
-  private projectPhotosDataStore: Array<{title: string, description: string, date: Date, url: string}> = [
+  private projectPhotosDataStore: Array<PhotosDataFormat> = [
     {
       title: 'Photos Title 1',
       description: 'Description 1',
@@ -43,4 +43,15 @@ export class ProjectPhotosService {
       url: 'https://www.queenstownisite.com/isite/queenstown/isite.svg'
     }
   ];
+
+  public getPhotosDetails(): Array<PhotosDataFormat> {
+    return this.projectPhotosDataStore.slice();
+  }
+}
+
+export interface PhotosDataFormat {
+  title: string;
+  description: string;
+  date: Date;
+  url: string;
 }

@@ -1,78 +1,54 @@
-<app-auth-header></app-auth-header>
-<main>
-    <section class="project-photos">
-        <div class="container-fluid">
-            <h2 class="text-center">Photos</h2>
-            <app-filter-n-sort></app-filter-n-sort>
-            <div class="row">
-                <div class="col-xs-12 col-md-8 offset-md-2">
-                    <div class="card-deck margin-b30">
-                        <div class="card">
-                            <img src="https://www.queenstownisite.com/isite/queenstown/isite.svg" class="card-img-top" alt="...">
-                            <div class="card-body">
-                                <h5 class="card-title">Photos title 1</h5>
-                                <p class="card-text">Description.</p>
-                            </div>
-                            <div class="card-footer">
-                                <small class="text-muted">Last updated 3 mins ago</small>
-                            </div>
+<section class="project-photos">
+    <div class="container-fluid">
+        <h2 class="text-center">Photos</h2>
+        <app-filter-n-sort></app-filter-n-sort>
+        <div class="row">
+            <div class="col-xs-12 col-md-8 offset-md-2">
+                <div class="card-deck margin-b30">
+                    <div class="card" *ngFor="let photo of photosArray; let i=index">
+                        <img [src]="photo.url" class="card-img-top" alt="...">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ photo.title }}</h5>
+                            <p class="card-text">{{ photo.description }}</p>
                         </div>
-                        <div class="card">
-                            <img src="https://www.queenstownisite.com/isite/queenstown/isite.svg" class="card-img-top" alt="...">
-                            <div class="card-body">
-                                <h5 class="card-title">Photos title 2</h5>
-                                <p class="card-text">Description.</p>
-                            </div>
-                            <div class="card-footer">
-                                <small class="text-muted">Last updated 3 mins ago</small>
-                            </div>
-                        </div>
-                        <div class="card">
-                            <img src="https://www.queenstownisite.com/isite/queenstown/isite.svg" class="card-img-top" alt="...">
-                            <div class="card-body">
-                                <h5 class="card-title">Photos title 3</h5>
-                                <p class="card-text">Description.</p>
-                            </div>
-                            <div class="card-footer">
-                                <small class="text-muted">Last updated 3 mins ago</small>
-                            </div>
+                        <div class="card-footer">
+                            <small class="text-muted">{{ photo.date }}</small>
                         </div>
                     </div>
-                    <div class="card-deck margin-b30">
-                        <div class="card">
-                            <img src="https://www.queenstownisite.com/isite/queenstown/isite.svg" class="card-img-top" alt="...">
-                            <div class="card-body">
-                                <h5 class="card-title">Photos title 4</h5>
-                                <p class="card-text">Description.</p>
-                            </div>
-                            <div class="card-footer">
-                                <small class="text-muted">Last updated 3 mins ago</small>
-                            </div>
+                </div>
+                <div class="card-deck margin-b30">
+                    <div class="card">
+                        <img src="https://www.queenstownisite.com/isite/queenstown/isite.svg" class="card-img-top" alt="...">
+                        <div class="card-body">
+                            <h5 class="card-title">Photos title 4</h5>
+                            <p class="card-text">Description.</p>
                         </div>
-                        <div class="card">
-                            <img src="https://www.queenstownisite.com/isite/queenstown/isite.svg" class="card-img-top" alt="...">
-                            <div class="card-body">
-                                <h5 class="card-title">Photos title 5</h5>
-                                <p class="card-text">Description.</p>
-                            </div>
-                            <div class="card-footer">
-                                <small class="text-muted">Last updated 3 mins ago</small>
-                            </div>
+                        <div class="card-footer">
+                            <small class="text-muted">Last updated 3 mins ago</small>
                         </div>
-                        <div class="card">
-                            <img src="https://www.queenstownisite.com/isite/queenstown/isite.svg" class="card-img-top" alt="...">
-                            <div class="card-body">
-                                <h5 class="card-title">Photos title 6</h5>
-                                <p class="card-text">Description.</p>
-                            </div>
-                            <div class="card-footer">
-                                <small class="text-muted">Last updated 3 mins ago</small>
-                            </div>
+                    </div>
+                    <div class="card">
+                        <img src="https://www.queenstownisite.com/isite/queenstown/isite.svg" class="card-img-top" alt="...">
+                        <div class="card-body">
+                            <h5 class="card-title">Photos title 5</h5>
+                            <p class="card-text">Description.</p>
+                        </div>
+                        <div class="card-footer">
+                            <small class="text-muted">Last updated 3 mins ago</small>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <img src="https://www.queenstownisite.com/isite/queenstown/isite.svg" class="card-img-top" alt="...">
+                        <div class="card-body">
+                            <h5 class="card-title">Photos title 6</h5>
+                            <p class="card-text">Description.</p>
+                        </div>
+                        <div class="card-footer">
+                            <small class="text-muted">Last updated 3 mins ago</small>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </section>
-</main>
-<app-footer></app-footer>
+    </div>
+</section>

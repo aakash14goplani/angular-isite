@@ -5,7 +5,6 @@ import { FormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { UnauthHeaderComponent } from './unauth-header/unauth-header.component';
-import { AuthHeaderComponent } from './auth-header/auth-header.component';
 import { FooterComponent } from './footer/footer.component';
 import { HomePageComponent } from './home-page/home-page.component';
 import { PrivacyPolicyComponent } from './privacy-policy/privacy-policy.component';
@@ -14,7 +13,6 @@ import { AccessibilityStatementComponent } from './accessibility-statement/acces
 import { UserNameValidatorDirective } from './home-page/user-name-validator.directive';
 import { PasswordValidatorDirective } from './home-page/password-validator.directive';
 import { ProjectDetailsComponent } from './project-details/project-details.component';
-import { ProjectDetailsHeaderComponent } from './project-details/project-details-header/project-details-header.component';
 import { ProjectPlanComponent } from './project-plan/project-plan.component';
 import { FilterNSortComponent } from './shared/filter-n-sort/filter-n-sort.component';
 import { FormatProjectContentsPipe } from './project-plan/format-project-contents.pipe';
@@ -28,12 +26,12 @@ import { ProjectTeamsComponent } from './project-teams/project-teams.component';
 import { ProjectBgDetailsComponent } from './project-bg-details/project-bg-details.component';
 import { TooltipDirective } from './home-page/tooltip.directive';
 import { ProjectComponent } from './project/project.component';
+import { HeaderComponent } from './header/header.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     UnauthHeaderComponent,
-    AuthHeaderComponent,
     FooterComponent,
     HomePageComponent,
     PrivacyPolicyComponent,
@@ -42,7 +40,6 @@ import { ProjectComponent } from './project/project.component';
     UserNameValidatorDirective,
     PasswordValidatorDirective,
     ProjectDetailsComponent,
-    ProjectDetailsHeaderComponent,
     ProjectPlanComponent,
     FilterNSortComponent,
     FormatProjectContentsPipe,
@@ -55,7 +52,8 @@ import { ProjectComponent } from './project/project.component';
     ProjectTeamsComponent,
     ProjectBgDetailsComponent,
     TooltipDirective,
-    ProjectComponent
+    ProjectComponent,
+    HeaderComponent
   ],
   imports: [
     BrowserModule,

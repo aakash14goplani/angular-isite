@@ -21,6 +21,7 @@ const routes: Routes = [
   { path: 'home', component: HomePageComponent },
   { path: 'index', component: HomePageComponent },
   { path: 'project', component: ProjectComponent, children: [
+      { path: '', redirectTo: 'details', pathMatch: 'full' },
       { path: 'details', component: ProjectDetailsComponent },
       { path: 'plan', component: ProjectPlanComponent },
       { path: 'photos', component: ProjectPhotosComponent },
