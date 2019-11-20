@@ -22,17 +22,29 @@ export class HeaderComponent implements OnDestroy {
       if (event instanceof NavigationEnd) {
         // console.log('Current URL: ', event.url);
         this.isNormalHeader = (event.url != null && event.url !== '/project' && event.url !== '/project/details') ? true : false;
-        this.toggleClassValue(document.documentElement.scrollWidth > 991 ? 'side' : 'top');
-        console.log('Normal Header: ', this.isNormalHeader);
+        // console.log('Normal Header: ', this.isNormalHeader);
       }
     });
   }
 
-  private toggleClassValue(navigationType: string): void {
+  private test() {
     this.expandNavigation = !this.expandNavigation;
-    console.log('called for: ', navigationType);
+    if (this.expandNavigation) {
+      this.spanSideNavClass = 'navbar-nav animate side-nav open';
+    } else {
+      this.spanSideNavClass = 'navbar-nav animate side-nav';
+    }
+  }
 
-    if (navigationType === 'top') {
+  private toggleClassValue(option?: string): void {
+    if (option != null && option === 'false') {
+      this.expandNavigation = false;
+    } else {
+      this.expandNavigation = !this.expandNavigation;
+    }
+    const navigationType: string = document.documentElement.scrollWidth > 991 ? 'side' : 'top';
+
+    if (navigationType != null && navigationType === 'top') {
       if (this.expandNavigation) {
         this.buttonTopNavClass = 'navbar-toggler';
         this.divTopNavClass = 'collapse navbar-collapse show';
@@ -42,13 +54,20 @@ export class HeaderComponent implements OnDestroy {
       }
     }
 
-    if (navigationType === 'side') {
+    if (navigationType != null && navigationType === 'side') {
       if (this.expandNavigation) {
         this.spanSideNavClass = 'navbar-nav animate side-nav open';
       } else {
         this.spanSideNavClass = 'navbar-nav animate side-nav';
       }
     }
+
+    console.log('Final Values');
+    console.log('option: ', option, ', type: ', typeof option);
+    console.log('position: ', navigationType, ', expand: ', this.expandNavigation);
+    console.log('buttonTopNavClass: ', this.buttonTopNavClass);
+    console.log('divTopNavClass: ', this.divTopNavClass);
+    console.log('spanSideNavClass: ', this.spanSideNavClass);
   }
 
   ngOnDestroy(): void {

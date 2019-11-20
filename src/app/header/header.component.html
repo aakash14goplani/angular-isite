@@ -1,14 +1,14 @@
 <header>
     <div id="wrapper" class="animate">
         <nav class="navbar header-top fixed-top navbar-expand-lg navbar-dark bg-dark">
-            <span *ngIf="isNormalHeader" class="navbar-toggler-icon leftmenutrigger" (click)="toggleClassValue('side')"></span>
+            <span *ngIf="isNormalHeader" class="navbar-toggler-icon leftmenutrigger" (click)="test()"></span>
             <a class="navbar-brand" routerLink="/index">iSITE</a>
             <!--toggle class 'collapsed'-->
-            <button [attr.class]="buttonTopNavClass" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" [attr.aria-expanded]="expandNavigation" aria-label="Toggle navigation" (click)="toggleClassValue('top')">
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <!--toggle class 'show'-->
-            <div [attr.class]="divTopNavClass" id="navbarText">
+            <div class="collapse navbar-collapse" id="navbarText">
                 <!--toggle class 'open'-->
                 <ul *ngIf="isNormalHeader" [attr.class]="spanSideNavClass">
                     <li class="nav-item">
