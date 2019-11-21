@@ -1,7 +1,7 @@
 <header>
     <div id="wrapper" class="animate">
         <nav class="navbar header-top fixed-top navbar-expand-lg navbar-dark bg-dark">
-            <span *ngIf="isNormalHeader" class="navbar-toggler-icon leftmenutrigger" (click)="test()"></span>
+            <span *ngIf="isNormalHeader" class="navbar-toggler-icon leftmenutrigger" (click)="toggleSideNav()"></span>
             <a class="navbar-brand" routerLink="/index">iSITE</a>
             <!--toggle class 'collapsed'-->
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
@@ -10,7 +10,7 @@
             <!--toggle class 'show'-->
             <div class="collapse navbar-collapse" id="navbarText">
                 <!--toggle class 'open'-->
-                <ul *ngIf="isNormalHeader" [attr.class]="spanSideNavClass">
+                <ul *ngIf="isNormalHeader" [attr.class]="spanSideNavClass" (click)="toggleClassValue($event)">
                     <li class="nav-item">
                         <a class="nav-link" routerLink="details">
                             ( Current Project Name )

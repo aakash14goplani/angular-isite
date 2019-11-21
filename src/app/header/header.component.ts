@@ -12,8 +12,6 @@ export class HeaderComponent implements OnDestroy {
   // tslint:disable: no-inferrable-types
   private routerSubscription: Subscription;
   private isNormalHeader: boolean = false;
-  private buttonTopNavClass: string = 'navbar-toggler collapsed';
-  private divTopNavClass: string = 'collapse navbar-collapse';
   private spanSideNavClass: string = 'navbar-nav animate side-nav';
   private expandNavigation: boolean = false;
 
@@ -27,7 +25,7 @@ export class HeaderComponent implements OnDestroy {
     });
   }
 
-  private test() {
+  private toggleSideNav() {
     this.expandNavigation = !this.expandNavigation;
     if (this.expandNavigation) {
       this.spanSideNavClass = 'navbar-nav animate side-nav open';
@@ -36,38 +34,13 @@ export class HeaderComponent implements OnDestroy {
     }
   }
 
-  private toggleClassValue(option?: string): void {
-    if (option != null && option === 'false') {
-      this.expandNavigation = false;
-    } else {
-      this.expandNavigation = !this.expandNavigation;
+  private toggleClassValue(event: any): void {
+    const toggleClass: boolean = document.documentElement.scrollWidth > 991 ? false : true;
+    const element: HTMLElement = document.querySelector('.navbar-toggler') as HTMLElement;
+    if (toggleClass) {
+      event.preventDefault();
+      element.click();
     }
-    const navigationType: string = document.documentElement.scrollWidth > 991 ? 'side' : 'top';
-
-    if (navigationType != null && navigationType === 'top') {
-      if (this.expandNavigation) {
-        this.buttonTopNavClass = 'navbar-toggler';
-        this.divTopNavClass = 'collapse navbar-collapse show';
-      } else {
-        this.buttonTopNavClass = 'navbar-toggler collapsed';
-        this.divTopNavClass = 'collapse navbar-collapse';
-      }
-    }
-
-    if (navigationType != null && navigationType === 'side') {
-      if (this.expandNavigation) {
-        this.spanSideNavClass = 'navbar-nav animate side-nav open';
-      } else {
-        this.spanSideNavClass = 'navbar-nav animate side-nav';
-      }
-    }
-
-    console.log('Final Values');
-    console.log('option: ', option, ', type: ', typeof option);
-    console.log('position: ', navigationType, ', expand: ', this.expandNavigation);
-    console.log('buttonTopNavClass: ', this.buttonTopNavClass);
-    console.log('divTopNavClass: ', this.divTopNavClass);
-    console.log('spanSideNavClass: ', this.spanSideNavClass);
   }
 
   ngOnDestroy(): void {

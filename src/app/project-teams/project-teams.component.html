@@ -1,1 +1,25 @@
-<p>project-teams works!</p>
+<section class="project-teams">
+    <div class="container-fluid">
+        <h2 class="text-center margin-b30">Teams</h2>
+        <div class="row">
+            <div class="col-xs-12 col-md-8 offset-md-2">
+                <div class="card-deck margin-b30">
+                    <div class="card" *ngFor="let teamMember of teamsData">
+                        <img [src]="teamMember.image" class="card-img-top" [alt]="teamMember.name">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ teamMember.name }}</h5>
+                            <p class="card-text">{{ teamMember.description }}</p>
+                        </div>
+                        <div class="card-footer">
+                            <small class="text-muted">
+                                <a [href]="socialItem.socialLink" target="_blank" rel="noreferrer" *ngFor="let socialItem of teamMember.socialLinks; let i=index" class="teams-social-links">
+                                    <span class="teams-dispaly-pointer" *ngIf="i > 0">|</span> {{ socialItem.socialSite }}
+                                </a>
+                            </small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

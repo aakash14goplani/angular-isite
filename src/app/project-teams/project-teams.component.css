@@ -1,0 +1,14 @@
+.margin-b30 {
+    margin-bottom: 30px;
+}
+.project-teams {
+    margin-bottom: 20px;
+}
+.teams-social-links {
+    color: inherit;
+    text-decoration: none;
+}
+.teams-dispaly-pointer {
+    cursor: pointer;
+    padding: 0 5px;
+}
