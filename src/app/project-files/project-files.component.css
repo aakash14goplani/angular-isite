@@ -1,0 +1,12 @@
+.margin-b30 {
+    margin-bottom: 30px;
+}
+.project-files {
+    margin-bottom: 20px;
+}
+.list-group.inner li{
+	border:none;
+}
+li.list-group-item a {
+	text-decoration: none;
+}

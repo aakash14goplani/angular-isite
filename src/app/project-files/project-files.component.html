@@ -1,1 +1,62 @@
-<p>project-files works!</p>
+<section class="project-files">
+    <div class="container-fluid">
+        <h2 class="text-center">Files</h2>
+        <app-filter-n-sort></app-filter-n-sort>
+        <div class="row">
+            <div class="col-xs-12 col-md-8 offset-md-2">
+                <ul class="list-group">
+                    <li class="list-group-item">
+                        <a href="#" (click)="initiateUploadFor('PROJECT_DETAILS')" data-toggle="modal" data-target="#myModal">Project Details</a>
+                    </li>
+                    <li class="list-group-item">
+                        <a href="#" (click)="initiateUploadFor('WORK_ORDER')" data-toggle="modal" data-target="#myModal">Work Order</a>
+                        <ul class="list-group inner">
+                            <li class="list-group-item">uploaded_file_1</li>
+                            <li class="list-group-item">uploaded_file_2</li>
+                        </ul>
+                    </li>
+                    <li class="list-group-item">
+                        <a href="#" (click)="initiateUploadFor('EOT_LETTER')" data-toggle="modal" data-target="#myModal">EOT Letter</a>
+                    </li>
+                    <li class="list-group-item">
+                        <a href="#" (click)="initiateUploadFor('REVISED_ESTIMATES')" data-toggle="modal" data-target="#myModal">Revised Estimates</a>
+                    </li>
+                    <li class="list-group-item">
+                        <a href="#" (click)="initiateUploadFor('MS_PLAN')" data-toggle="modal" data-target="#myModal">MS Plan</a>
+                    </li>
+                    <li class="list-group-item">
+                        <a href="#" (click)="initiateUploadFor('BANK_GUARNTEE')" data-toggle="modal" data-target="#myModal">Bank Guarantees</a>
+                    </li>
+                    <li class="list-group-item">
+                        <a href="#" (click)="initiateUploadFor('WC_POLICY')" data-toggle="modal" data-target="#myModal">WC Policy</a>
+                    </li>
+                    <li class="list-group-item">
+                        <a href="#" (click)="initiateUploadFor('CAR_POLICY')" data-toggle="modal" data-target="#myModal">Car Policy</a>
+                    </li>
+                    <li class="list-group-item">
+                        <a href="#" (click)="initiateUploadFor('STAMP_DUTY')" data-toggle="modal" data-target="#myModal">Stamp Duty</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="modal" tabindex="-1" role="dialog" id="myModal">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Modal title</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <input type="file" id="customFile" name="customFile">
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" (click)="uploadFiles()" class="btn btn-success">Upload File</button>
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

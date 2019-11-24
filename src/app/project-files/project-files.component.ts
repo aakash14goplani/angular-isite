@@ -1,15 +1,39 @@
 import { Component, OnInit } from '@angular/core';
+import { ProjectFilesService } from './project-files.service';
 
 @Component({
   selector: 'app-project-files',
   templateUrl: './project-files.component.html',
-  styleUrls: ['./project-files.component.css']
+  styleUrls: ['./project-files.component.css'],
+  providers: [ ProjectFilesService ]
 })
 export class ProjectFilesComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    private projectFilesService: ProjectFilesService
+  ) { }
+
+  // tslint:disable: no-inferrable-types
+  private uploadingFor: string = '';
 
   ngOnInit() {
+    /*
+		  logic to upload files
+		  this.projectFilesService.....
+  	*/
+  }
+
+  private initiateUploadFor(option: string): void {
+    this.uploadingFor = option;
+    console.log('uploadingFor: ', this.uploadingFor);
+  }
+
+  private uploadFiles(): void {
+    console.log('File Uploaded for: ', this.uploadingFor);
+    /*
+		logic to upload files
+		this.projectFilesService.....
+  	*/
   }
 
 }

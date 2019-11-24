@@ -4,27 +4,18 @@
         <!-- <app-filter-n-sort></app-filter-n-sort> -->
         <div class="row">
             <div class="col-xs-12 col-md-8 offset-md-2">
-                <div class="card-deck margin-b30">
-                    <div class="card">
-                        <div class="card-header">11/01/2019</div>
-                        <div class="card-body">
-                            <span class="card-text">
-                                <ul>
-                                    <li>Concrete</li>
-                                    <li>Steel</li>
-                                </ul>
-                            </span>
-                        </div>
-                    </div>
-                    <div class="card">
-                        <div class="card-header">11/09/2019</div>
-                        <div class="card-body">
-                            <span class="card-text">
-                                <ul>
-                                    <li>Fly Ash</li>
-                                </ul>
-                            </span>
-                        </div>
+                <div class="card-deck margin-b30" *ngFor="let materialDetails of materialSubArray">
+                    <div class="card" *ngFor="let material of materialDetails">
+                        <ng-container *ngIf="material.inward_date">
+                            <div class="card-header">{{ material.inward_date | date: 'dd/MM/yyyy' }}</div>
+                            <div class="card-body">
+                                <span class="card-text">
+                                    <ul>
+                                        <li *ngFor="let contents of material.materials">{{ contents.name }} : {{ contents. quantity }}</li>
+                                    </ul>
+                                </span>
+                            </div>
+                        </ng-container>
                     </div>
                 </div>
             </div>

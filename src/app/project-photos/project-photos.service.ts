@@ -41,6 +41,12 @@ export class ProjectPhotosService {
       description: 'Description 6',
       date: new Date(),
       url: 'https://www.queenstownisite.com/isite/queenstown/isite.svg'
+    },
+    {
+      title: 'Photos Title 7',
+      description: 'Description 7',
+      date: new Date(),
+      url: 'https://www.queenstownisite.com/isite/queenstown/isite.svg'
     }
   ];
 

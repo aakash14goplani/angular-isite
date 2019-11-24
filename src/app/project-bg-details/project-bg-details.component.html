@@ -1,1 +1,28 @@
-<p>project-bg-details works!</p>
+<section class="project-bank-guarantee-details">
+    <div class="container-fluid">
+        <h2 class="text-center margin-b30">Bank Guarantee Details</h2>
+        <!-- <app-filter-n-sort></app-filter-n-sort> -->
+        <div class="row">
+            <div class="col-xs-12 col-md-8 offset-md-2">
+                <div class="card-deck margin-b30" *ngFor="let bankDetails of bankGuarnteeDataSubArray">
+                    <div class="card" *ngFor="let bankDetail of bankDetails">
+                    	<ng-container *ngIf="bankDetail.image_url">
+	                        <img [src]="bankDetail.image_url" class="card-img" [alt]="bankDetail.title">
+	                        <div class="card-body">
+	                            <h5 class="card-title">{{ bankDetail.title }}</h5>
+	                            <span class="card-text">
+	                                <ul>
+	                                    <li>BG No.: {{ bankDetail.contents.id }}</li>
+	                                    <li>BG Amount: {{ bankDetail.contents.amount }}</li>
+	                                    <li>BG Date: {{ bankDetail.contents.start_date | date: 'dd/MM/yyyy' }}</li>
+	                                    <li>BG Expiry Date: {{ bankDetail.contents.end_date | date: 'dd/MM/yyyy' }}</li>
+	                                </ul>
+	                            </span>
+	                        </div>
+                        </ng-container>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
