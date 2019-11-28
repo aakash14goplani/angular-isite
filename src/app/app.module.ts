@@ -27,6 +27,7 @@ import { ProjectBgDetailsComponent } from './project-bg-details/project-bg-detai
 import { TooltipDirective } from './home-page/tooltip.directive';
 import { ProjectComponent } from './project/project.component';
 import { HeaderComponent } from './header/header.component';
+import { UserProfileComponent } from './user-profile/user-profile.component';
 
 @NgModule({
   declarations: [
@@ -53,7 +54,8 @@ import { HeaderComponent } from './header/header.component';
     ProjectBgDetailsComponent,
     TooltipDirective,
     ProjectComponent,
-    HeaderComponent
+    HeaderComponent,
+    UserProfileComponent
   ],
   imports: [
     BrowserModule,
