@@ -6,8 +6,12 @@
 a:hover.anchor-card {
     color: inherit;
     text-decoration: none;
+    cursor: pointer;
 }
 .btn-add-project {
     float: right;
     margin: 10px;
+}
+div.card {
+    margin-bottom: 20px;
 }

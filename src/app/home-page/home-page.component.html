@@ -39,8 +39,9 @@
 
                         <div class="form-group">
                             <label for="password">Password</label>
+                            <!-- <input type="password" id="password" [attr.class]="formClass" name="password" required ngModel #passwordInput="ngModel" appPasswordValidator> -->
                             <input type="password" id="password" class="form-control" name="password" required ngModel #passwordInput="ngModel" appPasswordValidator>
-                            <span class="fa fa-question-circle fa-xl" tooltip="Password should be between 8 - 16 character length and must include special character and number" placement="bottom" delay="500"></span>
+                            <span *ngIf="!isLoginMode" class="fa fa-question-circle fa-xl" tooltip="Password should be between 8 - 16 character length and must include special character and number" placement="bottom" delay="500"></span>
                             <span class="help-block" *ngIf="!passwordInput.valid && passwordInput.touched">{{ isLoginMode ? 'Please enter a valid password' : 'Password should be between 8 - 16 character length and must include special character and number'}}</span>
                         </div>
 

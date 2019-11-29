@@ -1,24 +1,44 @@
-import { Component, OnInit } from '@angular/core';
-import { UserService } from '../core/user-service/user-service.service';
+import { Component, AfterViewChecked, OnDestroy } from '@angular/core';
 import { NgForm } from '@angular/forms';
+import { AuthService } from '../authentication/auth.service';
+// import { Subscription, Subject } from 'rxjs';
 
 @Component({
   selector: 'app-home-page',
   templateUrl: './home-page.component.html',
   styleUrls: ['./home-page.component.css']
 })
-export class HomePageComponent implements OnInit {
+export class HomePageComponent implements AfterViewChecked, OnDestroy {
 
   constructor(
-    private userService: UserService,
+    private authService: AuthService
   ) { }
-  // tslint:disable: no-inferrable-types
   private isLoginMode: boolean = false;
+  /* Adding subject to force refresh component on every switch between login / register. Here class
+  will toggle between `form-control` and `form-control register`, this will prevent angular from
+  adding validation classsed `ng-invalid`, `ng-error` etc and the validation message won't deisplay
+  comment till find alternate solution!
 
-  ngOnInit(): void {}
+  private formClass: string = 'form-control register';
+  private subjectFormClass: Subject<string> = new Subject<string>();
+  private subscription: Subscription; */
+
+  ngAfterViewChecked(): void {
+    /* this.subscription = this.subjectFormClass.subscribe((message) => {
+       this.formClass = message;
+    }); */
+    this.authService.autoLogin();
+  }
 
   private switchMode(): void {
     this.isLoginMode = !this.isLoginMode;
+    /* if (this.isLoginMode) {
+      this.formClass = 'form-control';
+      this.subjectFormClass.next(this.formClass);
+    } else {
+      this.formClass = 'form-control register';
+      this.subjectFormClass.next(this.formClass);
+    } */
   }
 
   private onSubmit(formData: NgForm): void {
@@ -31,12 +51,16 @@ export class HomePageComponent implements OnInit {
     if (this.isLoginMode) {
       // login user
       console.log('logging user...');
-      this.userService.authenticateUser(userEmail, userPassword);
+      this.authService.authenticateUser(userEmail, userPassword);
     } else {
       // register user
       console.log('regestering user...');
-      this.userService.registerUser(userName, userEmail, userPassword);
+      this.authService.registerUser(userName, userEmail, userPassword);
     }
+  }
+
+  ngOnDestroy(): void {
+    // this.subscription.unsubscribe();
   }
 
 }

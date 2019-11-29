@@ -12,9 +12,7 @@
                 <!--toggle class 'open'-->
                 <ul *ngIf="isNormalHeader" [attr.class]="spanSideNavClass" (click)="toggleClassValue($event)">
                     <li class="nav-item">
-                        <a class="nav-link" routerLink="details">
-                            ( Current Project Name )
-                        </a>
+                        <a class="nav-link" routerLink="details">{{ currentProjectName }}</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" routerLink="plan" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Plan
@@ -42,10 +40,10 @@
                 </ul>
                 <ul class="navbar-nav ml-md-auto d-md-flex">
                     <li class="dropdown">
-                        <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">My Account <span class="caret"></span></a>
+                        <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{ userName }} <span class="caret"></span></a>
                         <ul class="dropdown-menu">
                             <li><a class="dropdown-nav-link" routerLink="/my-account">Profile</a></li>
-                            <li><a class="dropdown-nav-link" routerLink="/index">Logout</a></li>
+                            <li><a class="dropdown-nav-link" (click)="logoutUser()">Logout</a></li>
                         </ul>
                     </li>
                 </ul>

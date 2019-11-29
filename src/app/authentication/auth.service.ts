@@ -9,65 +9,89 @@ import { User } from './user.model';
 })
 export class AuthService {
 
-  user = new BehaviorSubject<User>(null);
+  private user: BehaviorSubject<User> = new BehaviorSubject<User>(null);
+  private timeOut: any;
 
   constructor(
     private router: Router,
     private userService: UserService
   ) {}
 
-  /* avoid registering duplicate users */
-  public validateUserEmailExists(name: string, email: string): string {
-    const errorToken: string = 'SUCCESS';
-
-    /* for (const user of this.userDataStore) {
-      if (user.email === email) {
-        errorToken = 'EMAIL_EXISTS';
-        break;
-      }
-    } */
-
-    return errorToken;
-  }
-
   public authenticateUser(email: string, password: string): void {
     let userAuthenticated = false;
     this.userService.checkEmailPasswordCombination(email, password).subscribe((flag: boolean) => {
       userAuthenticated = flag;
     });
-
     if (userAuthenticated) {
-      const userName = this.userService.getUserName(email);
-      const expiresIn: number = 1800000; // 30 minutes in millis
-      const expiryDate = new Date(new Date().getTime() + expiresIn);
-      const user = new User(userName, email, this.generateToken(), expiryDate);
-      this.user.next(user);
-      localStorage.setItem('userData', JSON.stringify(user));
+      this.processUserAndNavigate('login', email);
     } else {
       /* ERROR alert message: unable to login */
     }
   }
 
+  public registerUser(name: string, email: string, password: string): void {
+    let messageToken = '';
+    this.userService.setUserData(name, email, password).subscribe((message: string) => {
+      messageToken = message;
+    });
+    if ('SUCCESS' === messageToken) {
+      this.processUserAndNavigate('register', email);
+    } else {
+      /* ERROR alert message: unable to register */
+    }
+  }
+
+  public logout(): void {
+    this.user.next(null);
+    localStorage.removeItem('userData');
+    if (this.timeOut) {
+        clearTimeout(this.timeOut);
+    }
+    this.timeOut = null;
+    this.router.navigate(['/home']);
+  }
+
+  public autoLogin(): void {
+    const userData: {
+      email: string,
+      name: string,
+      token: string,
+      tokenExpirationDate: string
+    } = JSON.parse(localStorage.getItem('userData'));
+    if (!userData) {
+      return;
+    }
+    const continueUserSession = new User(userData.email, userData.name, userData.token, new Date(userData.tokenExpirationDate));
+    if (continueUserSession.getToken()) {
+      this.user.next(continueUserSession);
+      const sessionExpiryData = new Date(userData.tokenExpirationDate).getTime() - new Date().getTime();
+      this.autoLogout(sessionExpiryData);
+    }
+  }
+
+  public autoLogout(expirationDuration: number): void {
+    this.timeOut = setTimeout(() => {
+        this.logout();
+    }, expirationDuration);
+  }
+
+  private processUserAndNavigate(type: string, email: string): void {
+    const userName = this.userService.getUserName(email);
+    const expiresIn: number = 3600000; // 60 minutes in millis
+    const expiryDate = new Date(new Date().getTime() + expiresIn);
+    const user = new User(email, userName, this.generateToken(), expiryDate);
+    this.user.next(user);
+    localStorage.setItem('userData', JSON.stringify(user));
+    this.router.navigate(['project']);
+  }
+
   private generateToken(): string {
     let result: string = '';
-    const characters: string = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789_+-=?*/!@#$%^&';
+    const characters: string = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789_+-=*!@#$';
     const charactersLength = characters.length;
     for (let i = 0; i < 12; i++) {
         result += characters.charAt(Math.floor(Math.random() * charactersLength));
     }
     return result;
-  }
-
-  public registerUser(name: string, email: string, password: string): void {
-    /* for (const user of this.userDataStore) {
-      if (user.email === email) {
-        // email already registered
-        console.log('registeration failed: email already exists!');
-        return;
-      }
-    }
-    this.userDataStore.push({ name, email, password });
-    this.router.navigate(['project']);
-    console.log('registeration successfull', this.userDataStore.length); */
   }
 }

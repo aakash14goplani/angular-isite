@@ -26,9 +26,13 @@ export class UserService {
     return this.userDataStore.slice();
   }
 
-  public setUserData(name: string, email: string, password: string): void {
-    this.userDataStore.push({ name, email, password });
-    this.userDataChanged.next(this.userDataStore);
+  public setUserData(name: string, email: string, password: string): Observable<string> {
+    if (!this.validateUserEmailExists(email)) {
+      this.userDataStore.push({ name, email, password });
+      this.userDataChanged.next(this.userDataStore);
+      return of('SUCCESS');
+    }
+    return of('EMAIL_EXISTS');
   }
 
   public updateUserName(name: string, email: string): void {
@@ -83,12 +87,12 @@ export class UserService {
   }
 
   /* avoid registering duplicate users */
-  public validateUserEmailExists(name: string, email: string): string {
-    let errorToken: string = 'SUCCESS';
+  public validateUserEmailExists(email: string): boolean {
+    let errorToken: boolean = false;
 
     for (const user of this.userDataStore) {
       if (user.email === email) {
-        errorToken = 'EMAIL_EXISTS';
+        errorToken = true;
         break;
       }
     }
