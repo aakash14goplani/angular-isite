@@ -27,7 +27,6 @@ export class HomePageComponent implements AfterViewChecked, OnDestroy {
     /* this.subscription = this.subjectFormClass.subscribe((message) => {
        this.formClass = message;
     }); */
-    this.authService.autoLogin();
   }
 
   private switchMode(): void {

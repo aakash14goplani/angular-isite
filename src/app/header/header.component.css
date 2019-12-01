@@ -43,6 +43,14 @@ a:hover.dropdown-nav-link {
     color: inherit;
     cursor: pointer;
 }
+a.navbar-brand {
+	color: white;
+}
+a:hover.navbar-brand {
+	text-decoration: none;
+    color: white;
+    cursor: pointer;
+}
 @media screen and (min-width: 0px) and (max-width: 991px) {
 	span.navbar-toggler-icon.leftmenutrigger {
 		display: none;

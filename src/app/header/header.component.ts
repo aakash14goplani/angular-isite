@@ -18,6 +18,7 @@ export class HeaderComponent implements OnDestroy, OnInit {
   private expandNavigation: boolean = false;
   private userName: string = 'My Account';
   private currentProjectName: string = 'Contents:';
+  private isUserLoggedIn: boolean = false;
 
   constructor(
     private router: Router,
@@ -43,12 +44,23 @@ export class HeaderComponent implements OnDestroy, OnInit {
 
     if (userData) {
       this.userName = userData.name;
+      this.isUserLoggedIn = true;
+    } else {
+      this.isUserLoggedIn = false;
     }
 
     if (this.coreProjectService.globalProjectName) {
       this.projectNameSubscription = this.coreProjectService.globalProjectName.subscribe((projectName: string) => {
         this.currentProjectName = projectName;
       });
+    }
+  }
+
+  private navigateToHomePage(): void {
+    if (this.isUserLoggedIn) {
+      this.router.navigate(['/project/details']);
+    } else {
+      this.router.navigate(['/home']);
     }
   }
 

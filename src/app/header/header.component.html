@@ -2,7 +2,7 @@
     <div id="wrapper" class="animate">
         <nav class="navbar header-top fixed-top navbar-expand-lg navbar-dark bg-dark">
             <span *ngIf="isNormalHeader" class="navbar-toggler-icon leftmenutrigger" (click)="toggleSideNav()"></span>
-            <a class="navbar-brand" routerLink="/index">iSITE</a>
+            <a class="navbar-brand" (click)="navigateToHomePage()">iSITE</a>
             <!--toggle class 'collapsed'-->
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -12,30 +12,30 @@
                 <!--toggle class 'open'-->
                 <ul *ngIf="isNormalHeader" [attr.class]="spanSideNavClass" (click)="toggleClassValue($event)">
                     <li class="nav-item">
-                        <a class="nav-link" routerLink="details">{{ currentProjectName }}</a>
+                        <a class="nav-link" routerLink="/project/details">{{ currentProjectName }}</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" routerLink="plan" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Plan
+                        <a class="nav-link" routerLink="/project/plan" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Plan
                             <span class="sr-only">(current)</span>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" routerLink="photos" routerLinkActive="active">Photos</a>
+                        <a class="nav-link" routerLink="/project/photos" routerLinkActive="active">Photos</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" routerLink="dpr" routerLinkActive="active">DPR</a>
+                        <a class="nav-link" routerLink="/project/dpr" routerLinkActive="active">DPR</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" routerLink="material-inward" routerLinkActive="active">Material Inward</a>
+                        <a class="nav-link" routerLink="/project/material-inward" routerLinkActive="active">Material Inward</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" routerLink="files" routerLinkActive="active">Files</a>
+                        <a class="nav-link" routerLink="/project/files" routerLinkActive="active">Files</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" routerLink="teams" routerLinkActive="active">Team</a>
+                        <a class="nav-link" routerLink="/project/teams" routerLinkActive="active">Team</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" routerLink="bg-details" routerLinkActive="active">BG Details</a>
+                        <a class="nav-link" routerLink="/project/bg-details" routerLinkActive="active">BG Details</a>
                     </li>
                 </ul>
                 <ul class="navbar-nav ml-md-auto d-md-flex">

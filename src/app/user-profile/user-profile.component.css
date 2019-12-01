@@ -4,3 +4,13 @@
 .my-profile {
     margin-bottom: 20px;
 }
+a.update-profile-details {
+    cursor: pointer;
+    text-decoration: none;
+    color: blue;
+}
+a:hover.update-profile-details {
+    cursor: pointer;
+    text-decoration: underline;
+    color: blue;
+}

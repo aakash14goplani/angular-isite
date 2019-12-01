@@ -15,13 +15,14 @@ import { ProjectTeamsComponent } from './project-teams/project-teams.component';
 import { ProjectBgDetailsComponent } from './project-bg-details/project-bg-details.component';
 import { ProjectComponent } from './project/project.component';
 import { UserProfileComponent } from './user-profile/user-profile.component';
+import { AuthGuardService } from './authentication/auth-guard.service';
 
 
 const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
   { path: 'home', component: HomePageComponent },
   { path: 'index', component: HomePageComponent },
-  { path: 'project', component: ProjectComponent, children: [
+  { path: 'project', component: ProjectComponent, canActivate: [ AuthGuardService ], children: [
       { path: '', redirectTo: 'details', pathMatch: 'full' },
       { path: 'details', component: ProjectDetailsComponent },
       { path: 'plan', component: ProjectPlanComponent },
@@ -33,7 +34,7 @@ const routes: Routes = [
       { path: 'bg-details', component: ProjectBgDetailsComponent }
     ]
   },
-  { path: 'my-account', component: UserProfileComponent },
+  { path: 'my-account', component: UserProfileComponent, canActivate: [ AuthGuardService ] },
   { path: 'privacy-policy', component: PrivacyPolicyComponent },
   { path: 'legal-notice', component: LegalNoticeComponent },
   { path: 'accessibility', component: AccessibilityStatementComponent },

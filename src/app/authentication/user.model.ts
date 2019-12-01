@@ -18,4 +18,8 @@ export class User {
         }
         return null;
     }
+
+    public getTokenExpirationDate(): Date {
+        return this.tokenExpirationDate;
+    }
 }

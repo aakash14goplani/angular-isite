@@ -9,7 +9,7 @@ import { User } from './user.model';
 })
 export class AuthService {
 
-  private user: BehaviorSubject<User> = new BehaviorSubject<User>(null);
+  public user: BehaviorSubject<User> = new BehaviorSubject<User>(null);
   private timeOut: any;
 
   constructor(
