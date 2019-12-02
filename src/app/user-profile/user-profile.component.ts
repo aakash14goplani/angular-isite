@@ -1,9 +1,8 @@
-import { Component, OnInit, OnDestroy, ViewChild, ElementRef } from '@angular/core';
-import { AuthService } from '../authentication/auth.service';
-import { Subscription } from 'rxjs';
-import { UserService } from '../core/user-service/user-service.service';
-import { User } from '../authentication/user.model';
+import { Component, OnInit, ViewChild, ElementRef, OnDestroy } from '@angular/core';
 import { ProfileService } from './profile.service';
+import { AuthService } from '../authentication/auth.service';
+import { User } from '../authentication/user.model';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-user-profile',
@@ -14,37 +13,38 @@ import { ProfileService } from './profile.service';
 export class UserProfileComponent implements OnInit, OnDestroy {
 
   constructor(
-    private authService: AuthService,
-    private userService: UserService
+    private profileService: ProfileService,
+    private authService: AuthService
   ) { }
 
-  private subscription: Subscription;
   private userName: string = '';
   private userEmail: string = '';
-  private token: string = '';
-  private tokenExpirationDate: Date;
   private updateMessageForName: boolean = false;
   private nameMessage: string = 'Update User Name';
   private updateMessageForEmail: boolean = false;
   private emailMessage: string = 'Update User Email';
+  private authServiceSubscription: Subscription;
+
+  private userNameErrorMessage: string = '';
+  private userEmailErrorMessage: string = '';
+  private userPasswordErrorMessage: string = '';
+
   @ViewChild('userNameInput', {static: false}) newUserName: ElementRef;
   @ViewChild('userEmailInput', {static: false}) newUserEmail: ElementRef;
   @ViewChild('currentPassword', {static: false}) currentPassword: ElementRef;
   @ViewChild('newPassword', {static: false}) newPassword: ElementRef;
   @ViewChild('confirmNewPassword', {static: false}) confirmNewPassword: ElementRef;
 
-  ngOnInit() {
-    this.subscription = this.authService.user.subscribe((userData) => {
-      if (!!userData) {
-        this.userEmail = userData.email;
+  ngOnInit(): void {
+    this.authServiceSubscription = this.authService.user.subscribe((userData: User) => {
+      if (userData) {
         this.userName = userData.name;
-        this.token = userData.getToken();
-        this.tokenExpirationDate = userData.getTokenExpirationDate();
+        this.userEmail = userData.email;
       }
     });
   }
 
-  private updateUserDetails(type: string): void {
+  private updateDisplayMessageFor(type: string): void {
     if (type === 'name') {
       this.updateMessageForName = !this.updateMessageForName;
       this.nameMessage = (this.updateMessageForName) ? 'Cancel' : 'Update User Name';
@@ -55,53 +55,79 @@ export class UserProfileComponent implements OnInit, OnDestroy {
     }
   }
 
-  private updateValue(type: string) {
+  private updateUserValueFor(type: string) {
     if (type === 'name') {
+      this.userNameErrorMessage = '';
       const newUserName = this.newUserName.nativeElement.value;
+
       if (newUserName) {
-        this.userService.updateUserName(newUserName, this.userEmail);
-        this.authService.user.next(new User(this.userEmail, newUserName, this.token, this.tokenExpirationDate));
-        console.log('updated successfully');
+        if (newUserName.length > 0 && newUserName.length < 4) {
+          this.userNameErrorMessage = 'USER NAME SHOULD BE GREATER THAN 4 CHARACTERS';
+        }
+        const userExist = this.profileService.getUserData().find(user => user.name.toLowerCase() === newUserName.toLowerCase());
+        if (userExist != null) {
+          this.userNameErrorMessage = 'USER ALREADY EXISTS';
+        }
+        console.log('updating name: ', newUserName, ', error: ', this.userNameErrorMessage);
+
+        if (this.userNameErrorMessage.length === 0) {
+          this.profileService.updateUserName(newUserName, this.userEmail);
+        }
       }
     }
     if (type === 'email') {
       const newUserEmail = this.newUserEmail.nativeElement.value;
+      this.userEmailErrorMessage = '';
+
       if (newUserEmail) {
-        this.userService.updateUserEmail(this.userEmail, newUserEmail);
-        this.authService.user.next(new User(newUserEmail, this.userName, this.token, this.tokenExpirationDate));
+        const userEmailExist = this.profileService.getUserData().find(user => user.email.toLowerCase() === newUserEmail.toLowerCase());
+        if (userEmailExist != null) {
+          this.userEmailErrorMessage = 'EMAIL ALREADY EXISTS';
+        }
+        const regexp: RegExp =
+        new RegExp(/^[a-z0-9!#$%&'*+\/=?^_`{|}~.-]+@[a-z0-9]([a-z0-9-]*[a-z0-9])?(\.[a-z0-9]([a-z0-9-]*[a-z0-9])?)*$/);
+        if (!regexp.test(newUserEmail)) {
+          this.userEmailErrorMessage = 'INVALID EMAIL';
+        }
+        console.log('updating email: ', newUserEmail, ', error: ', this.userEmailErrorMessage);
+
+        if (this.userEmailErrorMessage.length === 0) {
+          this.profileService.updateUserEmail(this.userEmail, newUserEmail);
+        }
       }
     }
     if (type === 'password') {
       const currentPassword = this.currentPassword.nativeElement.value;
       const newPassword = this.newPassword.nativeElement.value;
       const confirmNewPassword = this.confirmNewPassword.nativeElement.value;
+      this.userPasswordErrorMessage = '';
 
       if (currentPassword && newPassword && confirmNewPassword) {
-        const userData = this.userService.getUserData();
-        const index = userData.findIndex(userData => userData.email === this.userEmail);
+
+        if (!newPassword.match(/^(?=.*[\d])(?=.*[!@#$_%^&*])[\w!@#_$%^&*]{8,16}$/)) {
+          this.userPasswordErrorMessage = 'New Password must be between 8 - 16 letters and contains special characters';
+        }
+        const userData = this.profileService.getUserData();
+        const index = userData.findIndex(userData2 => userData2.email === this.userEmail);
 
         if (index >= 0) {
           const existingPassword = userData[index].password;
           if (existingPassword && existingPassword === currentPassword) {
             if (newPassword === confirmNewPassword) {
-              this.userService.updateUserPassword(this.userEmail, newPassword);
-              console.log('password updated: ', this.userService.getUserData());
+              this.profileService.updateUserPassword(this.userEmail, currentPassword, newPassword, confirmNewPassword);
             } else {
-              /* data mismatch */
-              console.log('new password and confirm_new_password are not same: ');
+              this.userPasswordErrorMessage = 'New Password and Confirm_New_Password are not same';
             }
           } else {
-            /* password mismatch */
-            console.log('new password and existing password are not same: ');
+            this.userPasswordErrorMessage = 'New Password and Existing Password are not same';
           }
         }
-        
       }
     }
   }
 
   ngOnDestroy(): void {
-    this.subscription.unsubscribe();
+    this.authServiceSubscription.unsubscribe();
   }
 
 }

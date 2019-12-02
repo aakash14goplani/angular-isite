@@ -14,3 +14,7 @@ a:hover.update-profile-details {
     text-decoration: underline;
     color: blue;
 }
+span.help-block {
+    color: red;
+    display: block;
+}

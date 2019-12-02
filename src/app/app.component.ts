@@ -9,7 +9,7 @@ import { AuthService } from './authentication/auth.service';
 export class AppComponent implements OnInit {
   title = 'isite-angular';
 
-  constructor (
+  constructor(
     private authService: AuthService
   ) {}
 

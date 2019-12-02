@@ -1,1 +1,17 @@
-<p>page-not-found works!</p>
+<app-header *ngIf="isUserLoggedIn"></app-header>
+<app-unauth-header *ngIf="!isUserLoggedIn"></app-unauth-header>
+ <main>
+    <section class="page-not-found">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-xs-12 col-md-8 offset-md-2">
+                    <img src="../../assets/images/page_not_found.png" alt="Page Not Found" class="img-responsive img-custom">
+                </div>
+                <div class="col-xs-12 col-md-8 offset-md-2">
+                    <h5>{{ statusMessage }}</h5>
+                    <h5>Go back to <a routerLink='/home'>Home</a> Page</h5>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>

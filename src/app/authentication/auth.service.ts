@@ -66,6 +66,7 @@ export class AuthService {
       this.user.next(continueUserSession);
       const sessionExpiryData = new Date(userData.tokenExpirationDate).getTime() - new Date().getTime();
       this.autoLogout(sessionExpiryData);
+      this.router.navigate(['project']);
     }
   }
 

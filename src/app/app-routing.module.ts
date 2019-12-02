@@ -16,13 +16,14 @@ import { ProjectBgDetailsComponent } from './project-bg-details/project-bg-detai
 import { ProjectComponent } from './project/project.component';
 import { UserProfileComponent } from './user-profile/user-profile.component';
 import { AuthGuardService } from './authentication/auth-guard.service';
+import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 
 
 const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
   { path: 'home', component: HomePageComponent },
   { path: 'index', component: HomePageComponent },
-  { path: 'project', component: ProjectComponent, canActivate: [ AuthGuardService ], children: [
+  { path: 'project', component: ProjectComponent, canActivateChild: [ AuthGuardService ], children: [
       { path: '', redirectTo: 'details', pathMatch: 'full' },
       { path: 'details', component: ProjectDetailsComponent },
       { path: 'plan', component: ProjectPlanComponent },
@@ -38,7 +39,8 @@ const routes: Routes = [
   { path: 'privacy-policy', component: PrivacyPolicyComponent },
   { path: 'legal-notice', component: LegalNoticeComponent },
   { path: 'accessibility', component: AccessibilityStatementComponent },
-  { path: '**', redirectTo: 'home' }
+  { path: 'page-not-found', component: PageNotFoundComponent, data: {message: 'This is not the page you were looking for...'} },
+  { path: '**', redirectTo: 'page-not-found' }
 ];
 
 @NgModule({

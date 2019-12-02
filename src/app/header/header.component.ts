@@ -3,6 +3,7 @@ import { Router, NavigationEnd } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { AuthService } from '../authentication/auth.service';
 import { ProjectService } from '../project/project.service';
+import { User } from '../authentication/user.model';
 
 @Component({
   selector: 'app-header',
@@ -13,6 +14,7 @@ export class HeaderComponent implements OnDestroy, OnInit {
 
   private routerSubscription: Subscription;
   private projectNameSubscription: Subscription;
+  private authServiceSubscription: Subscription;
   private isNormalHeader: boolean = false;
   private spanSideNavClass: string = 'navbar-nav animate side-nav';
   private expandNavigation: boolean = false;
@@ -35,19 +37,12 @@ export class HeaderComponent implements OnDestroy, OnInit {
   }
 
   ngOnInit(): void {
-    const userData: {
-      email: string,
-      name: string,
-      token: string,
-      tokenExpirationDate: string
-    } = JSON.parse(localStorage.getItem('userData'));
-
-    if (userData) {
-      this.userName = userData.name;
-      this.isUserLoggedIn = true;
-    } else {
-      this.isUserLoggedIn = false;
-    }
+    this.authServiceSubscription = this.authService.user.subscribe((userData: User) => {
+      if (userData) {
+        this.userName = userData.name;
+        this.isUserLoggedIn = true;
+      }
+    });
 
     if (this.coreProjectService.globalProjectName) {
       this.projectNameSubscription = this.coreProjectService.globalProjectName.subscribe((projectName: string) => {
@@ -89,6 +84,7 @@ export class HeaderComponent implements OnDestroy, OnInit {
   ngOnDestroy(): void {
     this.routerSubscription.unsubscribe();
     this.projectNameSubscription.unsubscribe();
+    this.authServiceSubscription.unsubscribe();
   }
 
 }

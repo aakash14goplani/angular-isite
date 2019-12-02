@@ -10,15 +10,17 @@
                             <label for="userName">Name: </label> {{ userName }}
                             <br>
                             <input type="text" *ngIf="updateMessageForName" class="form-control" name="userName" #userNameInput>
-                            <a (click)="updateValue('name')" *ngIf="updateMessageForName" class="update-profile-details">Update | </a>
-                            <a (click)="updateUserDetails('name')" class="update-profile-details">{{ nameMessage }}</a>
+                            <span class="help-block" *ngIf="userNameErrorMessage.length > 0">{{ userNameErrorMessage }}</span>
+                            <a (click)="updateUserValueFor('name')" *ngIf="updateMessageForName" class="update-profile-details">Update | </a>
+                            <a (click)="updateDisplayMessageFor('name')" class="update-profile-details">{{ nameMessage }}</a>
                         </div>
                         <div class="form-group">
                             <label for="userEmail">Email: </label> {{ userEmail }}
                             <br>
                             <input type="text" *ngIf="updateMessageForEmail" class="form-control" name="userEmail" #userEmailInput>
-                            <a (click)="updateValue('email')" *ngIf="updateMessageForEmail" class="update-profile-details">Update | </a>
-                            <a (click)="updateUserDetails('email')" class="update-profile-details">{{ emailMessage }}</a>
+                            <span class="help-block" *ngIf="userEmailErrorMessage.length > 0">{{ userEmailErrorMessage }}</span>
+                            <a (click)="updateUserValueFor('email')" *ngIf="updateMessageForEmail" class="update-profile-details">Update | </a>
+                            <a (click)="updateDisplayMessageFor('email')" class="update-profile-details">{{ emailMessage }}</a>
                         </div>
 
                         <h4>Change Password</h4>
@@ -33,7 +35,8 @@
                         <div class="form-group">
                             <label for="userName">Retype New Password</label>
                             <input type="password" class="form-control" id="new_password_confirm" name="new_password_confirm" #confirmNewPassword>
-                            <a (click)="updateValue('password')" class="update-profile-details">Update</a>
+                            <span class="help-block" *ngIf="userPasswordErrorMessage.length > 0">{{ userPasswordErrorMessage }}</span>
+                            <a (click)="updateUserValueFor('password')" class="update-profile-details">Update</a>
                         </div>
                     </div>
                 </div>
