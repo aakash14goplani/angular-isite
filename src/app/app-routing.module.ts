@@ -17,6 +17,7 @@ import { ProjectComponent } from './project/project.component';
 import { UserProfileComponent } from './user-profile/user-profile.component';
 import { AuthGuardService } from './authentication/auth-guard.service';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
+import { ProjectDetailsResolverService } from './project-details/project-details-resolver.service';
 
 
 const routes: Routes = [
@@ -24,8 +25,8 @@ const routes: Routes = [
   { path: 'home', component: HomePageComponent },
   { path: 'index', component: HomePageComponent },
   { path: 'project', component: ProjectComponent, canActivateChild: [ AuthGuardService ], children: [
-      { path: '', redirectTo: 'details', pathMatch: 'full' },
-      { path: 'details', component: ProjectDetailsComponent },
+      { path: '', redirectTo: 'details', pathMatch: 'full', resolve: [ProjectDetailsResolverService] },
+      { path: 'details', component: ProjectDetailsComponent, resolve: [ProjectDetailsResolverService] },
       { path: 'plan', component: ProjectPlanComponent },
       { path: 'photos', component: ProjectPhotosComponent },
       { path: 'dpr', component: ProjectDprComponent },

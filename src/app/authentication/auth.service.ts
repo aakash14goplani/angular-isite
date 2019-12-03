@@ -81,9 +81,11 @@ export class AuthService {
     const expiresIn: number = 3600000; // 60 minutes in millis
     const expiryDate = new Date(new Date().getTime() + expiresIn);
     const user = new User(email, userName, this.generateToken(), expiryDate);
-    this.user.next(user);
-    localStorage.setItem('userData', JSON.stringify(user));
-    this.router.navigate(['project']);
+    setTimeout(() => {
+      this.user.next(user);
+      localStorage.setItem('userData', JSON.stringify(user));
+      this.router.navigate(['project']);
+    }, 2000);
   }
 
   private generateToken(): string {

@@ -14,6 +14,7 @@ export class HomePageComponent implements AfterViewChecked, OnDestroy {
     private authService: AuthService
   ) { }
   private isLoginMode: boolean = false;
+  private isLoading: boolean = false;
   /* Adding subject to force refresh component on every switch between login / register. Here class
   will toggle between `form-control` and `form-control register`, this will prevent angular from
   adding validation classsed `ng-invalid`, `ng-error` etc and the validation message won't deisplay
@@ -50,10 +51,12 @@ export class HomePageComponent implements AfterViewChecked, OnDestroy {
     if (this.isLoginMode) {
       // login user
       console.log('logging user...');
+      this.isLoading = true;
       this.authService.authenticateUser(userEmail, userPassword);
     } else {
       // register user
       console.log('regestering user...');
+      this.isLoading = true;
       this.authService.registerUser(userName, userEmail, userPassword);
     }
   }

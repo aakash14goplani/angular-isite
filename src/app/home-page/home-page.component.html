@@ -15,7 +15,12 @@
     <section id="authenticate">
         <div class="container">
             <div class="row">
-                <div class="col-xs-12 col-md-6 offset-md-3">
+                <ng-template #loadingSpinner>
+                    <div class="col-xs-6 offset-xs-6 col-sm-6 offset-sm-6 col-md-6 offset-md-6">
+                        <app-loading-spinner></app-loading-spinner>
+                    </div>
+                </ng-template>
+                <div class="col-xs-12 col-md-6 offset-md-3" *ngIf="!isLoading; else loadingSpinner">
                     <h2>To know more Login/Register</h2>
                     <form (ngSubmit)="onSubmit(form)" #form="ngForm">
                         <div class="form-group" *ngIf="!isLoginMode">

@@ -1,7 +1,10 @@
 import { Injectable } from '@angular/core';
-import { ProjectDetailsComponent } from './project-details.component';
 
-@Injectable()
+@Injectable({
+  providedIn: 'root'
+})
+/* initially this service was provided at component level but was then shifted to root level to
+ implemet route-resolver */
 export class ProjectDetailsService {
 
   constructor() { }
