@@ -14,7 +14,7 @@ export class ProjectBgDetailsComponent implements OnInit {
   ) { }
 
   private bankGuarnteeData: Array<BankGuarnteeDataFormat>;
-  private bankGuarnteeDataSubArray:  Array<BankGuarnteeDataFormat[]>;
+  private bankGuarnteeDataSubArray: Array<BankGuarnteeDataFormat[]>;
 
   ngOnInit() {
     this.bankGuarnteeData = this.projectBgDetailsService.getBankGuarnteeDetails();

@@ -24,7 +24,8 @@ const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
   { path: 'home', component: HomePageComponent },
   { path: 'index', component: HomePageComponent },
-  { path: 'project', component: ProjectComponent, canActivateChild: [ AuthGuardService ], children: [
+  { path: 'project', component: ProjectComponent, canActivateChild: [ AuthGuardService ],
+    children: [
       { path: '', redirectTo: 'details', pathMatch: 'full', resolve: [ProjectDetailsResolverService] },
       { path: 'details', component: ProjectDetailsComponent, resolve: [ProjectDetailsResolverService] },
       { path: 'plan', component: ProjectPlanComponent },
@@ -45,7 +46,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  imports: [ RouterModule.forRoot(routes) ],
+  exports: [ RouterModule ]
 })
 export class AppRoutingModule { }

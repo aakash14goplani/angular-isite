@@ -13,10 +13,19 @@ export class ProjectPlanComponent implements OnInit {
     private projectPlanService: ProjectPlanService
   ) { }
 
-  private projectPlanDetails: Array<{ name: string, contents: number }> = [];
+  private projectPlanDetails: Array<{ name: string, contents: number, location: string, date: Date }> = [];
+  private isSorting: boolean = false;
+  private sortType: string = '';
+  private sortField: string = '';
 
   ngOnInit() {
     this.projectPlanDetails = this.projectPlanService.getProjectPlanDetails();
+  }
+
+  private sort(type: string, field: string): void {
+    this.isSorting = true;
+    this.sortType = type;
+    this.sortField = field;
   }
 
 }

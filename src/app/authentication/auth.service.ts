@@ -1,7 +1,7 @@
-import { Injectable, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Injectable, OnDestroy } from '@angular/core';
+import { Router, NavigationEnd } from '@angular/router';
 import { UserService } from '../core/user-service/user-service.service';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Subscription } from 'rxjs';
 import { User } from './user.model';
 
 @Injectable({
@@ -15,7 +15,7 @@ export class AuthService {
   constructor(
     private router: Router,
     private userService: UserService
-  ) {}
+  ) {  }
 
   public authenticateUser(email: string, password: string): void {
     let userAuthenticated = false;
@@ -66,6 +66,8 @@ export class AuthService {
       this.user.next(continueUserSession);
       const sessionExpiryData = new Date(userData.tokenExpirationDate).getTime() - new Date().getTime();
       this.autoLogout(sessionExpiryData);
+      /* redirect user automatically, e.g. if user is logged in on one window and opens new session
+      in other window, he should be forced to continue with its existing session */
       this.router.navigate(['project']);
     }
   }
