@@ -18,7 +18,7 @@ export class TooltipDirective {
 
   constructor(private el: ElementRef, private renderer: Renderer2) { }
 
-  /* @HostListener('mouseenter') onMouseEnter() {
+  @HostListener('mouseenter') onMouseEnter() {
     if (!this.tooltip) {
       this.show();
     }
@@ -28,9 +28,9 @@ export class TooltipDirective {
     if (this.tooltip) {
       this.hide();
     }
-  } */
+  }
 
-  @HostListener('click') onMouseClick() {
+  /* @HostListener('click') onMouseClick() {
     this.toggler = !this.toggler;
     if (this.toggler && !this.tooltip) {
       this.show();
@@ -38,13 +38,13 @@ export class TooltipDirective {
     if (!this.toggler && this.tooltip) {
       this.hide();
     }
-  }
+  } */
 
   private show(): void {
     this.create();
     this.setPosition();
     this.renderer.addClass(this.tooltip, 'ng-tooltip-show');
-  }
+  } 
 
   private hide(): void {
     this.renderer.removeClass(this.tooltip, 'ng-tooltip-show');

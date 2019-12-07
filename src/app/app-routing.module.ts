@@ -16,7 +16,7 @@ import { ProjectBgDetailsComponent } from './project-bg-details/project-bg-detai
 import { ProjectComponent } from './project/project.component';
 import { UserProfileComponent } from './user-profile/user-profile.component';
 import { AuthGuardService } from './authentication/auth-guard.service';
-import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
+import { PageNotFoundComponent } from './shared/page-not-found/page-not-found.component';
 import { ProjectDetailsResolverService } from './project-details/project-details-resolver.service';
 
 
