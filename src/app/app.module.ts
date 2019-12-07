@@ -30,6 +30,8 @@ import { HeaderComponent } from './header/header.component';
 import { UserProfileComponent } from './user-profile/user-profile.component';
 import { PageNotFoundComponent } from './shared/page-not-found/page-not-found.component';
 import { LoadingSpinnerComponent } from './shared/loading-spinner/loading-spinner.component';
+import { SortDataPipe } from './shared/sort-pipe';
+import { FilterDataPipe } from './shared/filter-data.pipe';
 
 @NgModule({
   declarations: [
@@ -59,7 +61,10 @@ import { LoadingSpinnerComponent } from './shared/loading-spinner/loading-spinne
     HeaderComponent,
     UserProfileComponent,
     PageNotFoundComponent,
-    LoadingSpinnerComponent
+    LoadingSpinnerComponent,
+    SortDataPipe,
+    FilterDataPipe
+
   ],
   imports: [
     BrowserModule,
