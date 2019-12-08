@@ -16,8 +16,13 @@ export class FilterDataPipe implements PipeTransform {
 
   transform(value: any, filterValue: string, filterField: string, fromService: string): any {
 
+    console.log('Initial values received in FILTER - ');
+    console.log('value: ', value);
+    console.log('filterValue: ', filterValue);
+    console.log('filterField: ', filterField);
+    console.log('fromService: ', fromService);
+
     let service: any;
-    /* https://stackoverflow.com/questions/43698908/multiple-pipes-simultaneously-in-angular-2 */
 
     if (fromService && filterField && filterValue) {
       switch (fromService) {
@@ -33,18 +38,16 @@ export class FilterDataPipe implements PipeTransform {
       }
 
       if (value && value.length > 0) {
-        const tempArray = []; // make it dynamic
-        for (const data of value) {
-          if (data[filterField] === filterValue) {
-            // make it dynamic
-            tempArray.push({ name: data.name, contents: data.contents, location: data.location, date: data.date });
-          }
-        }
+        const tempArray = value.filter((data) => {
+          return data[filterField] === filterValue.toLowerCase();
+        });
         if (tempArray.length > 0) {
+          console.log('returning filtered valus: ', tempArray);
           return tempArray;
         }
       }
     }
+    console.log('returning original values from filter: ', value);
     return value;
   }
 

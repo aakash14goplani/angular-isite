@@ -1,9 +1,21 @@
-.margin-b30 {
-    margin-bottom: 30px;
-}
 .project-photos {
-    margin-bottom: 2%;
+    margin-bottom: 40px;
 }
-.card {
-	border: 0;
+@media screen and (min-width: 0px) and (max-width: 991px) {
+    p.filter-n-sort-title {
+        /* display: inline-block; */
+        display: block;
+    }
+}
+.filter-n-sort {
+    margin: 20px 0;
+}
+.filter-n-sort-title {
+    font-weight: 500;
+    font-size: 20px;
+    padding-left: 2%;
+}
+.align-card-deck {
+    display: inline-block;
+    margin: 0 20px 20px 0;
 }

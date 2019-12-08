@@ -1,13 +1,15 @@
 <section class="project-plan">
     <div class="container-fluid">
         <h2 class="text-center"> Project Plan</h2>
+
         <div class="row filter-n-sort">
             <div class="col-xs-12 col-md-4 offset-md-2">
                 <p class="filter-n-sort-title">Filter:</p>
                 <div class="btn-group" role="group" aria-label="Filter">
-                    <button type="button" (click)="filter()" class="btn btn-light">Drain</button>
-                    <button type="button" class="btn btn-light">Bridge</button>
-                    <button type="button" class="btn btn-light">Carriageway</button>
+                    <button type="button" (click)="filter('Drain')" class="btn btn-light">Drain</button>
+                    <button type="button" (click)="filter('Bridge')" class="btn btn-light">Bridge</button>
+                    <button type="button" (click)="filter('Carriageway')" class="btn btn-light">Carriageway</button>
+                    <button type="button" *ngIf="isFiltering" (click)="clearFilter()" class="btn btn-light">Clear</button>
                 </div>
             </div>
             <div class="col-xs-12 col-md-4 offset-md-2">
@@ -24,16 +26,11 @@
                 </div>
             </div>
         </div>
+
         <div class="row">
             <div class="col-xs-12 col-md-8 offset-md-2">
-                <!-- <ul class="list-group" *ngIf="!isSorting">
-                    <li class="list-group-item d-flex justify-content-between align-items-center" *ngFor="let project of projectPlanDetails">{{ project.name }}
-                        <span class="badge badge-light badge-pill">{{ project.contents | formatProjectContents }}</span>
-                    </li>
-                </ul> -->
-
                 <ul class="list-group">
-                    <li class="list-group-item d-flex justify-content-between align-items-center" *ngFor="let project of projectPlanDetails | sortData: sortType: sortField: 'plan'">{{ project.name }}
+                    <li class="list-group-item d-flex justify-content-between align-items-center" *ngFor="let project of projectPlanDetails | filterData : filterValue : 'location' : 'plan' | sortData : sortType : sortField : 'plan'">{{ project.name }}
                         <span class="badge badge-light badge-pill">{{ project.contents | formatProjectContents }}</span>
                     </li>
                 </ul>

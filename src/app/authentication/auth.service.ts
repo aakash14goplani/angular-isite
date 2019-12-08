@@ -68,7 +68,7 @@ export class AuthService {
       this.autoLogout(sessionExpiryData);
       /* redirect user automatically, e.g. if user is logged in on one window and opens new session
       in other window, he should be forced to continue with its existing session */
-      this.router.navigate(['project']);
+      // this.router.navigate(['project']);
     }
   }
 

@@ -1,24 +1,60 @@
 <section class="project-photos">
     <div class="container-fluid">
         <h2 class="text-center">Photos</h2>
-        <app-filter-n-sort></app-filter-n-sort>
-        <div class="row">
-            <div class="col-xs-12 col-md-8 offset-md-2">
-                <div class="card-deck margin-b30" *ngFor="let photos of arrayOfArrays">
-                    <div class="card" *ngFor="let photo of photos">
-                        <ng-container *ngIf="photo.url">
-                            <img [src]="photo.url" class="card-img-top" alt="photo.title">
-                            <div class="card-body">
-                                <h5 class="card-title">{{ photo.title }}</h5>
-                                <p class="card-text">{{ photo.description }}</p>
-                            </div>
-                            <div class="card-footer">
-                                <small class="text-muted">{{ photo.date | date: 'dd/MM/yyyy' }}</small>
-                            </div>
-                        </ng-container>
+        
+        <div class="row filter-n-sort">
+            <div class="col-xs-12 col-md-4 offset-md-2">
+                <p class="filter-n-sort-title">Filter:</p>
+                <div class="btn-group" role="group" aria-label="Filter">
+                    <button type="button" (click)="filter('Drain')" class="btn btn-light">Drain</button>
+                    <button type="button" (click)="filter('Bridge')" class="btn btn-light">Bridge</button>
+                    <button type="button" (click)="filter('Carriageway')" class="btn btn-light">Carriageway</button>
+                    <button type="button" *ngIf="isFiltering" (click)="clearFilter()" class="btn btn-light">Clear</button>
+                </div>
+            </div>
+            <div class="col-xs-12 col-md-4 offset-md-2">
+                <p class="filter-n-sort-title">Sort:</p>
+                <div class="btn-group" role="group" aria-label="Sort">
+                    <button type="button" (click)="sort('asc', 'date')" class="btn btn-light"><i class="fa fa-arrow-up" aria-hidden="true"></i></button>
+                    <button type="button" class="btn btn-light disabled">Modified Date</button>
+                    <button type="button" (click)="sort('desc', 'date')" class="btn btn-light"><i class="fa fa-arrow-down" aria-hidden="true"></i></button>
+                </div><br>
+                <div class="btn-group" role="group" aria-label="Sort">
+                    <button type="button" (click)="sort('asc', 'location')" class="btn btn-light"><i class="fa fa-arrow-up" aria-hidden="true"></i></button>
+                    <button type="button" class="btn btn-light disabled">Location Prox.</button>
+                    <button type="button" (click)="sort('desc', 'location')" class="btn btn-light"><i class="fa fa-arrow-down" aria-hidden="true"></i></button>
+                </div>
+            </div>
+        </div>
+
+        <div class="row offset-md-2">
+            <div class="col-md-5 col-xs-12 align-card-deck" *ngFor="let photo of photosArray | filterData : filterValue : 'location' : 'photos' | sortData : sortType : sortField : 'photos'">
+                <div class="card">
+                    <img [src]="photo.url" class="card-img-top" alt="photo.title">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ photo.title }}</h5>
+                        <p class="card-text">{{ photo.description }}</p>
+                    </div>
+                    <div class="card-footer">
+                        <small class="text-muted">{{ photo.date | date: 'yyyy/MM/dd' }}</small>
                     </div>
                 </div>
             </div>
+            <!-- Procedure to use nested for loops
+            <div class="card-deck margin-b30" *ngFor="let photos of arrayOfArrays">
+                <div class="card" *ngFor="let photo of photos | filterData : filterValue : 'location' : 'photos' | sortData : sortType : sortField : 'photos'">
+                    <ng-container *ngIf="photo.url">
+                        <img [src]="photo.url" class="card-img-top" alt="photo.title">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ photo.title }}</h5>
+                            <p class="card-text">{{ photo.description }}</p>
+                        </div>
+                        <div class="card-footer">
+                            <small class="text-muted">{{ photo.date | date: 'yyyy/MM/dd' }}</small>
+                        </div>
+                    </ng-container>
+                </div>
+            </div> -->
         </div>
     </div>
 </section>
