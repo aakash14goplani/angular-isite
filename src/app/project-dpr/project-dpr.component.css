@@ -1,27 +1,18 @@
 .margin-b30 {
     margin-bottom: 30px;
 }
-.card-header {
-    font-weight: 500;
-    text-align: left;
-}
 .card-header.date {
     text-align: center;
     font-weight: 700;
 }
 .card-footer > button.right {
     float: right;
-    font-size: 14px;
-    padding: 1%;
 }
 .card-footer > button.left {
     float: left;
-    font-size: 14px;
-    padding: 1%;
 }
-.align-card-deck {
-    display: inline-block;
-    margin: 0 20px 20px 0;
+.dpr-list > li {
+    padding-bottom: 15px;
 }
 @media screen and (min-width: 0px) and (max-width: 991px) {
     p.filter-n-sort-title {
@@ -36,4 +27,16 @@
     font-weight: 500;
     font-size: 20px;
     padding-left: 2%;
+}
+.btn-add-project {
+    padding-left: 40%;
+    margin: 0 10px 20px 0;
+}
+.add-project-notes {
+    float: right;
+}
+input.form-control {
+    width: 90%;
+    display: inline-block;
+    margin-right: 2%;
 }
