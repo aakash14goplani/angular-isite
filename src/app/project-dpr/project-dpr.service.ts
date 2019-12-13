@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { Subject } from 'rxjs';
 
 @Injectable()
 export class ProjectDprService {
@@ -23,6 +24,8 @@ export class ProjectDprService {
     { date: new Date('2019-7-8'), content: 'Dressing excavated swd slab' },
     { date: new Date('2019-6-8'), content: 'Dressing excavated bed for HP culvert at ch 25060' }
   ];
+
+  public isUpdateMode = new Subject<boolean>();
 
   public getProjectDPRData(): Array<{date: Date, content: string}> {
     return this.projectDPRDataStotre.slice();

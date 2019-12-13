@@ -32,6 +32,7 @@ import { PageNotFoundComponent } from './shared/page-not-found/page-not-found.co
 import { LoadingSpinnerComponent } from './shared/loading-spinner/loading-spinner.component';
 import { SortDataPipe } from './shared/sort-pipe';
 import { FilterDataPipe } from './shared/filter-data.pipe';
+import { EditDprComponent } from './project-dpr/edit-dpr/edit-dpr.component';
 
 @NgModule({
   declarations: [
@@ -63,7 +64,8 @@ import { FilterDataPipe } from './shared/filter-data.pipe';
     PageNotFoundComponent,
     LoadingSpinnerComponent,
     SortDataPipe,
-    FilterDataPipe
+    FilterDataPipe,
+    EditDprComponent
 
   ],
   imports: [

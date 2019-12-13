@@ -45,20 +45,24 @@
                     </div>
                 </div>
 
-                <div class="card margin-b30" *ngFor="let item of tempMap | keyvalue: maintainOrder">
-                    <div class="card-header date">{{ item.key | date: 'EEEE, d MMMM yyyy' }}</div>
-                    <div class="card-body">
-                        <span class="card-text">
-                            <ol class="dpr-list">
-                                <li *ngFor="let listItem of item.value">{{ listItem }}</li>
-                            </ol>
-                        </span>
+                <app-edit-dpr *ngIf="isDataUpdating" [updateDataForDate]="currentKey" [updateForContents]="currentValue"></app-edit-dpr>
+
+                <ng-container *ngIf="!isDataUpdating">
+                    <div class="card margin-b30" *ngFor="let item of tempMap | keyvalue: maintainOrder">
+                        <div class="card-header date">{{ item.key | date: 'EEEE, d MMMM yyyy' }}</div>
+                        <div class="card-body">
+                            <span class="card-text">
+                                <ol class="dpr-list">
+                                    <li *ngFor="let listItem of item.value">{{ listItem }}</li>
+                                </ol>
+                            </span>
+                        </div>
+                        <div class="card-footer">
+                            <button *ngIf="isDataUpdating" (click)="cancelUpdate()" class="btn btn-dark left">Cancel</button>
+                            <button (click)="updateProjectDPR(item.key, item.value)" class="btn btn-dark right">Update</button>
+                        </div>
                     </div>
-                    <div class="card-footer">
-                        <button *ngIf="isDataUpdating" (click)="cancelUpdate()" class="btn btn-dark left">Cancel</button>
-                        <button (click)="updateProjectDPR()" class="btn btn-dark right">Update</button>
-                    </div>
-                </div>
+                </ng-container>
             </div>
         </div>
     </div>

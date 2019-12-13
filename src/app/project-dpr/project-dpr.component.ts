@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ProjectDprService } from './project-dpr.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-project-dpr',
@@ -7,7 +8,7 @@ import { ProjectDprService } from './project-dpr.service';
   styleUrls: ['./project-dpr.component.css'],
   providers: [ ProjectDprService ]
 })
-export class ProjectDprComponent implements OnInit {
+export class ProjectDprComponent implements OnInit, OnDestroy {
 
   constructor(
     private projectDPRService: ProjectDprService
@@ -16,13 +17,23 @@ export class ProjectDprComponent implements OnInit {
   private projectDPRArray: Array<{date: Date, content: string}>;
   private tempMap = new Map<Date, Array<{content: string}>>();
   private newProjectDate: Date = new Date();
+  /* variable used to store current k-v pair that will be passed to edit-dpr component */
+  private currentKey: Date;
+  private currentValue: string[];
 
   private isDataUpdating: boolean = false;
   private isDataAdding: boolean = false;
   private arrayToAddDPRNotes: number[] = [1];
 
+  private updateSubscription: Subscription;
+
   ngOnInit(): void {
     this.projectDPRArray = this.projectDPRService.getProjectDPRData();
+    this.projectDPRService.isUpdateMode.next(false);
+
+    this.updateSubscription = this.projectDPRService.isUpdateMode.subscribe((status: boolean) => {
+      this.isDataUpdating = status;
+    });
 
     this.projectDPRArray.sort((a, b) => {
       if (a.date > b.date) {
@@ -58,11 +69,15 @@ export class ProjectDprComponent implements OnInit {
     this.tempMap.set(currentDate, tempArray);
   }
 
-  private updateProjectDPR(): void {
+  private updateProjectDPR(key, value): void {
+    this.currentKey = key;
+    this.currentValue = value;
+    /* logic for updating */
     const date: Date = new Date();
     const content: string = '';
     this.projectDPRService.setProjectDPRData(date, content);
     this.isDataUpdating = true;
+    this.projectDPRService.isUpdateMode.next(true);
   }
 
   private cancelUpdate(): void {
@@ -75,17 +90,14 @@ export class ProjectDprComponent implements OnInit {
 
   private addDPRReport(): void {
     this.isDataAdding = true;
-    let variable: string = 'aakash';
   }
 
   private addDPRNotes(): void {
-    this.arrayToAddDPRNotes.push(1);
+    let lastElementValue = this.arrayToAddDPRNotes[this.arrayToAddDPRNotes.length - 1];
+    this.arrayToAddDPRNotes.push((lastElementValue) ? (lastElementValue + 1) : 1);
   }
 
   private cancelCurrentNote(index: number): void {
-    // console.log('remove element from position: ' + index);
-    // console.log('remove element: ' + this.arrayToAddDPRNotes.indexOf(index));
-    console.log(this.arrayToAddDPRNotes);
     this.arrayToAddDPRNotes.splice(index, 1);
   }
 
@@ -95,6 +107,10 @@ export class ProjectDprComponent implements OnInit {
 
   private addNewDPR(): void {
     this.isDataAdding = false;
+  }
+
+  ngOnDestroy(): void {
+    this.updateSubscription.unsubscribe();
   }
 
 }
