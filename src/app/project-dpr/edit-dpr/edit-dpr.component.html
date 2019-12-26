@@ -16,20 +16,22 @@
 </div> -->
 <!-- reactive form approach -->
 <div class="card margin-b30">
-    <form>
+    <form [formGroup]="formData" (ngSubmit)="saveUpdates()">
         <div class="card-header date">{{ updateDataForDate | date: 'EEEE, d MMMM yyyy' }}</div>
         <div class="card-body">
             <span class="card-text">
-                <ol class="dpr-list">
-                    <li *ngFor="let listItem of updateForContents; let i=index">
-                        <input type="text" [(ngModel)]="listItem" class="form-control" #storeUpdates>
+                <ol class="dpr-list" formArrayName="dpr_data">
+                    <li *ngFor="let dprDataControl of dprDataControlFn; let i=index" [formGroupName]="i">
+                        <input type="text" formControlName="dpr_item" class="form-control">
+                        <i class="fa fa-minus-circle fa-2x" aria-hidden="true" (click)="deleteDprItem(i)"></i>
                     </li>
+                    <i class="fa fa-plus-circle fa-2x" aria-hidden="true" (click)="addDprItem()"></i>
                 </ol>
             </span>
         </div>
         <div class="card-footer">
             <button (click)="cancelUpdates()" class="btn btn-dark left">Cancel</button>
-            <button (click)="saveUpdates()" class="btn btn-dark right">Save</button>
+            <button type="submit" class="btn btn-dark right">Save</button>
         </div>
     </form>
 </div>

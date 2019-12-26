@@ -26,6 +26,7 @@ export class ProjectDprService {
   ];
 
   public isUpdateMode = new Subject<boolean>();
+  public dprDataChange = new Subject<Array<{date: Date, content: string}>>();
 
   public getProjectDPRData(): Array<{date: Date, content: string}> {
     return this.projectDPRDataStotre.slice();

@@ -5,6 +5,9 @@
     text-align: center;
     font-weight: 700;
 }
+.card-footer {
+    height: 64px;
+}
 .card-footer > button.right {
     float: right;
 }

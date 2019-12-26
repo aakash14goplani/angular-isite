@@ -26,14 +26,23 @@ export class ProjectDprComponent implements OnInit, OnDestroy {
   private arrayToAddDPRNotes: number[] = [1];
 
   private updateSubscription: Subscription;
+  private dprDataSubscription: Subscription;
 
   ngOnInit(): void {
     this.projectDPRArray = this.projectDPRService.getProjectDPRData();
+    console.log('initial: ', this.projectDPRArray.length);
+    this.dprDataSubscription = this.projectDPRService.dprDataChange.subscribe((dprArray) => {
+      console.log('dprArray', dprArray);
+      this.projectDPRArray = dprArray;
+      console.log('this.projectDPRArray', this.projectDPRArray);
+    });
     this.projectDPRService.isUpdateMode.next(false);
 
     this.updateSubscription = this.projectDPRService.isUpdateMode.subscribe((status: boolean) => {
       this.isDataUpdating = status;
     });
+
+    console.log('final: ', this.projectDPRArray.length);
 
     this.projectDPRArray.sort((a, b) => {
       if (a.date > b.date) {
@@ -111,6 +120,7 @@ export class ProjectDprComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.updateSubscription.unsubscribe();
+    this.dprDataSubscription.unsubscribe();
   }
 
 }
