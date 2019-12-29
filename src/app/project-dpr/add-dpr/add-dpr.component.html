@@ -1,0 +1,20 @@
+<div class="card margin-b30">
+    <form [formGroup]="formData" (ngSubmit)="saveDataAddition()">
+        <div class="card-header date">{{ newProjectDate | date: 'EEEE, d MMMM yyyy' }}</div>
+        <div class="card-body">
+            <span class="card-text">
+                <ol class="dpr-list" formArrayName="dpr_data">
+                    <li *ngFor="let dprDataControl of dprDataControlFn; let i=index" [formGroupName]="i">
+                        <input type="text" formControlName="dpr_item" placeholder="Enter Notes Here..." class="form-control">
+                        <i class="fa fa-minus-circle fa-2x" (click)="cancelNewNotes(i)" aria-hidden="true"></i>
+                    </li>
+                </ol>
+                <i class="fa fa-plus-circle fa-2x" (click)="addNewNotes()" aria-hidden="true"></i>
+            </span>
+        </div>
+        <div class="card-footer">
+            <button (click)="cancelDataAddition()" class="btn btn-dark left">Cancel</button>
+            <button type="submit" [disabled]="!formData.valid" class="btn btn-dark right">Save</button>
+        </div>
+    </form>
+</div>

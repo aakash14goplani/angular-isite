@@ -31,13 +31,6 @@
     font-size: 20px;
     padding-left: 2%;
 }
-.btn-add-project {
-    padding-left: 40%;
-    margin: 0 10px 20px 0;
-}
-.add-project-notes {
-    float: right;
-}
 input.form-control {
     width: 90%;
     display: inline-block;

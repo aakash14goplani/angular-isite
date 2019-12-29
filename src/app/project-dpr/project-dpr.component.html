@@ -17,37 +17,18 @@
         </div>
 
         <div class="row btn-add-project">
-            <button class="btn" (click)="addDPRReport()">
+            <button class="btn" (click)="addNewDPR()">
                 <i class="fa fa-plus-circle fa-4x" aria-hidden="true"></i>
             </button>
         </div>
 
         <div class="row">
             <div class="offset-md-2 col-md-8 col-xs-12">
-                <div class="card margin-b30" *ngIf="isDataAdding">
-                    <div class="card-header date">{{ newProjectDate | date: 'EEEE, d MMMM yyyy' }}</div>
-                    <div class="card-body">
-                        <span class="card-text">
-                            <ol class="dpr-list">
-                                <li *ngFor="let item of arrayToAddDPRNotes; let i = index">
-                                    <input type="text" placeholder="Enter Notes Here..." class="form-control">
-                                    <i class="fa fa-minus-circle fa-2x" (click)="cancelCurrentNote(i)" aria-hidden="true"></i>
-                                </li>
-                            </ol>
-                            <button class="btn add-project-notes" (click)="addDPRNotes()">
-                                <i class="fa fa-plus-circle fa-2x" aria-hidden="true"></i>
-                            </button>
-                        </span>
-                    </div>
-                    <div class="card-footer">
-                        <button (click)="cancelDataAddition()" class="btn btn-dark left">Cancel</button>
-                        <button (click)="addNewDPR()" class="btn btn-dark right">Save</button>
-                    </div>
-                </div>
+                <app-add-dpr *ngIf="isDataAdding && !isDataUpdating"></app-add-dpr>
 
-                <app-edit-dpr *ngIf="isDataUpdating" [updateDataForDate]="currentKey" [updateForContents]="currentValue"></app-edit-dpr>
+                <app-edit-dpr *ngIf="isDataUpdating && !isDataAdding" [updateDataForDate]="currentKey" [updateForContents]="currentValue"></app-edit-dpr>
 
-                <ng-container *ngIf="!isDataUpdating">
+                <ng-container *ngIf="!isDataUpdating && !isDataAdding">
                     <div class="card margin-b30" *ngFor="let item of tempMap | keyvalue: maintainOrder">
                         <div class="card-header date">{{ item.key | date: 'EEEE, d MMMM yyyy' }}</div>
                         <div class="card-body">
@@ -58,7 +39,6 @@
                             </span>
                         </div>
                         <div class="card-footer">
-                            <button *ngIf="isDataUpdating" (click)="cancelUpdate()" class="btn btn-dark left">Cancel</button>
                             <button (click)="updateProjectDPR(item.key, item.value)" class="btn btn-dark right">Update</button>
                         </div>
                     </div>

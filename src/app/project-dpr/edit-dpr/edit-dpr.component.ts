@@ -1,6 +1,5 @@
-import { Component, OnInit, Input, OnDestroy } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { ProjectDprService } from '../project-dpr.service';
-import { Subscription } from 'rxjs';
 import { FormGroup, FormArray, FormControl, Validators } from '@angular/forms';
 
 @Component({
@@ -8,7 +7,7 @@ import { FormGroup, FormArray, FormControl, Validators } from '@angular/forms';
   templateUrl: './edit-dpr.component.html',
   styleUrls: ['./edit-dpr.component.css']
 })
-export class EditDprComponent implements OnInit, OnDestroy {
+export class EditDprComponent implements OnInit {
 
   constructor(
     private projectDRPService: ProjectDprService
@@ -16,14 +15,11 @@ export class EditDprComponent implements OnInit, OnDestroy {
 
   @Input() private updateDataForDate: Date;
   @Input() private updateForContents: string[];
-  private isDataUpdating: boolean = true;
-  private updateSubscription: Subscription;
   private formData: FormGroup;
+  private dprDataArray: Array<{date: Date, content: string}>;
 
   ngOnInit() {
-    this.updateSubscription = this.projectDRPService.isUpdateMode.subscribe((status: boolean) => {
-      this.isDataUpdating = status;
-    });
+    this.dprDataArray = this.projectDRPService.getProjectDPRData();
 
     const dprDataFormArray = new FormArray([]);
     for (let i = 0; i < this.updateForContents.length; i++) {
@@ -45,10 +41,6 @@ export class EditDprComponent implements OnInit, OnDestroy {
 
   private deleteDprItem(index: number): void {
     (this.formData.get('dpr_data') as FormArray).removeAt(index);
-
-    /*
-      create a temp array that holds all data. remove that particular item from main aaray as well
-    */
   }
 
   private addDprItem(): void {
@@ -57,31 +49,34 @@ export class EditDprComponent implements OnInit, OnDestroy {
         dpr_item: new FormControl(null, Validators.required)
       })
     );
-    /*
-      add that item to new data as well
-    */
   }
 
   private saveUpdates(): void {
     this.projectDRPService.isUpdateMode.next(false);
-    
+
     const temp_var = new Date(this.updateDataForDate);
-    const final_date = temp_var.getUTCFullYear() + '-' + (+temp_var.getMonth() + 1) + '-' + temp_var.getDate();
+    const final_date = new Date(temp_var.getUTCFullYear() + '-' + (+temp_var.getMonth() + 1) + '-' + temp_var.getDate());
+    
+    this.dprDataArray = this.dprDataArray.filter((dprData) => {
+      return !(
+        dprData.date.getDate() === final_date.getDate() &&
+        dprData.date.getMonth() === final_date.getMonth() &&
+        dprData.date.getFullYear() === final_date.getFullYear() 
+      );
+    });
+
+    let tempArrayForDprArray: Array<{date: Date, content: string}> = [];
     for (let i = 0; i < this.formData.value.dpr_data.length; i++) {
-      this.projectDRPService.setProjectDPRData(new Date(final_date), this.formData.value.dpr_data[i].dpr_item);
+      tempArrayForDprArray.push({date: final_date, content: this.formData.value.dpr_data[i].dpr_item})
     }
-    this.projectDRPService.dprDataChange.next(this.projectDRPService.getProjectDPRData());
-    // emit that temp data
-    // remove all the data that belongs to date = x
-    // reneter new data with date = x
+    this.dprDataArray = this.dprDataArray.concat(tempArrayForDprArray);
+    this.projectDRPService.setProjectDPRData(this.dprDataArray);
+    
+    this.projectDRPService.dprDataChange.next(this.projectDRPService.getProcessedProjectDPRData());
   }
 
   private cancelUpdates(): void {
     this.projectDRPService.isUpdateMode.next(false);
-  }
-
-  ngOnDestroy(): void {
-    this.updateSubscription.unsubscribe();
   }
 
 }

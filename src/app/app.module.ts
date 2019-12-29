@@ -33,6 +33,7 @@ import { LoadingSpinnerComponent } from './shared/loading-spinner/loading-spinne
 import { SortDataPipe } from './shared/sort-pipe';
 import { FilterDataPipe } from './shared/filter-data.pipe';
 import { EditDprComponent } from './project-dpr/edit-dpr/edit-dpr.component';
+import { AddDprComponent } from './project-dpr/add-dpr/add-dpr.component';
 
 @NgModule({
   declarations: [
@@ -65,7 +66,8 @@ import { EditDprComponent } from './project-dpr/edit-dpr/edit-dpr.component';
     LoadingSpinnerComponent,
     SortDataPipe,
     FilterDataPipe,
-    EditDprComponent
+    EditDprComponent,
+    AddDprComponent
 
   ],
   imports: [
