@@ -1,18 +1,19 @@
-import { Component, AfterViewChecked, OnDestroy } from '@angular/core';
+import { Component, AfterViewChecked, OnDestroy, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { AuthService } from '../authentication/auth.service';
-// import { Subscription, Subject } from 'rxjs';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-home-page',
   templateUrl: './home-page.component.html',
   styleUrls: ['./home-page.component.css']
 })
-export class HomePageComponent implements AfterViewChecked, OnDestroy {
+export class HomePageComponent implements OnInit, OnDestroy {
 
   constructor(
     private authService: AuthService
   ) { }
+
   private isLoginMode: boolean = false;
   private isLoading: boolean = false;
   /* Adding subject to force refresh component on every switch between login / register. Here class
@@ -21,13 +22,13 @@ export class HomePageComponent implements AfterViewChecked, OnDestroy {
   comment till find alternate solution!
 
   private formClass: string = 'form-control register';
-  private subjectFormClass: Subject<string> = new Subject<string>();
-  private subscription: Subscription; */
+  private subjectFormClass: Subject<string> = new Subject<string>(); */
+  private authSubscription: Subscription;
 
-  ngAfterViewChecked(): void {
-    /* this.subscription = this.subjectFormClass.subscribe((message) => {
-       this.formClass = message;
-    }); */
+  ngOnInit(): void {
+    this.authSubscription = this.authService.authError.subscribe((authStatus) => {
+       this.isLoading = authStatus;
+    });
   }
 
   private switchMode(): void {
@@ -50,19 +51,20 @@ export class HomePageComponent implements AfterViewChecked, OnDestroy {
 
     if (this.isLoginMode) {
       // login user
-      console.log('logging user...');
       this.isLoading = true;
+      this.authService.authError.next(true);
       this.authService.authenticateUser(userEmail, userPassword);
     } else {
       // register user
       console.log('regestering user...');
       this.isLoading = true;
+      this.authService.authError.next(true);
       this.authService.registerUser(userName, userEmail, userPassword);
     }
   }
 
   ngOnDestroy(): void {
-    // this.subscription.unsubscribe();
+    this.authSubscription.unsubscribe();
   }
 
 }

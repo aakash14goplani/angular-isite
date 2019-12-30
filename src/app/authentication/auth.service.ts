@@ -1,7 +1,7 @@
-import { Injectable, OnDestroy } from '@angular/core';
-import { Router, NavigationEnd } from '@angular/router';
+import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
 import { UserService } from '../core/user-service/user-service.service';
-import { BehaviorSubject, Subscription } from 'rxjs';
+import { BehaviorSubject, Subject } from 'rxjs';
 import { User } from './user.model';
 
 @Injectable({
@@ -11,6 +11,7 @@ export class AuthService {
 
   public user: BehaviorSubject<User> = new BehaviorSubject<User>(null);
   private timeOut: any;
+  public authError: Subject<boolean> = new Subject<boolean>();
 
   constructor(
     private router: Router,
@@ -23,9 +24,12 @@ export class AuthService {
       userAuthenticated = flag;
     });
     if (userAuthenticated) {
+      this.authError.next(true);
       this.processUserAndNavigate('login', email);
     } else {
       /* ERROR alert message: unable to login */
+      console.log('unable to login');
+      this.authError.next(false);
     }
   }
 
@@ -35,9 +39,12 @@ export class AuthService {
       messageToken = message;
     });
     if ('SUCCESS' === messageToken) {
+      this.authError.next(true);
       this.processUserAndNavigate('register', email);
     } else {
       /* ERROR alert message: unable to register */
+      console.log('unable to register');
+      this.authError.next(false);
     }
   }
 
