@@ -3,17 +3,21 @@
         <div class="row">
             <div class="col-xs-12 col-md-8 offset-md-2">
                 <h2 class="text-center">Project Details</h2>
-                <a class="anchor-card" *ngFor="let project of projectDetails">
-                    <div class="card" (click)="storeProjectName(project.name)" style="width: inherit;">
-                        <div class="card-body">
-                            <h5 class="card-title">{{ project.name }}</h5>
-                            <p class="card-text">Last Updated Date: {{ project.date | date: 'dd MMMM, yyyy' }}</p>
+                <app-add-new-project *ngIf="addProject"></app-add-new-project>
+                <ng-container *ngIf="!addProject">
+                    <a class="anchor-card" *ngFor="let project of projectDetails; let i=index">
+                        <div class="card" (click)="storeProjectName(project.name)" style="width: inherit;">
+                            <div class="card-body">
+                                <h5 class="card-title">{{ project.name }}</h5>
+                                <p class="card-text">Last Updated Date: {{ project.date | date: 'dd MMMM, yyyy' }}</p>
+                            </div>
                         </div>
+                        <i class="fa fa-minus-circle fa-2x" (click)="deleteProject(i)" aria-hidden="true"></i>
+                    </a>
+                    <div class="add-project" (click)="addNewProject()">
+                        <i class="fa fa-plus-circle fa-3x" aria-hidden="true"></i>
                     </div>
-                </a>
-                <button class="btn btn-add-project">
-                    <i class="fa fa-plus-circle fa-3x" aria-hidden="true"></i>
-                </button>
+                </ng-container>
             </div>
         </div>
     </div>

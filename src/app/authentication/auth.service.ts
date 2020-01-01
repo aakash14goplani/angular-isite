@@ -11,7 +11,7 @@ export class AuthService {
 
   public user: BehaviorSubject<User> = new BehaviorSubject<User>(null);
   private timeOut: any;
-  public authError: Subject<boolean> = new Subject<boolean>();
+  public authError: Subject<string> = new Subject<string>();
 
   constructor(
     private router: Router,
@@ -24,12 +24,11 @@ export class AuthService {
       userAuthenticated = flag;
     });
     if (userAuthenticated) {
-      this.authError.next(true);
+      this.authError.next('');
       this.processUserAndNavigate('login', email);
     } else {
-      /* ERROR alert message: unable to login */
       console.log('unable to login');
-      this.authError.next(false);
+      this.authError.next('Invalid Credentials: unable to login');
     }
   }
 
@@ -39,12 +38,11 @@ export class AuthService {
       messageToken = message;
     });
     if ('SUCCESS' === messageToken) {
-      this.authError.next(true);
+      this.authError.next('');
       this.processUserAndNavigate('register', email);
     } else {
-      /* ERROR alert message: unable to register */
       console.log('unable to register');
-      this.authError.next(false);
+      this.authError.next('Unable to register - data provided may already exists or is incorrect');
     }
   }
 

@@ -1,0 +1,16 @@
+input.ng-invalid.ng-touched {
+    border: 1px solid red;
+}
+span.help-block {
+    color: red;
+}
+
+.left {
+    float: left;
+    margin-bottom: 30px;
+}
+
+.right {
+    float: right;
+    margin-bottom: 30px;
+}

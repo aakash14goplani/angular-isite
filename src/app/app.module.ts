@@ -34,6 +34,8 @@ import { SortDataPipe } from './shared/sort-pipe';
 import { FilterDataPipe } from './shared/filter-data.pipe';
 import { EditDprComponent } from './project-dpr/edit-dpr/edit-dpr.component';
 import { AddDprComponent } from './project-dpr/add-dpr/add-dpr.component';
+import { AlertWidgetComponent } from './shared/alert-widget/alert-widget.component';
+import { AddNewProjectComponent } from './project-details/add-new-project/add-new-project.component';
 
 @NgModule({
   declarations: [
@@ -67,7 +69,9 @@ import { AddDprComponent } from './project-dpr/add-dpr/add-dpr.component';
     SortDataPipe,
     FilterDataPipe,
     EditDprComponent,
-    AddDprComponent
+    AddDprComponent,
+    AlertWidgetComponent,
+    AddNewProjectComponent
 
   ],
   imports: [

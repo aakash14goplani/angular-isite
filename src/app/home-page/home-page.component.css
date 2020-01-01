@@ -73,3 +73,6 @@ input#password.form-control {
 .ng-tooltip-show {
     opacity: 1;
 }
+.heading-center {
+    text-align: center;
+}

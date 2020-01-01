@@ -24,10 +24,14 @@ export class HomePageComponent implements OnInit, OnDestroy {
   private formClass: string = 'form-control register';
   private subjectFormClass: Subject<string> = new Subject<string>(); */
   private authSubscription: Subscription;
+  private errorMessage: string = '';
 
   ngOnInit(): void {
-    this.authSubscription = this.authService.authError.subscribe((authStatus) => {
-       this.isLoading = authStatus;
+    this.authSubscription = this.authService.authError.subscribe((authStatus: string) => {
+       this.errorMessage = authStatus;
+       if (this.errorMessage.length > 0) {
+         this.isLoading = false;
+       }
     });
   }
 
@@ -52,15 +56,18 @@ export class HomePageComponent implements OnInit, OnDestroy {
     if (this.isLoginMode) {
       // login user
       this.isLoading = true;
-      this.authService.authError.next(true);
+      this.errorMessage = '';
       this.authService.authenticateUser(userEmail, userPassword);
     } else {
       // register user
-      console.log('regestering user...');
       this.isLoading = true;
-      this.authService.authError.next(true);
+      this.errorMessage = '';
       this.authService.registerUser(userName, userEmail, userPassword);
     }
+  }
+
+  private closePopUp(): void {
+    this.errorMessage = '';
   }
 
   ngOnDestroy(): void {
