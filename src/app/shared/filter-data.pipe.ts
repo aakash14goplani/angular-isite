@@ -16,11 +16,11 @@ export class FilterDataPipe implements PipeTransform {
 
   transform(value: any, filterValue: string, filterField: string, fromService: string): any {
 
-    console.log('Initial values received in FILTER - ');
+    /* console.log('Initial values received in FILTER - ');
     console.log('value: ', value);
     console.log('filterValue: ', filterValue);
     console.log('filterField: ', filterField);
-    console.log('fromService: ', fromService);
+    console.log('fromService: ', fromService); */
 
     let service: any;
 
@@ -42,12 +42,12 @@ export class FilterDataPipe implements PipeTransform {
           return data[filterField] === filterValue.toLowerCase();
         });
         if (tempArray.length > 0) {
-          console.log('returning filtered valus: ', tempArray);
+          // console.log('returning filtered valus: ', tempArray);
           return tempArray;
         }
       }
     }
-    console.log('returning original values from filter: ', value);
+    // console.log('returning original values from filter: ', value);
     return value;
   }
 
