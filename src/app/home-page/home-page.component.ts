@@ -14,8 +14,8 @@ export class HomePageComponent implements OnInit, OnDestroy {
     private authService: AuthService
   ) { }
 
-  private isLoginMode: boolean = false;
-  private isLoading: boolean = false;
+  isLoginMode: boolean = false;
+  isLoading: boolean = false;
   /* Adding subject to force refresh component on every switch between login / register. Here class
   will toggle between `form-control` and `form-control register`, this will prevent angular from
   adding validation classsed `ng-invalid`, `ng-error` etc and the validation message won't deisplay
@@ -23,8 +23,8 @@ export class HomePageComponent implements OnInit, OnDestroy {
 
   private formClass: string = 'form-control register';
   private subjectFormClass: Subject<string> = new Subject<string>(); */
-  private authSubscription: Subscription;
-  private errorMessage: string = '';
+  authSubscription: Subscription;
+  errorMessage: string = '';
 
   ngOnInit(): void {
     this.authSubscription = this.authService.authError.subscribe((authStatus: string) => {
@@ -35,7 +35,7 @@ export class HomePageComponent implements OnInit, OnDestroy {
     });
   }
 
-  private switchMode(): void {
+  switchMode(): void {
     this.isLoginMode = !this.isLoginMode;
     /* if (this.isLoginMode) {
       this.formClass = 'form-control';
@@ -46,7 +46,7 @@ export class HomePageComponent implements OnInit, OnDestroy {
     } */
   }
 
-  private onSubmit(formData: NgForm): void {
+  onSubmit(formData: NgForm): void {
     // console.log(formData);
     const userEmail = formData.value.email;
     const userPassword = formData.value.password;
@@ -66,7 +66,7 @@ export class HomePageComponent implements OnInit, OnDestroy {
     }
   }
 
-  private closePopUp(): void {
+  closePopUp(): void {
     this.errorMessage = '';
   }
 

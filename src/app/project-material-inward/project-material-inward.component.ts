@@ -14,7 +14,7 @@ export class ProjectMaterialInwardComponent implements OnInit {
   ) { }
 
   private materialDetailsArray: Array<MaterialInwardsStructure>;
-  private materialSubArray:  Array<MaterialInwardsStructure[]>;
+  materialSubArray:  Array<MaterialInwardsStructure[]>;
 
   ngOnInit(): void {
     this.materialDetailsArray = this.projectMaterialInwardService.getMaterials();

@@ -19,8 +19,8 @@ export class ProjectDetailsComponent implements OnInit, OnDestroy {
     private route: ActivatedRoute
   ) { }
 
-  private projectDetails: Array<{name: string, date: Date}>;
-  private addProject: boolean = false;
+  projectDetails: Array<{name: string, date: Date}>;
+  addProject: boolean = false;
 
   private additionSubscription: Subscription;
   private dataSubscription: Subscription;
@@ -41,16 +41,16 @@ export class ProjectDetailsComponent implements OnInit, OnDestroy {
     });
   }
 
-  private storeProjectName(projectName: string): void {
+  storeProjectName(projectName: string): void {
     this.coreProjectService.globalProjectName.next(projectName);
     this.router.navigate(['../plan'], { relativeTo: this.route });
   }
 
-  private addNewProject(): void {
+  addNewProject(): void {
     this.addProject = true;
   }
 
-  private deleteProject(index: number): void {
+  deleteProject(index: number): void {
     this.projectDetailsService.deleteProjectDetails(index);
     console.log(index);
   }

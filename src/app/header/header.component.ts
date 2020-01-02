@@ -15,12 +15,12 @@ export class HeaderComponent implements OnDestroy, OnInit {
   private routerSubscription: Subscription;
   private projectNameSubscription: Subscription;
   private authServiceSubscription: Subscription;
-  private isNormalHeader: boolean = false;
-  private spanSideNavClass: string = 'navbar-nav animate side-nav';
+  isNormalHeader: boolean = false;
+  spanSideNavClass: string = 'navbar-nav animate side-nav';
   private expandNavigation: boolean = false;
-  private userName: string = 'My Account';
-  private currentProjectName: string = 'Contents:';
-  private isUserLoggedIn: boolean = false;
+  userName: string = 'My Account';
+  currentProjectName: string = 'Contents:';
+  isUserLoggedIn: boolean = false;
 
   constructor(
     private router: Router,
@@ -51,7 +51,7 @@ export class HeaderComponent implements OnDestroy, OnInit {
     }
   }
 
-  private navigateToHomePage(): void {
+  navigateToHomePage(): void {
     if (this.isUserLoggedIn) {
       this.router.navigate(['/project/details']);
     } else {
@@ -59,7 +59,7 @@ export class HeaderComponent implements OnDestroy, OnInit {
     }
   }
 
-  private toggleSideNav() {
+  toggleSideNav() {
     this.expandNavigation = !this.expandNavigation;
     if (this.expandNavigation) {
       this.spanSideNavClass = 'navbar-nav animate side-nav open';
@@ -68,7 +68,7 @@ export class HeaderComponent implements OnDestroy, OnInit {
     }
   }
 
-  private toggleClassValue(event: any): void {
+  toggleClassValue(event: any): void {
     const toggleClass: boolean = document.documentElement.scrollWidth > 991 ? false : true;
     const element: HTMLElement = document.querySelector('.navbar-toggler') as HTMLElement;
     if (toggleClass) {
@@ -77,7 +77,7 @@ export class HeaderComponent implements OnDestroy, OnInit {
     }
   }
 
-  private logoutUser(): void {
+  logoutUser(): void {
     this.authService.logout();
   }
 

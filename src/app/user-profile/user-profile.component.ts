@@ -17,17 +17,17 @@ export class UserProfileComponent implements OnInit, OnDestroy {
     private authService: AuthService
   ) { }
 
-  private userName: string = '';
-  private userEmail: string = '';
-  private updateMessageForName: boolean = false;
-  private nameMessage: string = 'Update User Name';
-  private updateMessageForEmail: boolean = false;
-  private emailMessage: string = 'Update User Email';
+  userName: string = '';
+  userEmail: string = '';
+  updateMessageForName: boolean = false;
+  nameMessage: string = 'Update User Name';
+  updateMessageForEmail: boolean = false;
+  emailMessage: string = 'Update User Email';
   private authServiceSubscription: Subscription;
 
-  private userNameErrorMessage: string = '';
-  private userEmailErrorMessage: string = '';
-  private userPasswordErrorMessage: string = '';
+  userNameErrorMessage: string = '';
+  userEmailErrorMessage: string = '';
+  userPasswordErrorMessage: string = '';
 
   @ViewChild('userNameInput', {static: false}) newUserName: ElementRef;
   @ViewChild('userEmailInput', {static: false}) newUserEmail: ElementRef;
@@ -44,7 +44,7 @@ export class UserProfileComponent implements OnInit, OnDestroy {
     });
   }
 
-  private updateDisplayMessageFor(type: string): void {
+  updateDisplayMessageFor(type: string): void {
     if (type === 'name') {
       this.updateMessageForName = !this.updateMessageForName;
       this.nameMessage = (this.updateMessageForName) ? 'Cancel' : 'Update User Name';
@@ -55,7 +55,7 @@ export class UserProfileComponent implements OnInit, OnDestroy {
     }
   }
 
-  private updateUserValueFor(type: string) {
+  updateUserValueFor(type: string) {
     if (type === 'name') {
       this.userNameErrorMessage = '';
       const newUserName = this.newUserName.nativeElement.value;

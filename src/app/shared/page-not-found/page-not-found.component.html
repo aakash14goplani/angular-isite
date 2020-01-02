@@ -1,5 +1,5 @@
-<app-header *ngIf="isUserLoggedIn"></app-header>
-<app-unauth-header *ngIf="!isUserLoggedIn"></app-unauth-header>
+<app-header *ngIf="userLoggedIn"></app-header>
+<app-unauth-header *ngIf="!userLoggedIn"></app-unauth-header>
  <main>
     <section class="page-not-found">
         <div class="container-fluid">

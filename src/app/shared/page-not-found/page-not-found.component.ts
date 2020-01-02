@@ -15,8 +15,8 @@ export class PageNotFoundComponent implements OnInit {
     private authService: AuthService
   ) { }
 
-  private statusMessage: string = '';
-  private userLoggedIn: boolean = false;
+  statusMessage: string = '';
+  userLoggedIn: boolean = false;
 
   ngOnInit() {
     this.statusMessage = this.route.snapshot.data.message;
@@ -31,7 +31,7 @@ export class PageNotFoundComponent implements OnInit {
     });
   }
 
-  private redirectUser(): void {
+  redirectUser(): void {
     if (this.userLoggedIn) {
       this.router.navigate(['/project/details']);
     } else {

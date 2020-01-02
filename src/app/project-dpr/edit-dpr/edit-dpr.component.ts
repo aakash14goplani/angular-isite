@@ -15,8 +15,8 @@ export class EditDprComponent implements OnInit {
 
   @Input() private updateDataForDate: Date;
   @Input() private updateForContents: string[];
-  private formData: FormGroup;
-  private dprDataArray: Array<{date: Date, content: string}>;
+  formData: FormGroup;
+  dprDataArray: Array<{date: Date, content: string}>;
 
   ngOnInit() {
     this.dprDataArray = this.projectDRPService.getProjectDPRData();
@@ -39,11 +39,11 @@ export class EditDprComponent implements OnInit {
     return (this.formData.get('dpr_data') as FormArray).controls;
   }
 
-  private deleteDprItem(index: number): void {
+  deleteDprItem(index: number): void {
     (this.formData.get('dpr_data') as FormArray).removeAt(index);
   }
 
-  private addDprItem(): void {
+  addDprItem(): void {
     (this.formData.get('dpr_data') as FormArray).push(
       new FormGroup({
         dpr_item: new FormControl(null, Validators.required)
@@ -51,7 +51,7 @@ export class EditDprComponent implements OnInit {
     );
   }
 
-  private saveUpdates(): void {
+  saveUpdates(): void {
     this.projectDRPService.isUpdateMode.next(false);
 
     const temp_var = new Date(this.updateDataForDate);
@@ -75,7 +75,7 @@ export class EditDprComponent implements OnInit {
     this.projectDRPService.dprDataChange.next(this.projectDRPService.getProcessedProjectDPRData());
   }
 
-  private cancelUpdates(): void {
+  cancelUpdates(): void {
     this.projectDRPService.isUpdateMode.next(false);
   }
 

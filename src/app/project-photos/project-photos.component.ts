@@ -13,17 +13,15 @@ export class ProjectPhotosComponent implements OnInit {
     private projectPhotosService: ProjectPhotosService
   ) { }
 
-  private photosArray: Array<PhotosDataFormat>;
-  private arrayOfArrays: Array<PhotosDataFormat[]>;
+  photosArray: Array<PhotosDataFormat>;
+  // private arrayOfArrays: Array<PhotosDataFormat[]>;
 
-  private isSorting: boolean = false;
-  private sortType: string = '';
-  private sortField: string = '';
+  isSorting: boolean = false;
+  sortType: string = '';
+  sortField: string = '';
 
-  private filterValue: string = '';
-  private isFiltering: boolean = false;
-
-  private temp: Array<number> = [1, 2, 3, 4, 5, 6, 7];
+  filterValue: string = '';
+  isFiltering: boolean = false;
 
   ngOnInit() {
     this.photosArray = this.projectPhotosService.getPhotosDetails();
@@ -45,18 +43,18 @@ export class ProjectPhotosComponent implements OnInit {
     } */
   }
 
-  private sort(type: string, field: string): void {
+  sort(type: string, field: string): void {
     this.isSorting = true;
     this.sortType = type;
     this.sortField = field;
   }
 
-  private filter(filterValue: string): void {
+  filter(filterValue: string): void {
     this.filterValue = filterValue;
     this.isFiltering = true;
   }
 
-  private clearFilter(): void {
+  clearFilter(): void {
     this.isFiltering = false;
     this.filterValue = '';
   }

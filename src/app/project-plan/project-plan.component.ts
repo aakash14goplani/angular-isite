@@ -15,29 +15,29 @@ export class ProjectPlanComponent implements OnInit {
 
   private projectPlanDetails: Array<{ name: string, contents: number, location: string, date: Date }> = [];
 
-  private isSorting: boolean = false;
-  private sortType: string = '';
-  private sortField: string = '';
+  isSorting: boolean = false;
+  sortType: string = '';
+  sortField: string = '';
 
-  private filterValue: string = '';
-  private isFiltering: boolean = false;
+  filterValue: string = '';
+  isFiltering: boolean = false;
 
   ngOnInit() {
     this.projectPlanDetails = this.projectPlanService.getProjectPlanDetails();
   }
 
-  private sort(type: string, field: string): void {
+  sort(type: string, field: string): void {
     this.isSorting = true;
     this.sortType = type;
     this.sortField = field;
   }
 
-  private filter(filterValue: string): void {
+  filter(filterValue: string): void {
     this.filterValue = filterValue;
     this.isFiltering = true;
   }
 
-  private clearFilter(): void {
+  clearFilter(): void {
     this.isFiltering = false;
     this.filterValue = '';
   }

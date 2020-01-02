@@ -13,7 +13,7 @@ export class PrivacyPolicyComponent implements OnInit, OnDestroy {
     private authService: AuthService
   ) { }
 
-  private isUserLoggedIn: boolean = false;
+  isUserLoggedIn: boolean = false;
   private subscription: Subscription;
 
   ngOnInit(): void {

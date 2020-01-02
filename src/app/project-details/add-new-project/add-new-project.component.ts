@@ -16,14 +16,14 @@ export class AddNewProjectComponent implements OnInit {
   ngOnInit() {
   }
 
-  private saveProjectDetails(formData: NgForm): void {
+  saveProjectDetails(formData: NgForm): void {
     const projectName = formData.value.project_name;
     this.projectDetailsService.additionMode.next(false);
     this.projectDetailsService.addProjectDetails(projectName, new Date());
     formData.reset();
   }
 
-  private cancelAddition(): void {
+  cancelAddition(): void {
     this.projectDetailsService.additionMode.next(false);
   }
 

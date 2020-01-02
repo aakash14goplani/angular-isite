@@ -14,13 +14,13 @@ export class ProjectDprComponent implements OnInit, OnDestroy {
     private projectDPRService: ProjectDprService
   ) { }
 
-  private tempMap = new Map<Date, string[]>();
+  tempMap = new Map<Date, string[]>();
   /* variable used to store current k-v pair that will be passed to edit-dpr component */
-  private currentKey: Date;
-  private currentValue: string[];
+  currentKey: Date;
+  currentValue: string[];
 
-  private isDataUpdating: boolean = false;
-  private isDataAdding: boolean = false;
+  isDataUpdating: boolean = false;
+  isDataAdding: boolean = false;
 
   private updateSubscription: Subscription;
   private addSubscription: Subscription;
@@ -41,18 +41,18 @@ export class ProjectDprComponent implements OnInit, OnDestroy {
     });
   }
 
-  private updateProjectDPR(key, value): void {
+  updateProjectDPR(key, value): void {
     this.currentKey = key;
     this.currentValue = value;
     this.isDataUpdating = true;
     this.projectDPRService.isUpdateMode.next(true);
   }
 
-  private maintainOrder(a, b): number {
+  maintainOrder(a, b): number {
     return 0;
   }
 
-  private addNewDPR(): void {
+  addNewDPR(): void {
     this.isDataAdding = true;
     this.projectDPRService.isAddMode.next(true);
   }

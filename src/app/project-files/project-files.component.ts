@@ -14,7 +14,7 @@ export class ProjectFilesComponent implements OnInit {
   ) { }
 
   // tslint:disable: no-inferrable-types
-  private uploadingFor: string = '';
+  uploadingFor: string = '';
 
   ngOnInit() {
     /*
@@ -23,12 +23,12 @@ export class ProjectFilesComponent implements OnInit {
   	*/
   }
 
-  private initiateUploadFor(option: string): void {
+  initiateUploadFor(option: string): void {
     this.uploadingFor = option;
     console.log('uploadingFor: ', this.uploadingFor);
   }
 
-  private uploadFiles(): void {
+  uploadFiles(): void {
     console.log('File Uploaded for: ', this.uploadingFor);
     /*
 		logic to upload files

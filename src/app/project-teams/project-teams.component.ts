@@ -13,7 +13,7 @@ export class ProjectTeamsComponent implements OnInit {
     private projectTeamsService: ProjectTeamsService
   ) { }
 
-  private teamsData: TeamsDataFormat[];
+  teamsData: TeamsDataFormat[];
 
   ngOnInit() {
     this.teamsData = this.projectTeamsService.getTeamsDetails();

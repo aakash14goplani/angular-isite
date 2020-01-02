@@ -13,9 +13,8 @@ export class AddDprComponent implements OnInit {
     private projectDPRService: ProjectDprService
   ) { }
 
-  private newProjectDate: Date = new Date();
-  private formData: FormGroup;
-  private arrayToAddDPRNotes: number[] = [1];
+  newProjectDate: Date = new Date();
+  formData: FormGroup;
 
   ngOnInit() {
     const dprDataFormArray = new FormArray([]);
@@ -34,7 +33,7 @@ export class AddDprComponent implements OnInit {
     return (this.formData.get('dpr_data') as FormArray).controls;
   }
 
-  private addNewNotes(): void {
+  addNewNotes(): void {
     (this.formData.get('dpr_data') as FormArray).push(
       new FormGroup({
         dpr_item: new FormControl(null, Validators.required)
@@ -42,11 +41,11 @@ export class AddDprComponent implements OnInit {
     );
   }
 
-  private cancelNewNotes(index: number): void {
+  cancelNewNotes(index: number): void {
     (this.formData.get('dpr_data') as FormArray).removeAt(index);
   }
 
-  private saveDataAddition(): void {
+  saveDataAddition(): void {
     const final_date = new Date(this.newProjectDate.getUTCFullYear() + '-' + (+this.newProjectDate.getMonth() + 1) + '-' + this.newProjectDate.getDate());
 
     for (let i = 0; i < this.formData.value.dpr_data.length; i++) {
@@ -57,7 +56,7 @@ export class AddDprComponent implements OnInit {
     this.projectDPRService.dprDataChange.next(this.projectDPRService.getProcessedProjectDPRData());
   }
 
-  private cancelDataAddition(): void {
+  cancelDataAddition(): void {
     this.projectDPRService.isAddMode.next(false);
   }
 
