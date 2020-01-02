@@ -13,7 +13,7 @@ export class EditDprComponent implements OnInit {
     private projectDRPService: ProjectDprService
   ) { }
 
-  @Input() private updateDataForDate: Date;
+  @Input() updateDataForDate: Date;
   @Input() private updateForContents: string[];
   formData: FormGroup;
   dprDataArray: Array<{date: Date, content: string}>;

@@ -13,7 +13,7 @@ export class ProjectPlanComponent implements OnInit {
     private projectPlanService: ProjectPlanService
   ) { }
 
-  private projectPlanDetails: Array<{ name: string, contents: number, location: string, date: Date }> = [];
+  projectPlanDetails: Array<{ name: string, contents: number, location: string, date: Date }> = [];
 
   isSorting: boolean = false;
   sortType: string = '';
