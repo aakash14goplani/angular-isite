@@ -1,0 +1,21 @@
+<div class="card margin-b30">
+    <form [formGroup]="formData" (ngSubmit)="saveDataAddition()">
+        <div class="card-header date">{{ newProjectDate | date: 'EEEE, d MMMM yyyy' }}</div>
+        <div class="card-body">
+            <span class="card-text">
+                <ol class="material-list" formArrayName="material_data">
+                    <li *ngFor="let materialDataControl of materialDataControlFn; let i=index" [formGroupName]="i">
+                        <input type="text" formControlName="item_name" placeholder="Name..." class="form-control">
+                        <input type="number" formControlName="item_quantity" placeholder="Quantity..." class="form-control">
+                        <i class="fa fa-minus-circle fa-2x" (click)="cancelNewNotes(i)" aria-hidden="true"></i>
+                    </li>
+                </ol>
+                <i class="fa fa-plus-circle fa-2x" (click)="addNewNotes()" aria-hidden="true"></i>
+            </span>
+        </div>
+        <div class="card-footer">
+            <button (click)="cancelDataAddition()" class="btn btn-dark left">Cancel</button>
+            <button type="submit" [disabled]="!formData.valid" class="btn btn-dark right">Save</button>
+        </div>
+    </form>
+</div>

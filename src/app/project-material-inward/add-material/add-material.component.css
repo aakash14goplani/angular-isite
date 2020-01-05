@@ -1,0 +1,28 @@
+.margin-b30 {
+    margin-bottom: 30px;
+}
+.card-header.date {
+    text-align: center;
+    font-weight: 700;
+}
+.card-footer {
+    height: 64px;
+}
+.card-footer > button.right {
+    float: right;
+}
+.card-footer > button.left {
+    float: left;
+}
+.material-list > li {
+    padding-bottom: 15px;
+}
+input.form-control {
+    width: 40%;
+    display: inline-block;
+    margin-right: 2%;
+}
+
+input.ng-invalid.ng-touched {
+    border: 1px solid red;
+}

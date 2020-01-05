@@ -36,6 +36,8 @@ import { EditDprComponent } from './project-dpr/edit-dpr/edit-dpr.component';
 import { AddDprComponent } from './project-dpr/add-dpr/add-dpr.component';
 import { AlertWidgetComponent } from './shared/alert-widget/alert-widget.component';
 import { AddNewProjectComponent } from './project-details/add-new-project/add-new-project.component';
+import { AddMaterialComponent } from './project-material-inward/add-material/add-material.component';
+import { UpdateMaterialComponent } from './project-material-inward/update-material/update-material.component';
 
 @NgModule({
   declarations: [
@@ -71,7 +73,9 @@ import { AddNewProjectComponent } from './project-details/add-new-project/add-ne
     EditDprComponent,
     AddDprComponent,
     AlertWidgetComponent,
-    AddNewProjectComponent
+    AddNewProjectComponent,
+    AddMaterialComponent,
+    UpdateMaterialComponent
 
   ],
   imports: [

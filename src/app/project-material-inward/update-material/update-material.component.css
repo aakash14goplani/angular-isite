@@ -5,6 +5,9 @@
     text-align: center;
     font-weight: 700;
 }
+.card-footer {
+    height: 64px;
+}
 .card-footer > button.right {
     float: right;
 }
@@ -36,7 +39,11 @@
     float: right;
 }
 input.form-control {
-    width: 90%;
+    width: 40%;
     display: inline-block;
     margin-right: 2%;
+}
+
+input.ng-invalid.ng-touched {
+    border: 1px solid red;
 }

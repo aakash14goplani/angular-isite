@@ -1,23 +1,37 @@
-<section class="project-dpr">
+<section class="project-material-inward">
     <div class="container-fluid">
         <h2 class="text-center margin-b30">Material Inward</h2>
         <!-- <app-filter-n-sort></app-filter-n-sort> -->
+
+        <div class="row btn-add-project">
+            <button class="btn" (click)="addNewMaterail()">
+                <i class="fa fa-plus-circle fa-4x" aria-hidden="true"></i>
+            </button>
+        </div>
+
         <div class="row">
             <div class="col-xs-12 col-md-8 offset-md-2">
-                <div class="card-deck margin-b30" *ngFor="let materialDetails of materialSubArray">
-                    <div class="card" *ngFor="let material of materialDetails">
-                        <ng-container *ngIf="material.inward_date">
-                            <div class="card-header">{{ material.inward_date | date: 'dd/MM/yyyy' }}</div>
-                            <div class="card-body">
-                                <span class="card-text">
-                                    <ul>
-                                        <li *ngFor="let contents of material.materials">{{ contents.name }} : {{ contents. quantity }}</li>
-                                    </ul>
-                                </span>
-                            </div>
-                        </ng-container>
+                <app-add-material *ngIf="isDataAdding && !isDataUpdating"></app-add-material>
+
+                <app-update-material *ngIf="isDataUpdating && !isDataAdding" [updateDataForDate]="currentKey" [updateForContents]="currentValue"></app-update-material>
+
+                <ng-container *ngIf="!isDataUpdating && !isDataAdding">
+                    <div class="card margin-b30" *ngFor="let item of tempMap | keyvalue: maintainOrder">
+                        <div class="card-header date">{{ item.key | date: 'EEEE, d MMMM yyyy' }}</div>
+                        <div class="card-body">
+                            <span class="card-text">
+                                <ol class="material-list">
+                                    <ng-container *ngFor="let itemArray of item.value">
+                                        <li *ngFor="let listItem of itemArray">{{ listItem.name }} : {{ listItem.quantity }}</li>
+                                    </ng-container>
+                                </ol>
+                            </span>
+                        </div>
+                        <div class="card-footer">
+                            <button (click)="updateProjectMaterial(item.key, item.value)" class="btn btn-dark right">Update</button>
+                        </div>
                     </div>
-                </div>
+                </ng-container>
             </div>
         </div>
     </div>

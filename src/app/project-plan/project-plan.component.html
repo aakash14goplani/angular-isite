@@ -31,7 +31,11 @@
             <div class="col-xs-12 col-md-8 offset-md-2">
                 <ul class="list-group">
                     <li class="list-group-item d-flex justify-content-between align-items-center" *ngFor="let project of projectPlanDetails | filterData : filterValue : 'location' : 'plan' | sortData : sortType : sortField : 'plan'">{{ project.name }}
-                        <span class="badge badge-light badge-pill">{{ project.contents | formatProjectContents }}</span>
+                        <span class="badge badge-light badge-pill">
+                            {{ project.contents | formatProjectContents }} <br>
+                            Type: {{ project.location }} <br>
+                            Last Updated: {{ project.date | date: 'dd-MM-yyyy' }}
+                        </span>
                     </li>
                 </ul>
             </div>

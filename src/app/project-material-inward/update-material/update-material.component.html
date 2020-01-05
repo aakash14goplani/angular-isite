@@ -1,0 +1,21 @@
+<div class="card margin-b30">
+    <form [formGroup]="formData" (ngSubmit)="saveUpdates()">
+        <div class="card-header date">{{ updateDataForDate | date: 'EEEE, d MMMM yyyy' }}</div>
+        <div class="card-body">
+            <span class="card-text">
+                <ol class="material-list" formArrayName="material_data">
+                    <li *ngFor="let materialDataControl of materialDataControlFn; let i=index" [formGroupName]="i">
+                        <input type="text" formControlName="item_name" class="form-control">
+                        <input type="number" formControlName="item_quantity" class="form-control">
+                        <i class="fa fa-minus-circle fa-2x" aria-hidden="true" (click)="deleteMaterialItem(i)"></i>
+                    </li>
+                    <i class="fa fa-plus-circle fa-2x" aria-hidden="true" (click)="addMaterialItem()"></i>
+                </ol>
+            </span>
+        </div>
+        <div class="card-footer">
+            <button (click)="cancelUpdates()" class="btn btn-dark left">Cancel</button>
+            <button type="submit" [disabled]="!formData.valid" class="btn btn-dark right">Save</button>
+        </div>
+    </form>
+</div>
