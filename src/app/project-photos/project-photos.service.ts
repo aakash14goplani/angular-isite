@@ -1,9 +1,14 @@
 import { Injectable } from '@angular/core';
+import { Observable, throwError } from 'rxjs';
+import { HttpClient, HttpErrorResponse, HttpHandler } from '@angular/common/http';
+import { map, catchError } from 'rxjs/operators';
 
 @Injectable()
 export class ProjectPhotosService {
 
   constructor() { }
+
+  // private http: HttpClient = new HttpClient(new HttpHandler());
 
   private projectPhotosDataStore: Array<PhotosDataFormat> = [
     {
@@ -95,6 +100,24 @@ export class ProjectPhotosService {
   public getPhotosDetails(): Array<PhotosDataFormat> {
     return this.projectPhotosDataStore.slice();
   }
+
+  /* public postFile(fileToUpload: File): Observable<boolean> {
+    const endpoint = 'app/';
+    const formData: FormData = new FormData();
+    formData.append('fileKey', fileToUpload, fileToUpload.name);
+    return this.http
+      .post(endpoint, formData)
+      .pipe(
+        map(() => { return true; }),
+        catchError(this.handleError)
+    );
+  }
+
+  private handleError(errorResponse: HttpErrorResponse): Observable<never> {
+    console.log('errorResponse: ', errorResponse);
+    console.log('errorResponse.erroe: ', errorResponse.error);
+    return throwError('An unknown error occured!');
+  } */
 }
 
 export interface PhotosDataFormat {

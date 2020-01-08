@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ProjectPhotosService, PhotosDataFormat } from './project-photos.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-project-photos',
@@ -7,7 +8,7 @@ import { ProjectPhotosService, PhotosDataFormat } from './project-photos.service
   styleUrls: ['./project-photos.component.css'],
   providers: [ ProjectPhotosService ]
 })
-export class ProjectPhotosComponent implements OnInit {
+export class ProjectPhotosComponent implements OnInit, OnDestroy {
 
   constructor(
     private projectPhotosService: ProjectPhotosService
@@ -19,9 +20,12 @@ export class ProjectPhotosComponent implements OnInit {
   isSorting: boolean = false;
   sortType: string = '';
   sortField: string = '';
+  fileToUpload: File = null;
 
   filterValue: string = '';
   isFiltering: boolean = false;
+
+  private tempSubscription: Subscription;
 
   ngOnInit() {
     this.photosArray = this.projectPhotosService.getPhotosDetails();
@@ -57,6 +61,23 @@ export class ProjectPhotosComponent implements OnInit {
   clearFilter(): void {
     this.isFiltering = false;
     this.filterValue = '';
+  }
+
+  handleFileInput(files: FileList) {
+    this.fileToUpload = files.item(0);
+    /* this.tempSubscription = this.projectPhotosService.postFile(this.fileToUpload).subscribe(
+      (data: boolean) => {
+        console.log('SUCCESS', data);
+      },
+      (error) => {
+        console.log('ERROR', error);
+      }
+    ); */
+    
+  }
+
+  ngOnDestroy(): void {
+    // this.tempSubscription.unsubscribe();
   }
 
 }
