@@ -101,7 +101,8 @@ export class ProjectPhotosService {
     return this.projectPhotosDataStore.slice();
   }
 
-  /* public postFile(fileToUpload: File): Observable<boolean> {
+  /* https://stackoverflow.com/questions/40214772/file-upload-in-angular
+  public postFile(fileToUpload: File): Observable<boolean> {
     const endpoint = 'app/';
     const formData: FormData = new FormData();
     formData.append('fileKey', fileToUpload, fileToUpload.name);
