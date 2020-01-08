@@ -27,14 +27,14 @@
             </div>
         </div>
 
-        <div class="row">
+        <!-- <div class="row">
             <div class="col-xs-12 col-md-4 offset-md-2">
                 <div class="form-group">
                     <label for="file">Choose File</label>
                     <input type="file" id="file" (change)="handleFileInput($event.target.files)">
                 </div>
             </div>
-        </div>
+        </div> -->
 
         <div class="row offset-md-2">
             <div class="col-md-5 col-xs-12 align-card-deck" *ngFor="let photo of photosArray | filterData : filterValue : 'location' : 'photos' | sortData : sortType : sortField : 'photos'">
