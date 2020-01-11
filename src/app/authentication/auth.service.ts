@@ -74,6 +74,10 @@ export class AuthService {
       /* redirect user automatically, e.g. if user is logged in on one window and opens new session
       in other window, he should be forced to continue with its existing session */
       // this.router.navigate(['project']);
+
+      // on page-refresh when hosted on GitHub leads to 404 error. To avoid this add following line. 
+      // when working locally, again comment this line
+      this.router.navigate(['https://aakash14goplani.github.io/angular-isite/']);
     }
   }
 
