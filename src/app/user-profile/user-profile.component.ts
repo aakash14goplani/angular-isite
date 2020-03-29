@@ -29,11 +29,11 @@ export class UserProfileComponent implements OnInit, OnDestroy {
   userEmailErrorMessage: string = '';
   userPasswordErrorMessage: string = '';
 
-  @ViewChild('userNameInput', {static: false}) newUserName: ElementRef;
-  @ViewChild('userEmailInput', {static: false}) newUserEmail: ElementRef;
-  @ViewChild('currentPassword', {static: false}) currentPassword: ElementRef;
-  @ViewChild('newPassword', {static: false}) newPassword: ElementRef;
-  @ViewChild('confirmNewPassword', {static: false}) confirmNewPassword: ElementRef;
+  @ViewChild('userNameInput') newUserName: ElementRef;
+  @ViewChild('userEmailInput') newUserEmail: ElementRef;
+  @ViewChild('currentPassword') currentPassword: ElementRef;
+  @ViewChild('newPassword') newPassword: ElementRef;
+  @ViewChild('confirmNewPassword') confirmNewPassword: ElementRef;
 
   ngOnInit(): void {
     this.authServiceSubscription = this.authService.user.subscribe((userData: User) => {
