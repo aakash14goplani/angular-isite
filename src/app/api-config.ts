@@ -1,0 +1,1 @@
+export const IsiteHttp = "http://localhost:9090/";

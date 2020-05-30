@@ -1,5 +1,7 @@
+import { GenericResponse } from './../../services/response/GenericResponse';
+import { MaterialInwardsStructure, Materials } from './../../services/request/createMaterialInwardRequest';
 import { Component, OnInit, Input } from '@angular/core';
-import { ProjectMaterialInwardService, MaterialInwardsStructure } from '../project-material-inward.service';
+import { ProjectMaterialInwardService } from '../project-material-inward.service';
 import { FormGroup, FormArray, FormControl, Validators } from '@angular/forms';
 
 @Component({
@@ -13,21 +15,22 @@ export class UpdateMaterialComponent implements OnInit {
     private projectMaterialInwardService: ProjectMaterialInwardService
   ) { }
 
-  @Input() updateDataForDate: Date;
-  @Input() private updateForContents: Array<{name: string, quantity: number}>;
+  @Input() private updateForContents: MaterialInwardsStructure;
   formData: FormGroup;
   materialDataArray: MaterialInwardsStructure[];
+  updateDataForDate: string;
 
   ngOnInit() {
     this.materialDataArray = this.projectMaterialInwardService.getMaterials();
-    this.updateForContents = this.updateForContents.flatMap(x => x);
-    
+    this.updateDataForDate = this.updateForContents.inward_date;
+    //this.updateForContents = this.updateForContents.flatMap(x => x);
+    const updateArray = this.updateForContents.materials;
     const materialDataFormArray = new FormArray([]);
-    for (let i = 0; i < this.updateForContents.length; i++) {
+    for (let i = 0; i < updateArray.length; i++) {
       materialDataFormArray.push(
         new FormGroup({
-          item_name: new FormControl(this.updateForContents[i].name, Validators.required),
-          item_quantity: new FormControl(this.updateForContents[i].quantity, [Validators.required])
+          item_name: new FormControl(updateArray[i].name, Validators.required),
+          item_quantity: new FormControl(updateArray[i].quantity, [Validators.required])
         })
       );
     }
@@ -56,32 +59,40 @@ export class UpdateMaterialComponent implements OnInit {
   saveUpdates(): void {
     this.projectMaterialInwardService.isUpdateMode.next(false);
 
-    const temp_var = new Date(this.updateDataForDate);
-    const final_date = new Date(temp_var.getUTCFullYear() + '-' + (+temp_var.getMonth() + 1) + '-' + temp_var.getDate());
+    const temp_var = new Date(this.updateForContents.inward_date);
+    const final_date = temp_var.getUTCFullYear() + '-' + (temp_var.getMonth() + 1) + '-' + temp_var.getDate();
     
-    this.materialDataArray = this.materialDataArray.filter((materialData) => {
+    /* this.materialDataArray = this.materialDataArray.filter((materialData) => {
       return !(
         materialData.inward_date.getDate() === final_date.getDate() &&
         materialData.inward_date.getMonth() === final_date.getMonth() &&
         materialData.inward_date.getFullYear() === final_date.getFullYear() 
       );
-    });
+    }); */
 
-    let tempArray: Array<{inward_date: Date, materials: {name: string, quantity: number}[]}> = [];
-    let tempMaterialSubarray: Array<{name: string, quantity: number}> = [];
+    let updatedData: MaterialInwardsStructure = {
+      inward_date: final_date,
+      materials: []
+    };
     for (let i = 0; i < this.formData.value.material_data.length; i++) {
-      tempMaterialSubarray.push({
+      updatedData.materials.push({
         name: this.formData.value.material_data[i].item_name,
         quantity: this.formData.value.material_data[i].item_quantity
       })
     }
-    if (tempMaterialSubarray.length > 0) {
-      tempArray.push({ inward_date: final_date, materials: tempMaterialSubarray });
-    }
-    this.materialDataArray = this.materialDataArray.concat(tempArray);
-    this.projectMaterialInwardService.setProjectMaterialData(this.materialDataArray);
-    
-    this.projectMaterialInwardService.materialChange.next(this.projectMaterialInwardService.getProcessedMaterialData());
+    this.projectMaterialInwardService.saveProjectDPRData(updatedData,false).subscribe((data: GenericResponse) => {
+      if(data.message === "Success") {
+        let materialArray: MaterialInwardsStructure[] = this.projectMaterialInwardService.getMaterials();
+        for(let index=0; index < materialArray.length; index++) {
+          if(materialArray[index].inward_date === updatedData.inward_date) {
+            materialArray[index].materials = updatedData.materials;
+            break;
+          }
+        }
+        this.projectMaterialInwardService.setProjectMaterialData(materialArray);
+        this.projectMaterialInwardService.materialChange.next(this.projectMaterialInwardService.processMaterialData(materialArray));
+      }
+    });
   }
 
   cancelUpdates(): void {

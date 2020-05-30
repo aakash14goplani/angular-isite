@@ -1,62 +1,81 @@
 import { Injectable } from '@angular/core';
-import { Subject } from 'rxjs';
+import { Subject, Observable } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
+import { IsiteHttp } from '../api-config';
+import {FetchDprResponse, Content} from '../services/response/fetchDprResponse';
+import { CreateDprRequest } from './../services/request/createDprRequest';
 
 @Injectable()
 export class ProjectDprService {
+  
+  constructor(private httpClient: HttpClient) { }
 
-  constructor() { }
-
-  private projectDPRDataStotre: Array<{date: Date, content: string}> = [
-    { date: new Date('2019-7-10'), content: 'Concreting PCC for swd at ch 23575 to 23607 RHS' },
-    { date: new Date('2019-7-11'), content: 'Concreting swd wall at ch 24410 to 2442, 24764 to 24775 RHS and 24373 LHS' },
-    { date: new Date('2019-7-10'), content: 'Concreting PCC for swd at ch 24835 to 24859 LHS, 24795 to 24800 & 24437 to 24481 RHS' },
-    { date: new Date('2019-7-9'), content: 'Shuttering for swd slab at ch 24169 to 24198 LHS in progress' },
-    { date: new Date('2019-7-8'), content: 'cutting bending steel for swd slab' },
-    { date: new Date('2019-7-10'), content: 'Concreting swd slab at ch 24198 to 24227 RHS' },
-    { date: new Date('2019-7-8'), content: 'Concreting for Encasing HP culvert at ch 18620 RHS  1st lift' },
-    { date: new Date('2019-7-9'), content: 'Concreting PCC for utility duct at ch 19260' },
-    { date: new Date('2019-7-11'), content: 'Concreting swd wall at ch 24421 to 24432 RHS and 24530 to 24539 LHS ' },
-    { date: new Date('2019-7-12'), content: 'Concreting for Encasing HP culvert 1st lift ch 18860 LHS' },
-    { date: new Date('2019-7-12'), content: 'Soling for HP culvert at ch 24955' },
-    { date: new Date('2019-7-11'), content: 'Soling for swd at ch 24830 to 24860 LHS.' },
-    { date: new Date('2019-7-9'), content: 'Embankment grading and watering at ch 24750 to 24950.' },
-    { date: new Date('2019-7-8'), content: 'Dressing excavated bed for HP culvert at ch 25060' },
-    { date: new Date('2019-7-8'), content: 'Dressing excavated swd slab' },
-    { date: new Date('2019-6-8'), content: 'Dressing excavated bed for HP culvert at ch 25060' }
+  private projectDPRDataStore: Array<Content> = [
+    /* { date: '2019-7-10', content: ['Concreting PCC for swd at ch 23575 to 23607 RHS',
+    'Concreting swd slab at ch 24198 to 24227 RHS',
+    'Concreting swd slab at ch 24198 to 24227 RHS'
+    ]},
+    { date: '2019-7-11', content: ['Concreting swd wall at ch 24410 to 2442, 24764 to 24775 RHS and 24373 LHS',
+    'Concreting swd wall at ch 24421 to 24432 RHS and 24530 to 24539 LHS '
+    ]},
+    { date: '2019-7-12', content: ['Concreting for Encasing HP culvert 1st lift ch 18860 LHS',
+    'Soling for HP culvert at ch 24955'
+    ]},
+    { date: '2019-7-9', content: ['Embankment grading and watering at ch 24750 to 24950.',
+    'Concreting PCC for utility duct at ch 19260'
+    ]},
+    { date: '2019-7-8', content: ['Dressing excavated bed for HP culvert at ch 25060','Dressing excavated swd slab'] },
+    { date: '2019-6-8', content: ['Dressing excavated bed for HP culvert at ch 25060'] } */
   ];
 
   public isUpdateMode = new Subject<boolean>();
   public isAddMode = new Subject<boolean>();
   public dprDataChange = new Subject<Map<Date, string[]>>();
 
-  public getProjectDPRData(): Array<{date: Date, content: string}> {
-    return this.projectDPRDataStotre.slice();
+  public getProjectDPRData(): Array<Content> {
+    return this.projectDPRDataStore.slice();
   }
 
-  public setProjectDPRData(array: {date: Date, content: string}[]): void {
-    this.projectDPRDataStotre = array;
+  public setProjectDPRData(array: Content[]): void {
+    this.projectDPRDataStore = array;
   }
 
-  public addProjectDPRData(date: Date, content: string): void {
-    this.projectDPRDataStotre.push({date: date, content: content});
+  public addProjectDPRData(data: Content): void {
+    this.projectDPRDataStore.push(data);
   }
 
-  public getProcessedProjectDPRData(): Map<Date, string[]> {
-    return this.processProjectDPRData(this.projectDPRDataStotre.slice());
+  public saveProjectDPRData(data: Content, isAdd: boolean) : Observable<Object> {
+    let dprRequest: CreateDprRequest = {
+      date: data.date,
+      content: data.content 
+    };
+    if(isAdd) {
+      return this.httpClient.post(IsiteHttp.concat('savereport'), dprRequest);
+    } else {
+      return this.httpClient.post(IsiteHttp.concat('updatereport'), dprRequest);
+    }
   }
 
-  private processProjectDPRData(projectDPRArray: Array<{date: Date, content: string}>): Map<Date, string[]> {
+  public getProcessedProjectDPRData(): Observable<Object> {
+    //return this.processProjectDPRData(this.projectDPRDataStore.slice());
+    return this.httpClient.get(IsiteHttp.concat('fetchdpr'));
+  }
+
+  public processProjectDPRData(projectDPRArray: Array<Content>): Map<Date, string[]> {
+    console.log(JSON.stringify(projectDPRArray)); 
     projectDPRArray.sort((a, b) => {
-      if (a.date > b.date) {
+      let date1 = new Date(a.date);
+      let date2 = new Date(b.date);
+      if (date1 > date2) {
         return -1;
       }
-      if (a.date < b.date) {
+      if (date1 < date2) {
         return 1;
       }
       return 0;
     });
 
-    let tempArray = [];
+    /* let tempArray = [];
     let tempMap = new Map<Date, string[]>();
     let currentDate: Date = null;
     let nextDate: Date = null;
@@ -77,8 +96,12 @@ export class ProjectDprService {
     }
 
     tempArray.push(projectDPRArray[projectDPRArray.length - 1].content);
-    tempMap.set(lastDate, tempArray);
-
+    tempMap.set(lastDate, tempArray); */
+    let tempMap = new Map<Date, string[]>();
+    projectDPRArray.forEach((item) => {
+      tempMap.set(new Date(item.date),item.content);
+    });
+    
     return tempMap;
   }
 }

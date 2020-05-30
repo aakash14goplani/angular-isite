@@ -51,6 +51,11 @@ a:hover.navbar-brand {
     color: white;
     cursor: pointer;
 }
+.image_icon {
+	height: 30px;
+	width: 30px;
+	padding-right: 7px;
+}
 @media screen and (min-width: 0px) and (max-width: 991px) {
 	span.navbar-toggler-icon.leftmenutrigger {
 		display: none;

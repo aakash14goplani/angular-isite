@@ -26,7 +26,69 @@
                 </div>
             </div>
         </div>
-
+        <div class="text-center-align">
+            <button class="btn btn-dark center" (click)="addNewPlan(plan)">
+                Add Plan
+            </button>
+        </div>
+        <ng-template #plan let-modal>
+            <form [formGroup]="formData" (ngSubmit)="savePlan()">
+                <div class="modal-header text-center">
+                    <h4 class="modal-title">Add Plan</h4>
+                    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label class="col-form-label">Name:</label><input type="text" class="form-control"
+                            formControlName="name" placeholder="Eg. MNB" />
+                        <label class="col-form-label">Location:</label><input type="text" class="form-control"
+                            formControlName="location" placeholder="Eg. drain, bridge" />
+                        <label class="col-form-label">Choose Files:</label><input class="form-control" type="file"
+                            id="file" name="file" formControlName="file" (change)="onFileChange($event)" multiple />
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-dark" [disabled]="!formData.valid">Add</button>
+                    <button type="button" class="btn btn-light" (click)="modal.close('Close click')">Close</button>
+                </div>
+            </form>
+        </ng-template>
+        <ng-template #updateplan let-modal>
+            <form [formGroup]="updateFormData" (ngSubmit)="updatePlan()">
+                <div class="modal-header text-center">
+                    <h4 class="modal-title">Add Drawings</h4>
+                    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label class="col-form-label">Choose Files:</label><input class="form-control" type="file"
+                            id="file" name="file" formControlName="file" (change)="onFileChange($event)" multiple />
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-dark" [disabled]="!updateFormData.valid">Add</button>
+                    <button type="button" class="btn btn-light" (click)="modal.close('Close click')">Close</button>
+                </div>
+            </form>
+        </ng-template>
+        <div class="modal" tabindex="-1" role="dialog" id="fileModal">
+            <div class="modal-dialog custom_modal" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">View File</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body" id="fileBody">
+                    </div>
+                </div>
+            </div>
+        </div>
         <div class="row">
             <div class="col-xs-12 col-md-8 offset-md-2">
                 <ul class="list-group">
@@ -34,8 +96,27 @@
                         <span class="badge badge-light badge-pill">
                             {{ project.contents | formatProjectContents }} <br>
                             Type: {{ project.location }} <br>
-                            Last Updated: {{ project.date | date: 'dd-MM-yyyy' }}
+                            Last Updated: {{ project.date | date: 'dd-MM-yyyy' }} <br>
+                            <a data-toggle="collapse" href="#{{project.name}}" role="button" aria-expanded="false" aria-controls="collapsableContainer">
+                            View Drawings
+                            </a>
+                            <br>
+                            <a href="javascript:void(0)" role="button" (click)="addDrawings(updateplan,project)">
+                                Add Drawings
+                            </a>
                         </span>
+                        <div class="collapse" id="{{project.name}}">
+                            <ul class="list-group inner">
+                                <li class="list-group-item" *ngFor="let item of project.files"> {{item.fileName}}
+                                    <a href="#" class="p-left" (click)="openFile(item.url)" data-toggle="modal" data-target="#fileModal">
+                                        <img src="assets/images/icons/download.svg" class="image-icons" alt=""/>
+                                    </a>
+                                    <a href="javascript:void(0);" class="p-left" (click)="deleteFile(project,item.fileName)">
+                                        <img src="assets/images/icons/trash.svg" class="image-icons" alt=""/>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
                     </li>
                 </ul>
             </div>

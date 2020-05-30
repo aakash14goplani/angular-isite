@@ -1,5 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 
@@ -39,6 +40,9 @@ import { AlertWidgetComponent } from './shared/alert-widget/alert-widget.compone
 import { AddNewProjectComponent } from './project-details/add-new-project/add-new-project.component';
 import { AddMaterialComponent } from './project-material-inward/add-material/add-material.component';
 import { UpdateMaterialComponent } from './project-material-inward/update-material/update-material.component';
+// Datepicker module
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 
 @NgModule({
   declarations: [
@@ -84,7 +88,10 @@ import { UpdateMaterialComponent } from './project-material-inward/update-materi
     AppRoutingModule,
     FormsModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    BrowserAnimationsModule,
+    NgbModule,
+    BsDatepickerModule.forRoot()
   ],
   providers: [],
   bootstrap: [AppComponent]

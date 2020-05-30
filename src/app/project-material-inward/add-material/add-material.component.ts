@@ -1,3 +1,5 @@
+import { GenericResponse } from './../../services/response/GenericResponse';
+import { MaterialInwardsStructure, Materials } from './../../services/request/createMaterialInwardRequest';
 import { Component, OnInit } from '@angular/core';
 import { ProjectMaterialInwardService } from '../project-material-inward.service';
 import { FormGroup, FormArray, FormControl, Validators } from '@angular/forms';
@@ -47,26 +49,35 @@ export class AddMaterialComponent implements OnInit {
     (this.formData.get('material_data') as FormArray).removeAt(index);
   }
 
-  saveDataAddition(): void {
-    const final_date = new Date(this.newProjectDate.getUTCFullYear() + '-' + (+this.newProjectDate.getMonth() + 1) + '-' + this.newProjectDate.getDate());
+  cancelDataAddition(): void {
+    this.projectMaterialService.isAddMode.next(false);
+  }
 
-    let tempArray: { name: string, quantity: number }[] = [];
+  saveDataAddition(): void {
+    const final_date = this.newProjectDate.getUTCFullYear() + '-' + (+this.newProjectDate.getMonth() + 1) + '-' + this.newProjectDate.getDate();
+
+    let tempArray: Materials[] = [];
     for (let i = 0; i < this.formData.value.material_data.length; i++) {
       tempArray.push({
         name: this.formData.value.material_data[i].item_name,
         quantity: this.formData.value.material_data[i].item_quantity
       });
     }
-    if(tempArray.length > 0) {
-      this.projectMaterialService.addProjectMaterialData(final_date, tempArray);
+
+    let request: MaterialInwardsStructure = {
+      inward_date: final_date,
+      materials: tempArray
     }
-
-    this.projectMaterialService.isAddMode.next(false);
-    this.projectMaterialService.materialChange.next(this.projectMaterialService.getProcessedMaterialData());
-  }
-
-  cancelDataAddition(): void {
-    this.projectMaterialService.isAddMode.next(false);
+    if(tempArray.length > 0) {
+      this.projectMaterialService.saveProjectDPRData(request, true).subscribe((data: GenericResponse)=> {
+        if(data.message === "Success") {
+          this.projectMaterialService.addProjectMaterialData(request);
+          this.projectMaterialService.isAddMode.next(false);
+          this.projectMaterialService.materialChange.next(
+            this.projectMaterialService.processMaterialData(this.projectMaterialService.getMaterials()));
+        } 
+      });
+    }
   }
 
 }

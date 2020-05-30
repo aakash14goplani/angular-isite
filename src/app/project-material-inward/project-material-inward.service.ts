@@ -1,13 +1,16 @@
 import { Injectable } from '@angular/core';
-import { Subject } from 'rxjs';
+import { Subject, Observable } from 'rxjs';
+import { MaterialInwardsStructure, Materials } from '../services/request/createMaterialInwardRequest';
+import { HttpClient } from '@angular/common/http';
+import { IsiteHttp } from '../api-config';
 
 @Injectable()
 export class ProjectMaterialInwardService {
 
-  constructor() { }
+  constructor(private httpClient: HttpClient) { }
 
   private materialsDataStore: Array<MaterialInwardsStructure> = [
-    { inward_date: new Date('2020-1-1'), materials: [
+    /* { inward_date: new Date('2020-1-1'), materials: [
         { name: 'Concrete', quantity: 20 },
         { name: 'Steel', quantity: 10 }
       ]
@@ -21,12 +24,12 @@ export class ProjectMaterialInwardService {
         { name: 'Steel', quantity: 10 },
         { name: 'Fly Ash', quantity: 30 }
       ]
-    }
+    } */
   ];
 
   public isUpdateMode = new Subject<boolean>();
   public isAddMode = new Subject<boolean>();
-  public materialChange = new Subject<Map<Date, MaterialInwardsStructure[]>>();
+  public materialChange = new Subject<MaterialInwardsStructure[]>();
 
   public getMaterials(): Array<MaterialInwardsStructure> {
     return this.materialsDataStore.slice();
@@ -36,26 +39,36 @@ export class ProjectMaterialInwardService {
     this.materialsDataStore = array;
   }
 
-  public addProjectMaterialData(date: Date, materails: {name: string, quantity: number}[]): void {
-    this.materialsDataStore.push({inward_date: date, materials: materails});
+  public addProjectMaterialData(material: MaterialInwardsStructure): void {
+    this.materialsDataStore.push(material);
   }
 
-  public getProcessedMaterialData(): Map<Date, MaterialInwardsStructure[]> {
-    return this.processMaterialData(this.materialsDataStore.slice());
+  public getProcessedMaterialData(): Observable<Object> {
+    return this.httpClient.get(IsiteHttp.concat('fetchmaterials'));
   }
 
-  private processMaterialData(ProjectMaterialArray: MaterialInwardsStructure[]): Map<Date, MaterialInwardsStructure[]> {
+  public saveProjectDPRData(request: MaterialInwardsStructure, isAdd: boolean) : Observable<Object> {
+    if(isAdd) {
+      return this.httpClient.post(IsiteHttp.concat('addmaterial'), request);
+    } else {
+      return this.httpClient.post(IsiteHttp.concat('updatematerial'), request);
+    }
+  }
+
+  public processMaterialData(ProjectMaterialArray: MaterialInwardsStructure[]): MaterialInwardsStructure[] {
     ProjectMaterialArray.sort((a, b) => {
-      if (a.inward_date > b.inward_date) {
+      let date1 = new Date(a.inward_date);
+      let date2 = new Date(b.inward_date);
+      if (date1 > date2) {
         return -1;
       }
-      if (a.inward_date < b.inward_date) {
+      if (date1 < date2) {
         return 1;
       }
       return 0;
     });
 
-    let tempArray = [];
+    /* let tempArray = [];
     let tempMap = new Map<Date, MaterialInwardsStructure[]>();
     let currentDate: Date = null;
     let nextDate: Date = null;
@@ -76,13 +89,13 @@ export class ProjectMaterialInwardService {
     }
 
     tempArray.push(ProjectMaterialArray[ProjectMaterialArray.length - 1].materials);
-    tempMap.set(lastDate, tempArray);
+    tempMap.set(lastDate, tempArray); */
 
-    return tempMap;
+    /* let tempMap = new Map<Date, Materials>();
+    ProjectMaterialArray.forEach((item) => {
+      tempMap.set(new Date(item.inward_date), item.materials);
+    }); */
+
+    return ProjectMaterialArray;
   }
-}
-
-export interface MaterialInwardsStructure {
-  inward_date: Date;
-  materials: Array<{ name: string, quantity: number }>;
 }

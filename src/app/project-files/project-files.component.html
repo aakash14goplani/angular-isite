@@ -2,61 +2,214 @@
     <div class="container-fluid">
         <h2 class="text-center">Files</h2>
         <app-filter-n-sort></app-filter-n-sort>
-        <div class="row">
+        <div class="row" *ngIf="!isLoading">
             <div class="col-xs-12 col-md-8 offset-md-2">
                 <ul class="list-group">
                     <li class="list-group-item">
-                        <a href="#" (click)="initiateUploadFor('PROJECT_DETAILS')" data-toggle="modal" data-target="#myModal">Project Details</a>
+                        <a href="javascript:void(0)" (click)="initiateUploadFor('PROJECT_DETAILS', fileUpload)">Project Details</a>
+                        <a data-toggle="collapse" href="#PROJECT_DETAILS" role="button" aria-expanded="false" aria-controls="collapseExample">
+                            <img src="assets/images/icons/collapsable.svg" class="image-icons fr" alt=""/>
+                        </a>
+                        <div class="collapse" id="PROJECT_DETAILS">
+                            <ul class="list-group inner" *ngFor="let item of fileMap.get('PROJECT_DETAILS')">
+                                <li class="list-group-item"> {{item.file_name}}
+                                    <a href="#" (click)="openFile('PROJECT_DETAILS',item.file_name)" data-toggle="modal" data-target="#fileModal">
+                                        <img src="assets/images/icons/download.svg" class="image-icons" alt=""/>
+                                    </a>
+                                    <span (click)="deleteFile('PROJECT_DETAILS',item.file_name)">
+                                        <img src="assets/images/icons/trash.svg" class="image-icons" alt=""/>
+                                    </span>
+                                </li>
+                            </ul>
+                        </div>
                     </li>
                     <li class="list-group-item">
-                        <a href="#" (click)="initiateUploadFor('WORK_ORDER')" data-toggle="modal" data-target="#myModal">Work Order</a>
-                        <ul class="list-group inner">
-                            <li class="list-group-item">uploaded_file_1</li>
-                            <li class="list-group-item">uploaded_file_2</li>
-                        </ul>
+                        <a href="javascript:void(0)" (click)="initiateUploadFor('WORK_ORDER', fileUpload)">Work Order</a>
+                        <a data-toggle="collapse" href="#WORK_ORDER" role="button" aria-expanded="false" aria-controls="collapseExample">
+                            <img src="assets/images/icons/collapsable.svg" class="image-icons fr" alt=""/>
+                        </a>
+                        <div class="collapse" id="WORK_ORDER">
+                            <ul class="list-group inner" *ngFor="let item of fileMap.get('WORK_ORDER')">
+                                <li class="list-group-item"> {{item.file_name}}
+                                    <a href="#" (click)="openFile('WORK_ORDER',item.file_name)" data-toggle="modal" data-target="#fileModal">
+                                        <img src="assets/images/icons/download.svg" class="image-icons" alt=""/>
+                                    </a>
+                                    <span (click)="deleteFile('WORK_ORDER',item.file_name)">
+                                        <img src="assets/images/icons/trash.svg" class="image-icons" alt=""/>
+                                    </span>
+                                </li>
+                            </ul>
+                        </div>
                     </li>
                     <li class="list-group-item">
-                        <a href="#" (click)="initiateUploadFor('EOT_LETTER')" data-toggle="modal" data-target="#myModal">EOT Letter</a>
+                        <a href="javascript:void(0)" (click)="initiateUploadFor('EOT_LETTER', fileUpload)">EOT Letter</a>
+                        <a data-toggle="collapse" href="#EOT_LETTER" role="button" aria-expanded="false" aria-controls="collapseExample">
+                            <img src="assets/images/icons/collapsable.svg" class="image-icons fr" alt=""/>
+                        </a>
+                        <div class="collapse" id="EOT_LETTER">
+                            <ul class="list-group inner" *ngFor="let item of fileMap.get('EOT_LETTER')">
+                                <li class="list-group-item"> {{item.file_name}}
+                                    <a href="#" (click)="openFile('EOT_LETTER',item.file_name)" data-toggle="modal" data-target="#fileModal">
+                                        <img src="assets/images/icons/download.svg" class="image-icons" alt=""/>
+                                    </a>
+                                    <span (click)="deleteFile('EOT_LETTER',item.file_name)">
+                                        <img src="assets/images/icons/trash.svg" class="image-icons" alt=""/>
+                                    </span>
+                                </li>
+                            </ul>
+                        </div>
                     </li>
                     <li class="list-group-item">
-                        <a href="#" (click)="initiateUploadFor('REVISED_ESTIMATES')" data-toggle="modal" data-target="#myModal">Revised Estimates</a>
+                        <a href="javascript:void(0)" (click)="initiateUploadFor('REVISED_ESTIMATES', fileUpload)">Revised Estimates</a>
+                        <a data-toggle="collapse" href="#REVISED_ESTIMATES" role="button" aria-expanded="false" aria-controls="collapseExample">
+                            <img src="assets/images/icons/collapsable.svg" class="image-icons fr" alt=""/>
+                        </a>
+                        <div class="collapse" id="REVISED_ESTIMATES">
+                            <ul class="list-group inner" *ngFor="let item of fileMap.get('REVISED_ESTIMATES')">
+                                <li class="list-group-item"> {{item.file_name}}
+                                    <a href="#" (click)="openFile('REVISED_ESTIMATES',item.file_name)" data-toggle="modal" data-target="#fileModal">
+                                        <img src="assets/images/icons/download.svg" class="image-icons" alt=""/>
+                                    </a>
+                                    <span (click)="deleteFile('REVISED_ESTIMATES',item.file_name)">
+                                        <img src="assets/images/icons/trash.svg" class="image-icons" alt=""/>
+                                    </span>
+                                </li>
+                            </ul>
+                        </div>
                     </li>
                     <li class="list-group-item">
-                        <a href="#" (click)="initiateUploadFor('MS_PLAN')" data-toggle="modal" data-target="#myModal">MS Plan</a>
+                        <a href="javascript:void(0)" (click)="initiateUploadFor('MS_PLAN', fileUpload)">MS Plan</a>
+                        <a data-toggle="collapse" href="#MS_PLAN" role="button" aria-expanded="false" aria-controls="collapseExample">
+                            <img src="assets/images/icons/collapsable.svg" class="image-icons fr" alt=""/>
+                        </a>
+                        <div class="collapse" id="MS_PLAN">
+                            <ul class="list-group inner" *ngFor="let item of fileMap.get('MS_PLAN')">
+                                <li class="list-group-item"> {{item.file_name}}
+                                    <a href="#" (click)="openFile('MS_PLAN',item.file_name)" data-toggle="modal" data-target="#fileModal">
+                                        <img src="assets/images/icons/download.svg" class="image-icons" alt=""/>
+                                    </a>
+                                    <span (click)="deleteFile('MS_PLAN',item.file_name)">
+                                        <img src="assets/images/icons/trash.svg" class="image-icons" alt=""/>
+                                    </span>
+                                </li>
+                            </ul>
+                        </div>
                     </li>
                     <li class="list-group-item">
-                        <a href="#" (click)="initiateUploadFor('BANK_GUARNTEE')" data-toggle="modal" data-target="#myModal">Bank Guarantees</a>
+                        <a href="javascript:void(0)" (click)="initiateUploadFor('BANK_GUARNTEE', fileUpload)">Bank Guarantees</a>
+                        <a data-toggle="collapse" href="#BANK_GUARNTEE" role="button" aria-expanded="false" aria-controls="collapseExample">
+                            <img src="assets/images/icons/collapsable.svg" class="image-icons fr" alt=""/>
+                        </a>
+                        <div class="collapse" id="BANK_GUARNTEE">
+                            <ul class="list-group inner" *ngFor="let item of fileMap.get('BANK_GUARNTEE')">
+                                <li class="list-group-item"> {{item.file_name}}
+                                    <a href="#" (click)="openFile('BANK_GUARNTEE',item.file_name)" data-toggle="modal" data-target="#fileModal">
+                                        <img src="assets/images/icons/download.svg" class="image-icons" alt=""/>
+                                    </a>
+                                    <span (click)="deleteFile('BANK_GUARNTEE',item.file_name)">
+                                        <img src="assets/images/icons/trash.svg" class="image-icons" alt=""/>
+                                    </span>
+                                </li>
+                            </ul>
+                        </div>
                     </li>
                     <li class="list-group-item">
-                        <a href="#" (click)="initiateUploadFor('WC_POLICY')" data-toggle="modal" data-target="#myModal">WC Policy</a>
+                        <a href="javascript:void(0)" (click)="initiateUploadFor('WC_POLICY', fileUpload)">WC Policy</a>
+                        <a data-toggle="collapse" href="#WC_POLICY" role="button" aria-expanded="false" aria-controls="collapseExample">
+                            <img src="assets/images/icons/collapsable.svg" class="image-icons fr" alt=""/>
+                        </a>
+                        <div class="collapse" id="WC_POLICY">
+                            <ul class="list-group inner" *ngFor="let item of fileMap.get('WC_POLICY')">
+                                <li class="list-group-item"> {{item.file_name}}
+                                    <a href="#" (click)="openFile('WC_POLICY',item.file_name)" data-toggle="modal" data-target="#fileModal">
+                                        <img src="assets/images/icons/download.svg" class="image-icons" alt=""/>
+                                    </a>
+                                    <span (click)="deleteFile('WC_POLICY',item.file_name)">
+                                        <img src="assets/images/icons/trash.svg" class="image-icons" alt=""/>
+                                    </span>
+                                </li>
+                            </ul>
+                        </div>
                     </li>
                     <li class="list-group-item">
-                        <a href="#" (click)="initiateUploadFor('CAR_POLICY')" data-toggle="modal" data-target="#myModal">Car Policy</a>
+                        <a href="javascript:void(0)" (click)="initiateUploadFor('CAR_POLICY', fileUpload)">Car Policy</a>
+                        <a data-toggle="collapse" href="#CAR_POLICY" role="button" aria-expanded="false" aria-controls="collapseExample">
+                            <img src="assets/images/icons/collapsable.svg" class="image-icons fr" alt=""/>
+                        </a>
+                        <div class="collapse" id="CAR_POLICY">
+                            <ul class="list-group inner" *ngFor="let item of fileMap.get('CAR_POLICY')">
+                                <li class="list-group-item"> {{item.file_name}}
+                                    <a href="#" (click)="openFile('CAR_POLICY',item.file_name)" data-toggle="modal" data-target="#fileModal">
+                                        <img src="assets/images/icons/download.svg" class="image-icons" alt=""/>
+                                    </a>
+                                    <span (click)="deleteFile('CAR_POLICY',item.file_name)">
+                                        <img src="assets/images/icons/trash.svg" class="image-icons" alt=""/>
+                                    </span>
+                                </li>
+                            </ul>
+                        </div>
                     </li>
                     <li class="list-group-item">
-                        <a href="#" (click)="initiateUploadFor('STAMP_DUTY')" data-toggle="modal" data-target="#myModal">Stamp Duty</a>
+                        <a href="javascript:void(0)" (click)="initiateUploadFor('STAMP_DUTY', fileUpload)">Stamp Duty</a>
+                        <a data-toggle="collapse" href="#STAMP_DUTY" role="button" aria-expanded="false" aria-controls="collapseExample">
+                            <img src="assets/images/icons/collapsable.svg" class="image-icons fr" alt=""/>
+                        </a>
+                        <div class="collapse" id="STAMP_DUTY">
+                            <ul class="list-group inner" *ngFor="let item of fileMap.get('STAMP_DUTY')">
+                                <li class="list-group-item"> {{item.file_name}}
+                                    <a href="#" (click)="openFile('STAMP_DUTY',item.file_name)" data-toggle="modal" data-target="#fileModal">
+                                        <img src="assets/images/icons/download.svg" class="image-icons" alt=""/>
+                                    </a>
+                                    <span (click)="deleteFile('STAMP_DUTY',item.file_name)">
+                                        <img src="assets/images/icons/trash.svg" class="image-icons" alt=""/>
+                                    </span>
+                                </li>
+                            </ul> 
+                        </div>
                     </li>
                 </ul>
             </div>
         </div>
-        <div class="modal" tabindex="-1" role="dialog" id="myModal">
-            <div class="modal-dialog" role="document">
+        <ng-template #fileUpload let-modal>
+            <form [formGroup]="myForm" (ngSubmit)="uploadFiles()">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">Upload Files</h5>
+                            <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <input type="file" id="file" name="file" formControlName="file"
+                                (change)="onFileChange($event)" multiple>
+                            <div class="row file-names" *ngFor="let item of fileNames">
+                                <span><img src="assets/images/icons/file_check.svg" class="image" alt=""/>
+                                    <label>{{item}}</label></span>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="submit" class="btn btn-success"
+                            [disabled]="f.file.invalid">Upload File</button>
+                            <button type="button" class="btn btn-danger" (click)="modal.close('Close click')">Close</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </ng-template>
+        <div class="modal" tabindex="-1" role="dialog" id="fileModal">
+            <div class="modal-dialog custom_modal" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title">Modal title</h5>
+                        <h5 class="modal-title">View File</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
-                    <div class="modal-body">
-                        <input type="file" id="customFile" name="customFile">
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" (click)="uploadFiles()" class="btn btn-success">Upload File</button>
-                        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                    <div class="modal-body" id="fileBody">
                     </div>
                 </div>
             </div>
         </div>
-    </div>
+    </div>  
 </section>

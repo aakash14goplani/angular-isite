@@ -1,3 +1,5 @@
+import { IsiteHttp } from './../api-config';
+import { PhotosDataFormat, FetchPhotosResponse } from '../services/response/fetchPhotosResponse';
 import { Injectable } from '@angular/core';
 import { Observable, throwError } from 'rxjs';
 import { HttpClient, HttpErrorResponse, HttpHandler } from '@angular/common/http';
@@ -6,12 +8,12 @@ import { map, catchError } from 'rxjs/operators';
 @Injectable()
 export class ProjectPhotosService {
 
-  constructor() { }
+  constructor(private httpClient: HttpClient) { }
 
   // private http: HttpClient = new HttpClient(new HttpHandler());
 
   private projectPhotosDataStore: Array<PhotosDataFormat> = [
-    {
+    /* {
       title: 'Photos Title 1',
       description: 'Description 1',
       date: new Date(),
@@ -94,11 +96,32 @@ export class ProjectPhotosService {
       date: new Date('2020-01-01'),
       url: 'assets/images/drain_3.jpeg',
       location: 'drain'
-    }
+    } */
   ];
+
+  public fetchPhotos(): Observable<Object> {
+    return this.httpClient.get(IsiteHttp.concat('fetchphotos'));
+  }
+
+  public uploadPhoto(request:FormData): Observable<Object> {
+    return this.httpClient.post(IsiteHttp.concat('uploadphoto'), request);
+  }
 
   public getPhotosDetails(): Array<PhotosDataFormat> {
     return this.projectPhotosDataStore.slice();
+  }
+
+  public setPhotoDetails(photoDetails: Array<PhotosDataFormat>) : void {
+    this.projectPhotosDataStore = photoDetails;
+  }
+
+  public addPhotoDetails(photoDetail: PhotosDataFormat): void {
+    this.projectPhotosDataStore.push(photoDetail);
+  }
+
+  public getSortedPhotoDetails(photoDetails: Array<PhotosDataFormat>) : Array<PhotosDataFormat> {
+    //add logic if required to fetch sorted photos
+    return photoDetails;
   }
 
   /* https://stackoverflow.com/questions/40214772/file-upload-in-angular
@@ -121,10 +144,3 @@ export class ProjectPhotosService {
   } */
 }
 
-export interface PhotosDataFormat {
-  title: string;
-  description: string;
-  date: Date;
-  url: string;
-  location: string
-}

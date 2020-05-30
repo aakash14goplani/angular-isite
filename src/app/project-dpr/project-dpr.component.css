@@ -1,6 +1,16 @@
 .margin-b30 {
     margin-bottom: 30px;
 }
+.project-dpr {
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-color: #cccccc;
+    background-image: linear-gradient(white,grey); 
+}
+.text-center-align {
+    text-align: center;
+    padding-bottom: 10px;
+}
 .card-header.date {
     text-align: center;
     font-weight: 700;
