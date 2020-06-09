@@ -25,7 +25,7 @@ export class FilterDataPipe implements PipeTransform {
     let service: any;
 
     if (fromService && filterField && filterValue) {
-      switch (fromService) {
+      /* switch (fromService) {
         case 'details': service = new ProjectDetailsService(); break;
         case 'plan': service = new ProjectPlanService(); break;
         case 'photos': service = new ProjectPhotosService(); break;
@@ -35,7 +35,7 @@ export class FilterDataPipe implements PipeTransform {
         case 'teams': service = new ProjectTeamsService(); break;
         case 'bg_details': service = new ProjectBgDetailsService(); break;
         default: break;
-      }
+      } */
 
       if (value && value.length > 0) {
         const tempArray = value.filter((data) => {
