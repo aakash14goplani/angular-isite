@@ -1,5 +1,15 @@
 .project-photos {
     margin-bottom: 40px;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-color: #cccccc;
+    margin-top: -49px;
+    padding-top: 10px;
+    background-image: linear-gradient(white,grey);
+}
+.text-center-align {
+    text-align: center;
+    padding-bottom: 10px;
 }
 @media screen and (min-width: 0px) and (max-width: 991px) {
     p.filter-n-sort-title {

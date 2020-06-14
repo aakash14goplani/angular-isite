@@ -6,3 +6,12 @@
 .card {
 	border: 0;
 }
+
+.project-bank-guarantee-details {
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-color: #cccccc;
+    margin-top: -49px;
+    padding-top: 10px;
+    background-image: linear-gradient(white,grey);
+}

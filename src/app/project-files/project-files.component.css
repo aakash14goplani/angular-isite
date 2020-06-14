@@ -1,8 +1,35 @@
 .margin-b30 {
     margin-bottom: 30px;
 }
+.file-names {
+    margin-left: 3%;
+    font-weight:500;
+    color: indianred;
+    padding: 3px;
+}
+.image {
+    margin-right: 10px;
+    height: 27px;
+    padding: 3px;
+}
+.custom_modal {
+    max-width: 80%;
+    max-height: 80%;
+}
+.image-icons {
+    padding-left: 20px;
+}
+.fr {
+    float: right;
+}
 .project-files {
     margin-bottom: 20px;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-color: #cccccc;
+    margin-top: -49px;
+    padding-top: 10px;
+    background-image: linear-gradient(white,grey);
 }
 .list-group.inner li{
 	border:none;

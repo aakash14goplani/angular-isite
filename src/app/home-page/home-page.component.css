@@ -7,7 +7,22 @@
 .margin-b30 {
     margin-bottom: 30px;
 }
+.bg-img {
+    background-image: url('/assets/images/construction_hd.jpeg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-color: #cccccc;
+    margin-top: -49px;
+    padding-top: 10px;
+    color: white;
+}
+.bg-img h2 {
+    color: white;
+}
 
+.bg-img label {
+    color:white;
+}
 /* forms */
 input.ng-invalid.ng-touched {
     border: 1px solid red;

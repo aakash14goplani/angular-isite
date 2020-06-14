@@ -20,7 +20,7 @@ export class SortDataPipe implements PipeTransform {
         sortOrder = (sortOrder == null) ? 'asc' : sortOrder;
 
         if (fromService && sortField) {
-            switch (fromService) {
+           /*  switch (fromService) {
                 case 'details': service = new ProjectDetailsService(); break;
                 case 'plan': service = new ProjectPlanService(); break;
                 case 'photos': service = new ProjectPhotosService(); break;
@@ -30,7 +30,7 @@ export class SortDataPipe implements PipeTransform {
                 case 'teams': service = new ProjectTeamsService(); break;
                 case 'bg_details': service = new ProjectBgDetailsService(); break;
                 default: break;
-            }
+            } */
 
             if (value && value.length > 0) {
                 value.sort((a, b) => {

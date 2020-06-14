@@ -1,6 +1,14 @@
 .margin-b30 {
     margin-bottom: 30px;
 }
+.project-material-inward {
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-color: #cccccc;
+    margin-top: -49px;
+    padding-top: 10px;
+    background-image: linear-gradient(white,grey);
+}
 .card-header.date {
     text-align: center;
     font-weight: 700;
@@ -13,6 +21,10 @@
 }
 .material-list > li {
     padding-bottom: 15px;
+}
+.text-center-align {
+    text-align: center;
+    padding-bottom: 10px;
 }
 @media screen and (min-width: 0px) and (max-width: 991px) {
     p.filter-n-sort-title {

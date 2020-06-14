@@ -15,7 +15,8 @@ export class UserService {
   private userDataStore: Array<{name: string, email: string, password: string}> = [
     { name: 'Aakash', email: 'test@test.test', password: 'test@123' },
     { name: 'Sumit', email: 'sumit@test.test', password: 'test@123' },
-    { name: 'Ashish', email: 'ashish@test.test', password: 'test@123' }
+    { name: 'Ashish', email: 'ashish@test.test', password: 'test@123' },
+    { name: 'Jayesh', email: 'codedaemon@test.test', password: 'test@123'}
   ];
 
   /* subject to refresh component whenever user-date changes */

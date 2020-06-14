@@ -6,7 +6,7 @@
                 <ol class="material-list" formArrayName="material_data">
                     <li *ngFor="let materialDataControl of materialDataControlFn; let i=index" [formGroupName]="i">
                         <input type="text" formControlName="item_name" class="form-control">
-                        <input type="number" formControlName="item_quantity" class="form-control">
+                        <input type="text" formControlName="item_quantity" class="form-control">
                         <i class="fa fa-minus-circle fa-2x" aria-hidden="true" (click)="deleteMaterialItem(i)"></i>
                     </li>
                     <i class="fa fa-plus-circle fa-2x" aria-hidden="true" (click)="addMaterialItem()"></i>

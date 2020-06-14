@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ProjectDprService } from '../project-dpr.service';
 import { FormGroup, FormArray, FormControl, Validators } from '@angular/forms';
+import { FetchDprResponse, Content} from '../../services/response/fetchDprResponse';
+import { GenericResponse } from '../../services/response/GenericResponse';
 
 @Component({
   selector: 'app-add-dpr',
@@ -46,14 +48,24 @@ export class AddDprComponent implements OnInit {
   }
 
   saveDataAddition(): void {
-    const final_date = new Date(this.newProjectDate.getUTCFullYear() + '-' + (+this.newProjectDate.getMonth() + 1) + '-' + this.newProjectDate.getDate());
-
-    for (let i = 0; i < this.formData.value.dpr_data.length; i++) {
-      this.projectDPRService.addProjectDPRData(final_date, this.formData.value.dpr_data[i].dpr_item);
+    const final_date = this.newProjectDate.getUTCFullYear() + '-' + (this.newProjectDate.getMonth() + 1)  + '-' + this.newProjectDate.getDate();
+    let tempData : Content = {
+      date: final_date,
+      content: []
     }
-
-    this.projectDPRService.isAddMode.next(false);
-    this.projectDPRService.dprDataChange.next(this.projectDPRService.getProcessedProjectDPRData());
+    for (let i = 0; i < this.formData.value.dpr_data.length; i++) {
+      tempData.content.push(this.formData.value.dpr_data[i].dpr_item);
+    }
+    this.projectDPRService.saveProjectDPRData(tempData, true).subscribe((data: GenericResponse) => {
+      if(data.message === "Success") {
+        this.projectDPRService.addProjectDPRData(tempData);
+        this.projectDPRService.isAddMode.next(false);
+        this.projectDPRService.dprDataChange.next(
+          this.projectDPRService.processProjectDPRData(this.projectDPRService.getProjectDPRData()));
+      } 
+      // write failure logic, add a toast message
+    });
+  
   }
 
   cancelDataAddition(): void {
