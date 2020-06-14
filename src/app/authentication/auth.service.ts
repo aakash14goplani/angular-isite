@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { UserService } from '../core/user-service/user-service.service';
-import { BehaviorSubject, Subject } from 'rxjs';
+import { BehaviorSubject, Subject, Observable } from 'rxjs';
 import { User } from './user.model';
 
 @Injectable({
@@ -30,6 +30,10 @@ export class AuthService {
       console.log('unable to login');
       this.authError.next('Invalid Credentials: unable to login');
     }
+  }
+
+  public getUsers(): Observable<User> {
+    return this.user.asObservable();
   }
 
   public registerUser(name: string, email: string, password: string): void {

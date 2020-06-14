@@ -3,7 +3,7 @@ import { RouterTestingModule } from '@angular/router/testing';
 
 import { UserService } from './user-service.service';
 
-fdescribe('UserService', () => {
+describe('UserService', () => {
 
   let userService: UserService;
 

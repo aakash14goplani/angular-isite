@@ -20,7 +20,7 @@ import { PageNotFoundComponent } from './shared/page-not-found/page-not-found.co
 import { ProjectDetailsResolverService } from './project-details/project-details-resolver.service';
 
 
-const routes: Routes = [
+export const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
   { path: 'home', component: HomePageComponent },
   { path: 'index', component: HomePageComponent },

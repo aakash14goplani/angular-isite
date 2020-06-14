@@ -20,10 +20,15 @@ export class AccessibilityStatementComponent implements OnInit, OnDestroy {
     this.subscription = this.authService.user.subscribe((userData) => {
       this.isUserLoggedIn = (!!userData) ? true : false;
     });
+    /* this.subscription = this.authService.getUsers().subscribe((userData) => {
+      this.isUserLoggedIn = (!!userData) ? true : false;
+    }); */
   }
 
   ngOnDestroy(): void {
-    this.subscription.unsubscribe();
+    if (this.subscription) {
+      this.subscription.unsubscribe();
+    }
   }
 
 }

@@ -1,12 +1,35 @@
-import { TestBed } from '@angular/core/testing';
-
 import { ProjectDetailsService } from './project-details.service';
 
 describe('ProjectDetailsService', () => {
-  beforeEach(() => TestBed.configureTestingModule({}));
+  let projectDetailService;
+
+  beforeEach(() => {
+    projectDetailService = new ProjectDetailsService();
+  });
 
   it('should be created', () => {
-    const service: ProjectDetailsService = TestBed.get(ProjectDetailsService);
-    expect(service).toBeTruthy();
+    expect(projectDetailService).toBeTruthy();
+  });
+
+  it('should return project details', () => {
+    const array = projectDetailService.projectDetails();
+
+    expect(array.length).toBe(2);
+  });
+
+  it('should add data to project details', () => {
+    projectDetailService.addProjectDetails('projectName', new Date());
+
+    expect(projectDetailService.projectDetails().length).toBe(3);
+  });
+
+  it('should remove data from project details', () => {
+    projectDetailService.deleteProjectDetails(1);
+
+    expect(projectDetailService.projectDetails().length).toBe(1);
+  });
+
+  afterEach(() => {
+    projectDetailService = null;
   });
 });

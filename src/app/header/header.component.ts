@@ -44,6 +44,13 @@ export class HeaderComponent implements OnDestroy, OnInit {
       }
     });
 
+    /* this.authServiceSubscription = this.authService.getUsers().subscribe((userData: User) => {
+      if (userData) {
+        this.userName = userData.name;
+        this.isUserLoggedIn = true;
+      }
+    }); */
+
     if (this.coreProjectService.globalProjectName) {
       this.projectNameSubscription = this.coreProjectService.globalProjectName.subscribe((projectName: string) => {
         this.currentProjectName = projectName;
