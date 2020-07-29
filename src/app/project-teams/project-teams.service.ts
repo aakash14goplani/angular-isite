@@ -6,18 +6,18 @@ export class ProjectTeamsService {
   constructor() { }
 
   private teamsDatStorage: Array<TeamsDataFormat> = [
-    { image: 'https://www.queenstownisite.com/isite/queenstown/isite.svg', name: 'Ashish', description: 'Thinker',
+    { image: 'https://cdn.pixabay.com/photo/2016/10/14/15/45/icon-1740415_960_720.png', name: 'Ashish', description: 'Thinker',
       socialLinks: [
         { socialSite: 'LinkedIn', socialLink: '<url_1>' }
       ]
     },
-    { image: 'https://www.queenstownisite.com/isite/queenstown/isite.svg', name: 'Sumit', description: 'Cloud',
+    { image: 'https://cdn.pixabay.com/photo/2016/10/14/15/45/icon-1740415_960_720.png', name: 'Sumit', description: 'Cloud',
       socialLinks: [
         { socialSite: 'LinkedIn', socialLink: '<url_1>' },
         { socialSite: 'Twitter', socialLink: '<url_2>' }
       ]
     },
-    { image: 'https://www.queenstownisite.com/isite/queenstown/isite.svg', name: 'Aakash', description: 'Full Stack',
+    { image: 'https://cdn.pixabay.com/photo/2016/10/14/15/45/icon-1740415_960_720.png', name: 'Aakash', description: 'Full Stack',
       socialLinks: [
         { socialSite: 'LinkedIn', socialLink: '<url_1>' },
         { socialSite: 'Twitter', socialLink: '<url_2>' },
