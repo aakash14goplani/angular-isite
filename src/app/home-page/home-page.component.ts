@@ -14,7 +14,7 @@ export class HomePageComponent implements OnInit, OnDestroy {
     private authService: AuthService
   ) { }
 
-  isLoginMode: boolean = false;
+  isLoginMode: boolean = true;
   isLoading: boolean = false;
   /* Adding subject to force refresh component on every switch between login / register. Here class
   will toggle between `form-control` and `form-control register`, this will prevent angular from

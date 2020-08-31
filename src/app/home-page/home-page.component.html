@@ -4,9 +4,8 @@
         <div class="container">
             <div class="row">
                 <div class="col-xs-12 col-md-8 offset-md-2">
-                    <h2>Random Introduction about our Product</h2>
-                    <p>Construction technology refers to the collection of innovative tools, machinery, modifications, software, etc. used during the construction phase of a project that enables advancement in field construction methods, including semi-automated and automated construction equipment</p>
-                    <p>Construction technology refers to the collection of innovative tools, machinery, modifications, software, etc. used during the construction phase of a project that enables advancement in field construction methods, including semi-automated and automated construction equipment</p>
+                    <p>A cloud based platform that keeps everyone involved in the project on same page. Digitize your site operations through isite for an enhanced productivity and seamless integration of data.</p>
+                    <p><i>keep your site within sight!</i></p>
                     <hr>
                 </div>
             </div>
@@ -26,24 +25,25 @@
                     </div>
                 </ng-template>
                 <div class="col-xs-12 col-md-6 offset-md-3">
-                    <h2 class="heading-center">{{ isLoginMode ? 'Login' : 'Register' }}</h2><hr>
-                    <form (ngSubmit)="onSubmit(form)" #form="ngForm"  *ngIf="!isLoading; else loadingSpinner">
+                    <h2 class="heading-center">{{ isLoginMode ? 'Login' : 'Register' }}</h2>
+                    <hr>
+                    <form (ngSubmit)="onSubmit(form)" #form="ngForm" *ngIf="!isLoading; else loadingSpinner">
                         <div class="form-group" *ngIf="!isLoginMode">
                             <label for="username">Name</label>
                             <input type="text" id="username" class="form-control" name="username" required ngModel #userNameInput="ngModel" appUserNameValidator>
                             <span class="help-block" *ngIf="!userNameInput.valid && userNameInput.touched">
                                 <span class="help-block" *ngIf="userNameInput?.errors?.uname_already_exists">User Name already exists...</span>
-                                <span class="help-block" *ngIf="userNameInput?.errors?.uname_length_invalid">User Name length should be greater than 4!</span>
-                                <span class="help-block" *ngIf="userNameInput?.errors?.required">Please enter a valid user-name</span>
+                            <span class="help-block" *ngIf="userNameInput?.errors?.uname_length_invalid">User Name length should be greater than 4!</span>
+                            <span class="help-block" *ngIf="userNameInput?.errors?.required">Please enter a valid user-name</span>
                             </span>
-                        </div> 
+                        </div>
 
                         <div class="form-group">
                             <label for="email">E-Mail</label>
                             <input type="email" id="email" class="form-control" name="email" required ngModel email #emailInput="ngModel" [appEmailValidator]="!isLoginMode ? true : false">
                             <span class="help-block" *ngIf="!emailInput.valid && emailInput.touched">
                                 <span class="help-block" *ngIf="emailInput?.errors?.uemail_already_exists">Email already exists...</span>
-                                <span class="help-block" *ngIf="(!emailInput.valid && !emailInput?.errors?.uemail_already_exists) || emailInput?.errors?.required">Please enter a valid email</span>
+                            <span class="help-block" *ngIf="(!emailInput.valid && !emailInput?.errors?.uemail_already_exists) || emailInput?.errors?.required">Please enter a valid email</span>
                             </span>
                         </div>
 
